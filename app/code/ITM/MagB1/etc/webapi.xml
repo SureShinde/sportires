@@ -1,0 +1,478 @@
+<?xml version="1.0"?>
+<!-- /** * Copyright 2015 Magento. All rights reserved. * See COPYING.txt 
+	for license details. */ -->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="../../../../../app/code/Magento/Webapi/etc/webapi.xsd">
+	
+	 <route url="/V1/magb1/categories" method="GET">
+        <service class="ITM\MagB1\Api\Catalog\CategoryInterface" method="getCategoryTree" />
+        <resources>
+            <resource ref="Magento_Catalog::categories" />
+        </resources>
+    </route>
+    
+	
+	<!-- product -->
+	
+	  <route url="/V1/magb1/product/:sku" method="GET">
+        <service class="ITM\MagB1\Api\Catalog\ProductInterface" method="get"/>
+        <resources>
+            <resource ref="Magento_Backend::admin" />
+        </resources>
+    </route>
+     
+     <route url="/V1/magb1/product/save" method="POST">
+        <service class="ITM\MagB1\Api\Catalog\ProductInterface" method="saveProduct"/>
+        <resources>
+            <resource ref="Magento_Backend::admin" />
+        </resources>
+    </route>
+    <route url="/V1/magb1/product/save/:sku" method="PUT">
+        <service class="ITM\MagB1\Api\Catalog\ProductInterface" method="saveProduct" />
+        <resources>
+            <resource ref="Magento_Backend::admin" />
+        </resources>
+    </route>
+    
+   	<route url="/V1/magb1/product/sku" method="GET">
+		<service class="ITM\MagB1\Api\Catalog\ProductInterface"	method="getSkuList" />
+		<resources>
+			<resource ref="Magento_Backend::admin" />
+		</resources>
+	</route>
+	<route url="/V1/magb1/product/delete/:id" method="DELETE">
+		<service class="ITM\MagB1\Api\Catalog\ProductInterface"
+				 method="deleteProductById" />
+		<resources>
+			<resource ref="Magento_Backend::admin" />
+		</resources>
+	</route>
+	<route url="/V1/magb1/product/images/delete/:key" method="DELETE">
+		<service class="ITM\MagB1\Api\Catalog\ProductInterface"
+			method="deleteProductImages" />
+		<resources>
+			<resource ref="Magento_Backend::admin" />
+		</resources>
+	</route>
+	<route url="/V1/magb1/product/images/delete/:key/useid/:useid" method="DELETE">
+		<service class="ITM\MagB1\Api\Catalog\ProductInterface"
+				 method="deleteProductImages" />
+		<resources>
+			<resource ref="Magento_Backend::admin" />
+		</resources>
+	</route>
+	<route url="/V1/magb1/product/list" method="GET">
+		<service class="ITM\MagB1\Api\Catalog\ProductInterface"
+			method="getProductList" />
+		<resources>
+			<!-- <resource ref="anonymous"/> -->
+			<resource ref="Magento_Backend::admin" />
+		</resources>
+	</route>
+	
+	<route url="/V1/magb1/product/count" method="GET">
+		<service class="ITM\MagB1\Api\Catalog\ProductInterface"	method="getProductListCount" />
+		<resources>
+			<resource ref="Magento_Backend::admin" />
+		</resources>
+	</route>
+	
+	<route url="/V1/magb1/product/attribute/set/group/attributes"
+		method="GET">
+		<service class="ITM\MagB1\Api\Attribute\AttributeInterface"
+			method="getProductAttributeSetGroupAttributes" />
+		<resources>
+			<!-- <resource ref="anonymous"/> -->
+			<resource ref="Magento_Backend::admin" />
+		</resources>
+	</route>
+	
+	<route url="/V1/magb1/product/attribute/set" method="GET">
+		<service class="ITM\MagB1\Api\Attribute\AttributeInterface"
+			method="getProductAttributeSet" />
+		<resources>
+			<!-- <resource ref="anonymous"/> -->
+			<resource ref="Magento_Backend::admin" />
+		</resources>
+	</route>
+	<route url="/V1/magb1/product/attribute/list" method="GET">
+		<service class="ITM\MagB1\Api\Attribute\AttributeInterface"
+			method="getProductAttributeList" />
+		<resources>
+			<!-- <resource ref="anonymous"/> -->
+			<resource ref="Magento_Backend::admin" />
+		</resources>
+	</route>
+	
+	<route url="/V1/magb1/attribute/option/labels" method="PUT">
+        <service class="ITM\MagB1\Api\Attribute\AttributeInterface" method="updateAttributeOptionLabels" />
+        <resources>
+            <resource ref="Magento_Backend::admin" />
+        </resources>
+    </route>
+    
+	<!--  Custom Options -->
+	<route url="/V1/magb1/products/:sku/options" method="POST">
+		<service class="ITM\MagB1\Api\Catalog\ProductInterface" method="saveOptions" />
+		<resources>
+			<resource ref="Magento_Backend::admin" />
+		</resources>
+	</route>
+	
+	
+	<!-- Bundle product delete product link from option -->
+	<route url="/V1/magb1/bundle-products/:sku/options/:optionId"
+		method="DELETE">
+		<service class="ITM\MagB1\Api\Catalog\ProductInterface"
+			method="deleteBundleOptionById" />
+		<resources>
+			<resource ref="Magento_Backend::admin" />
+		</resources>
+	</route>
+
+	<route url="/V1/magb1/bundle-products/:sku/options/delete"
+		method="DELETE">
+		<service class="ITM\MagB1\Api\Catalog\ProductInterface"
+			method="deleteBundleOptions" />
+		<resources>
+			<resource ref="Magento_Backend::admin" />
+		</resources>
+	</route>
+
+	<!-- Customer -->
+	<route url="/V1/magb1/customer/attribute/set/group/attributes"
+		method="GET">
+		<service class="ITM\MagB1\Api\Attribute\AttributeInterface"
+			method="getCustomerAttributeSetGroupAttributes" />
+		<resources>
+			<resource ref="Magento_Backend::admin" />
+		</resources>
+	</route>
+	<route url="/V1/magb1/customer/attribute/set" method="GET">
+		<service class="ITM\MagB1\Api\Attribute\AttributeInterface"
+			method="getCustomerAttributeSet" />
+		<resources>
+			<!-- <resource ref="anonymous"/> -->
+			<resource ref="Magento_Backend::admin" />
+		</resources>
+	</route>
+
+	<route url="/V1/magb1/customer/attribute/list" method="GET">
+		<service class="ITM\MagB1\Api\Attribute\AttributeInterface"
+			method="getCustomerAttributeList" />
+		<resources>
+			<resource ref="Magento_Backend::admin" />
+		</resources>
+	</route>
+	
+	<route url="/V1/magb1/customers" method="GET">
+		<service class="ITM\MagB1\Api\Customer\CustomerInterface"
+			method="getCustomerList" />
+		<resources>
+			<resource ref="Magento_Backend::admin" />
+		</resources>
+	</route>
+
+	<route url="/V1/magb1/customers/changepassword" method="PUT">
+		<service class="ITM\MagB1\Api\Customer\AccountManagementInterface" method="changePassword"/>
+		<resources>
+			<resource ref="Magento_Backend::admin" />
+		</resources>
+	</route>
+
+	<!-- Inventory -->
+	<route url="/V1/magb1/inventory/list" method="GET">
+		<service class="ITM\MagB1\Api\Catalog\InventoryInterface"
+			method="getList" />
+		<resources>
+			<resource ref="Magento_Backend::admin" />
+		</resources>
+	</route>
+	<!-- Config -->
+	<route url="/V1/magb1/shipping/carrier/list" method="GET">
+		<service class="ITM\MagB1\Api\Config\ConfigInterface" method="getCarrierList" />
+		<resources>
+			<resource ref="Magento_Backend::admin" />
+		</resources>
+	</route>
+	<route url="/V1/magb1/payment/method/list" method="GET">
+		<service class="ITM\MagB1\Api\Config\ConfigInterface" method="getPaymentMethodList" />
+		<resources>
+			<resource ref="Magento_Backend::admin" />
+		</resources>
+	</route>
+	<route url="/V1/magb1/reindex" method="POST">
+		<service class="ITM\MagB1\Api\Config\ConfigInterface" method="reIndex" />
+		<resources>
+			<resource ref="Magento_Backend::admin" />
+		</resources>
+	</route>
+		<route url="/V1/magb1/version" method="GET">
+		<service class="ITM\MagB1\Api\Config\ConfigInterface" method="getVersion" />
+		<resources>
+			<resource ref="Magento_Backend::admin" />
+		</resources>
+	</route>
+
+	<!-- Order -->
+	<route url="/V1/magb1/sales/order/info" method="GET">
+		<service class="ITM\MagB1\Api\Sales\OrderInterface" method="getOrderInfo" />
+		<resources>
+			<!-- <resource ref="anonymous" /> -->
+			<resource ref="Magento_Backend::admin" />
+		</resources>
+	</route>
+	<route url="/V1/magb1/sales/order/save" method="POST">
+		<service class="ITM\MagB1\Api\Sales\OrderInterface" method="saveOrder" />
+		<resources>
+			<resource ref="Magento_Backend::admin" />
+		</resources>
+	</route>
+	<route url="/V1/magb1/sales/order/update" method="PUT">
+		<service class="ITM\MagB1\Api\Sales\OrderInterface" method="updateOrder" />
+		<resources>
+			<resource ref="Magento_Backend::admin" />
+		</resources>
+	</route>
+	<route url="/V1/magb1/sales/order/list" method="GET">
+		<service class="ITM\MagB1\Api\Sales\OrderInterface" method="getList" />
+		<resources>
+			<resource ref="Magento_Backend::admin" />
+		</resources>
+	</route>
+	<route url="/V1/magb1/sales/order/count" method="GET">
+		<service class="ITM\MagB1\Api\Sales\OrderInterface" method="getOrderCount" />
+		<resources>
+			<resource ref="Magento_Backend::admin" />
+		</resources>
+	</route>
+	<!-- Shipment -->
+	<route url="/V1/magb1/sales/shipment/create" method="POST">
+		<service class="ITM\MagB1\Api\Sales\ShipmentInterface" method="createShipment" />
+		<resources>
+			<!-- <resource ref="anonymous" /> -->
+			<resource ref="Magento_Backend::admin" />
+		</resources>
+	</route>
+	<route url="/V1/magb1/sales/shipment/email/:increment_id" method="POST">
+		<service class="ITM\MagB1\Api\Sales\ShipmentInterface" method="sendShipmentEmail" />
+		<resources>
+			<resource ref="Magento_Backend::admin" />
+		</resources>
+	</route>
+
+	<!-- Invoice -->
+	<route url="/V1/magb1/sales/invoice/create" method="POST">
+		<service class="ITM\MagB1\Api\Sales\InvoiceInterface" method="createInvoice" />
+		<resources>
+			<resource ref="Magento_Backend::admin" />
+		</resources>
+	</route>
+
+	<!-- Entity -->
+	<route url="/V1/magb1/entity/save" method="POST">
+		<service class="ITM\MagB1\Api\Entity\EntityInterface" method="saveEntity" />
+		<resources>
+			<resource ref="Magento_Backend::admin" />
+		</resources>
+	</route>
+
+	<route url="/V1/magb1/entity/list/:cur_page/:page_size/:model_name/"
+		method="GET">
+		<service class="ITM\MagB1\Api\Entity\EntityInterface" method="getList" />
+		<resources>
+			<resource ref="Magento_Backend::admin" />
+		</resources>
+	</route>
+	<route url="/V1/magb1/entity/count/:model_name/" method="GET">
+		<service class="ITM\MagB1\Api\Entity\EntityInterface" method="getCollectionCount" />
+		<resources>
+			<resource ref="Magento_Backend::admin" />
+		</resources>
+	</route>
+
+	<route url="/V1/magb1/entity/delete" method="POST">
+		<service class="ITM\MagB1\Api\Entity\EntityInterface" method="deleteEntity" />
+		<resources>
+			<resource ref="Magento_Backend::admin" />
+		</resources>
+	</route>
+	<route url="/V1/magb1/entity/deletebykey" method="POST">
+		<service class="ITM\MagB1\Api\Entity\EntityInterface" method="deleteEntityByKey" />
+		<resources>
+			<resource ref="Magento_Backend::admin" />
+		</resources>
+	</route>
+
+
+    <!-- Productfiles API -->
+                    
+    <!-- end point = /V1/itm/magb1/productfiles/list -->
+    <route url="/V1/itm/magb1/productfiles/list" method="GET">
+        <service class="ITM\MagB1\Api\ProductfilesInterface" method="getList" />
+        <resources>
+            <resource ref="Magento_Backend::admin" />
+        </resources>
+    </route>
+    
+    <!-- end point = /V1/itm/magb1/productfiles/save -->
+    <!-- Json  = "{"entity": json object here }" -->
+    <route url="/V1/itm/magb1/productfiles/save" method="POST">
+        <service class="ITM\MagB1\Api\ProductfilesInterface" method="save" />
+        <resources>
+            <resource ref="Magento_Backend::admin" />
+        </resources>
+    </route>
+    
+    <!-- end point = /V1/itm/magb1/productfiles/delete/:sku/:store_id -->
+    <route url="/V1/itm/magb1/productfiles/delete/:sku/:store_id" method="DELETE">
+        <service class="ITM\MagB1\Api\ProductfilesInterface" method="delete" />
+        <resources>
+            <resource ref="Magento_Backend::admin" />
+        </resources>
+    </route>
+     
+     
+      <!-- Orderfiles API -->
+                    
+    <!-- end point = /V1/itm/magb1/orderfiles/list -->
+    <route url="/V1/itm/magb1/orderfiles/list" method="GET">
+        <service class="ITM\MagB1\Api\OrderfilesInterface" method="getList" />
+        <resources>
+            <resource ref="Magento_Backend::admin" />
+        </resources>
+    </route>
+    
+    <!-- end point = /V1/itm/magb1/orderfiles/save -->
+    <!-- Json  = "{"entity": json object here }" -->
+    <route url="/V1/itm/magb1/orderfiles/save" method="POST">
+        <service class="ITM\MagB1\Api\OrderfilesInterface" method="save" />
+        <resources>
+            <resource ref="Magento_Backend::admin" />
+        </resources>
+    </route>
+                    
+    <!-- end point = /V1/itm/magb1/orderfiles/delete/:increment_id -->
+    <route url="/V1/itm/magb1/orderfiles/delete/:increment_id" method="DELETE">
+        <service class="ITM\MagB1\Api\OrderfilesInterface" method="delete" />
+        <resources>
+            <resource ref="Magento_Backend::admin" />
+        </resources>
+    </route>
+
+    
+    
+    
+    <!-- Invoicefiles API -->
+                    
+    <!-- end point = /V1/itm/magb1/invoicefiles/list -->
+    <route url="/V1/itm/magb1/invoicefiles/list" method="GET">
+        <service class="ITM\MagB1\Api\InvoicefilesInterface" method="getList" />
+        <resources>
+            <resource ref="Magento_Backend::admin" />
+        </resources>
+    </route>
+    
+    <!-- end point = /V1/itm/magb1/invoicefiles/save -->
+    <!-- Json  = "{"entity": json object here }" -->
+    <route url="/V1/itm/magb1/invoicefiles/save" method="POST">
+        <service class="ITM\MagB1\Api\InvoicefilesInterface" method="save" />
+        <resources>
+            <resource ref="Magento_Backend::admin" />
+        </resources>
+    </route>
+                    
+    <route url="/V1/itm/magb1/invoicefiles/save" method="PUT">
+        <service class="ITM\MagB1\Api\InvoicefilesInterface" method="save" />
+        <resources>
+            <resource ref="Magento_Backend::admin" />
+        </resources>
+    </route>
+
+    
+    <!-- end point = /V1/itm/magb1/invoicefiles/delete/:increment_id -->
+    <route url="/V1/itm/magb1/invoicefiles/delete/:increment_id" method="DELETE">
+        <service class="ITM\MagB1\Api\InvoicefilesInterface" method="delete" />
+        <resources>
+            <resource ref="Magento_Backend::admin" />
+        </resources>
+    </route>
+                    
+        
+
+    
+    
+    <!-- Shipmentfiles API -->
+                    
+    <!-- end point = /V1/itm/magb1/shipmentfiles/list -->
+    <route url="/V1/itm/magb1/shipmentfiles/list" method="GET">
+        <service class="ITM\MagB1\Api\ShipmentfilesInterface" method="getList" />
+        <resources>
+            <resource ref="Magento_Backend::admin" />
+        </resources>
+    </route>
+    
+    <!-- end point = /V1/itm/magb1/shipmentfiles/save -->
+    <!-- Json  = "{"entity": json object here }" -->
+    <route url="/V1/itm/magb1/shipmentfiles/save" method="POST">
+        <service class="ITM\MagB1\Api\ShipmentfilesInterface" method="save" />
+        <resources>
+            <resource ref="Magento_Backend::admin" />
+        </resources>
+    </route>
+                    
+    <route url="/V1/itm/magb1/shipmentfiles/save" method="PUT">
+        <service class="ITM\MagB1\Api\ShipmentfilesInterface" method="save" />
+        <resources>
+            <resource ref="Magento_Backend::admin" />
+        </resources>
+    </route>
+
+    <!-- end point = /V1/itm/magb1/shipmentfiles/delete/:increment_id -->
+    <route url="/V1/itm/magb1/shipmentfiles/delete/:increment_id" method="DELETE">
+        <service class="ITM\MagB1\Api\ShipmentfilesInterface" method="delete" />
+        <resources>
+            <resource ref="Magento_Backend::admin" />
+        </resources>
+    </route>
+    
+                    
+        
+
+    
+    
+    <!-- Customerfiles API -->
+                    
+    <!-- end point = /V1/itm/magb1/customerfiles/list -->
+    <route url="/V1/itm/magb1/customerfiles/list" method="GET">
+        <service class="ITM\MagB1\Api\CustomerfilesInterface" method="getList" />
+        <resources>
+            <resource ref="Magento_Backend::admin" />
+        </resources>
+    </route>
+    
+    <!-- end point = /V1/itm/magb1/customerfiles/save -->
+    <!-- Json  = "{"entity": json object here }" -->
+    <route url="/V1/itm/magb1/customerfiles/save" method="POST">
+        <service class="ITM\MagB1\Api\CustomerfilesInterface" method="save" />
+        <resources>
+            <resource ref="Magento_Backend::admin" />
+        </resources>
+    </route>
+                    
+    <route url="/V1/itm/magb1/customerfiles/save" method="PUT">
+        <service class="ITM\MagB1\Api\CustomerfilesInterface" method="save" />
+        <resources>
+            <resource ref="Magento_Backend::admin" />
+        </resources>
+    </route>
+
+    <!-- end point = /V1/itm/magb1/customerfiles/delete/:customer_id -->
+    <route url="/V1/itm/magb1/customerfiles/delete/:customer_id" method="DELETE">
+        <service class="ITM\MagB1\Api\CustomerfilesInterface" method="deleteByCustomerId" />
+        <resources>
+            <resource ref="Magento_Backend::admin" />
+        </resources>
+    </route>   
+         
+</routes>

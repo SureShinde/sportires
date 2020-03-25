@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>      
+        <referenceBlock name="order_info">
+            <block class="Magento\Sales\Block\Adminhtml\Order\View\Info" name="sales_order_view_sap" template="ITM_MagB1::order/view/sap.phtml"/>
+        </referenceBlock>
+    </body>
+</page>

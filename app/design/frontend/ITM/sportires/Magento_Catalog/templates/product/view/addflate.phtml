@@ -1,0 +1,14 @@
+<?php 
+//if($_product == null)
+	
+ $_product = $block->getProduct(); 
+
+if($_product->getResource()->getAttribute('run_flat')->getFrontend()->getValue($_product) == 'Si') 
+echo '<!-- ITM adding the Run Flat Icon -->
+	<div class="flat"> 
+		<a href="./sportires/product/filterlist/?run_flat='.$_product->getData('run_flat').'"> 
+			<img src="/pub/media/wysiwyg/runflat.png" alt="runflat"> 
+		</a>
+	</div>
+	<!-- ITM adding the Run Flat Icon -->';
+?>  

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2017 x-mage2(Yosto). All rights reserved.
+ * See README.md for details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Yosto_Mpa::css/mpa.css" />
+    </head>
+    <body>
+
+        <referenceContainer name="content">
+            <block class="Yosto\Mpa\Block\Adminhtml\Product\MassActions"
+                   template="Yosto_Mpa::product/massactions.phtml"
+                   name="yosto.mpa"
+                   after="-"/>
+        </referenceContainer>
+    </body>
+</page>

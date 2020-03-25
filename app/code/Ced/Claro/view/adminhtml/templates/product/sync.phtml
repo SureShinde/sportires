@@ -1,0 +1,214 @@
+<?php
+
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement(EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category  Ced
+ * @package   Ced_Walmart
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright Copyright CEDCOMMERCE(http://cedcommerce.com/)
+ * @license   http://cedcommerce.com/license-agreement.txt
+ */
+
+$total = $block->productids;
+$baseUrl = $block->getUrl('claro/product/index');
+$editProduct = $block->getUrl('claro/product/index');
+$successImg = $block->getViewFileUrl('Ced_Claro::images/fam_bullet_success.gif');
+$errorImg = $block->getViewFileUrl('Ced_Claro::images/error_msg_icon.gif');
+$loaderImg = $block->getViewFileUrl('Ced_Claro::images/rule-ajax-loader.gif');
+?>
+<style type="text/css" >
+    . ul { list-style:none; padding:0; margin:0; }
+    . ul li { margin-left:0; border:1px solid #ccc; margin:2px;
+        padding:2px 2px 2px 2px; font:normal 12px sans-serif;
+    }
+    .all-validation-errors .error-msg {
+        padding-left: 4%;
+        list-style: none;
+    }
+    .sub-products{
+        margin-left: 45px;
+    }
+
+    #batches {
+        border: 1px solid #ddd;
+        border-radius: 0;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-12" style="margin-top: 10px;">
+        <br class="panel panel-default">
+        <div class="col-md-6 buttons_scb" style="text-align:right; float: right;">
+            <button onclick="setLocation('<?php  echo $block->escapeUrl($baseUrl); ?>')"
+                    class="btn btn-info uptransform"
+                    type="button"
+                    title="<?php  echo __('Back'); ?>">
+                <span><?php  echo __('Back'); ?></span>
+            </button>
+        </div>
+        <br>
+        <br class="block-content panel-body ">
+        <div id="walmart-progress-bar"></div>
+
+        <div id="batches">
+            <div class="batches-tab" data-role="collapsible">
+                <div data-role="trigger">
+                    <span>Responses</span>
+                </div>
+            </div>
+            <div class="batches-content" data-role="content">
+                <ul id="profileRows" style="list-style: none;">
+                    <li style="list-style: none;">
+                        <?php echo 'Total ' . $total . ' Batch(s) Found.'; ?>
+                    </li>
+                    <li style="list-style: none;" id="updateRow">
+                        <img id="statusImage" src="<?php echo $loaderImg ?>">
+                        <span id="updateStatus" class="text"><?php echo __("Updating..."); ?></span>
+                    </li>
+                    <li id="liFinished" style="display:none; list-style: none;">
+                        <br>
+                        <?php echo __("Finished Product mass ".$block->getMassage()); ?>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    require([
+            'jquery',
+            'jquery/ui',
+            'accordion',
+            'lineProgressbar'
+        ],
+        function ($) {
+
+            $("#walmart-progress-bar").LineProgressbar({
+                percentage: 0,
+                fillBackgroundColor: '#77a21b',
+                height: '25px',
+                duration: 0
+            });
+
+            $( ".batch-container" ).accordion({ collapsible: true, active: false});
+
+            var totalRecords = parseInt("<?php  echo (int)$total; ?>");
+            var countOfSuccess = 0;
+            var id = 0;
+            var liFinished = document.getElementById('liFinished');
+            var updateStatus = document.getElementById('updateStatus');
+            var updateRow = document.getElementById('updateRow');
+            var statusImage = document.getElementById('statusImage');
+
+            //call on load
+            sendRequest();
+
+
+            function sendRequest() {
+                $("#walmart-progress-bar").LineProgressbar({
+                    percentage: parseInt(((id+0.5) / totalRecords) * 100),
+                    fillBackgroundColor: '#77a21b',
+                    height: '35px',
+                    duration: 0
+                });
+
+                updateStatus.innerHTML = (id) + ' Of ' + totalRecords + ' Processing';
+
+                var request = $.ajax({
+                    type: "GET",
+                    url: "<?php  echo $block->getActionUrl();?>",
+                    data: {batchid: id},
+
+                    success: function (data) {
+                        var json = data;
+                        id++;
+                        if (json.hasOwnProperty('success')) {
+                            countOfSuccess++;
+                            var span = document.createElement('li');
+                            span.innerHTML =
+                                '<img src="<?php  echo $successImg ?>"><span>' +
+                                json.success + '</span>';
+                            span.id = 'id-' + id;
+                            updateRow.parentNode.insertBefore(span, updateRow);
+                        }
+                        else {
+                            var errorMessage = {
+                                'status': true,
+                                'errors': ''
+                            };
+                            var span = document.createElement('li');
+                            var heading = "<br><ul class='all-validation-errors'><li style='list-style: none'><b>"+'<img src="<?php  echo $errorImg ?>">';
+                            if (json.hasOwnProperty('error')) {
+                                heading = heading+json.error;
+                            }
+
+                            span.innerHTML = heading;
+                            span.id = 'id-' + id;
+                            updateRow.parentNode.insertBefore(span, updateRow);
+                            $( ".batch-container" ).accordion({ collapsible: true, active: false});
+                        }
+
+
+                    },
+
+                    error: function () {
+                        id++;
+                        var span = document.createElement('li');
+                        span.innerHTML = '<img src="<?php  echo $errorImg ?>"><span>Something went wrong </span>';
+                        span.id = 'id-'+id;
+                        span.style = 'background-color:#FDD';
+                        updateRow.parentNode.insertBefore(span, updateRow);
+
+                    },
+
+                    complete: function () {
+                        $("#walmart-progress-bar").LineProgressbar({
+                            percentage: parseInt(((id) / totalRecords) * 100),
+                            fillBackgroundColor: '#77a21b',
+                            height: '35px',
+                            duration: 10
+                        });
+
+                        if (id < totalRecords) {
+                            sendRequest();
+                        } else {
+                            statusImage.src = '<?php  echo $successImg ?>';
+                            var span = document.createElement('li');
+                            span.innerHTML =
+                                '<img src="<?php  echo $successImg ?>">' +
+                                '<span id="updateStatus">' +
+                                totalRecords + ' Product Batch Proccess Completed Successfully '+'</span>';
+                            liFinished.parentNode.insertBefore(span, liFinished);
+                            document.getElementById("liFinished").style.display = "block";
+                            updateStatus.innerHTML = (id) + ' of ' + totalRecords + ' Processed.';
+
+                        }
+
+                    },
+                    dataType: "json"
+                });
+            }
+
+            function parseErrors(errors) {
+                var data = errors;
+                var result = {
+                    'status': true,
+                    'errors': ''
+                };
+                return result+data;
+            }
+
+            function getPercent() {
+                return Math.ceil(((id + 1) / totalRecords) * 1000) / 10;
+            }
+        }
+    );
+</script>

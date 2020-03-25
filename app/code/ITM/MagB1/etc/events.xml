@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+	<event name="sales_order_load_after">
+		<observer instance="ITM\MagB1\Observer\Sales\OrderLoadAfter" name="itm_magb1_sales_order_load_after"/>
+	</event>
+	<event name="payment_method_is_active">
+		<observer instance="ITM\MagB1\Observer\Payment\MethodIsActive" name="itm_magb1_observer_payment_methodisactive_payment_method_is_active"/>
+	</event>
+</config>

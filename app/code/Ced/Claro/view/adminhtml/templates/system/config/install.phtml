@@ -1,0 +1,69 @@
+<?php /* @var $block \Ced\Claro\Block\Adminhtml\System\Config\Install */ ?>
+
+<script>
+    require([
+        'jquery'
+    ], function($) {
+        function empty (e) {
+            switch (e) {
+                case "":
+                case 0:
+                case "0":
+                case null:
+                case false:
+                    return true;
+                default:
+                    if (typeof e === "undefined") {
+                        return true;
+                    } else if (typeof e === "object" && Object.keys(e).length === 0){
+                        return true;
+                    } else {
+                        return false;
+                    }
+            }
+        }
+
+        $('body').on('click', '#claro-install', function () {
+            var siteId = $('#claro_settings_site').val();
+            var appId = $('#claro_settings_app_id').val();
+            var secretKey	 = $('#claro_settings_secret_key').val();
+            if (!empty(appId) && !empty(secretKey) && !empty(siteId)) {
+                $.ajax({
+                    showLoader: true, // enable loader
+                    type: "POST",
+                    url: "<?php echo $block->getAjaxUrl();?>",
+                    data: {'site_id': siteId, 'app_id': appId, 'secret_key': secretKey, 'form_key': window.FORM_KEY},
+                    success: function (response) {
+                        if (response.hasOwnProperty('success') && response['success'] === true ) {
+                            addMessage(response['message'], 'green');
+                            if (response.hasOwnProperty('redirect_uri') && !empty(response['redirect_uri'])) {
+                                window.open(response['redirect_uri'],'_blank');
+                            }
+
+                        } else {
+                            addMessage(response['message'], 'red');
+                        }
+                    },
+                    error: function () {
+                        addMessage('Unable to connect. App saving failed.', 'red');
+                    }
+
+                });
+            } else {
+                addMessage('Kindly enter the app credentials.', 'red');
+            }
+
+        });
+
+        function addMessage(message, color) {
+            var container = $('#claro-install-message');
+            if (container === undefined || container === null || container.length === 0) {
+                $( "#claro-install" ).before( "<span id='claro-install-message'><span style='color: "+color+"; display: inline-block; max-width: 80%;'>"+message+"</span></span>" );
+            } else {
+                container.html('<span style="color: '+color+'; display: inline-block; max-width: 80%;">'+message+'</span>');
+            }
+        }
+    });
+</script>
+
+<?php echo $block->getButtonHtml() ?>

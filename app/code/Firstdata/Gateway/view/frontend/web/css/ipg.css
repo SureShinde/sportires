@@ -1,0 +1,53 @@
+#payment_form_ipgcheckout_shared #ipg_cc_form{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+#payment_form_ipgcheckout_shared label {
+    margin-left: 5px;
+}
+#payment_form_ipgcheckout_shared label.required:after, 
+#payment_form_ipgcheckout_shared span.required:after {
+    content: ' *';
+    color: #df280a;
+    font-weight: normal;    
+    font-size: 12px;
+}
+#payment_form_ipgcheckout_shared ul > li,
+#payment_form_ipgcheckout_shared .input-box{
+    clear: both;
+	padding-top: 5px;
+}
+#payment_form_ipgcheckout_shared .v-fix{
+    float: left;
+}
+#payment_form_ipgcheckout_shared .ipgctype{
+    width: 100px;
+    max-width: 100%;
+}
+#payment_form_ipgcheckout_shared .ipgccard{
+    width: 200px;
+    max-width: 100%;
+}
+#payment_form_ipgcheckout_shared .ipgmonth{
+    width: 50px;
+    margin-right: 10px;
+}
+#payment_form_ipgcheckout_shared .ipgyear {
+    width: 60px;        
+}
+#payment_form_ipgcheckout_shared .ipgcvv{
+    width: 55px;        
+}
+#payment_form_ipgcheckout_shared .button{
+    margin: 10px 0;        
+}
+#payment_form_ipgcheckout_shared .ipg_card_title{
+    font-weight: bold;
+    margin-bottom: 7px;        
+}    
+#payment_form_ipgcheckout_shared .ipg_error_msg{    
+    margin-bottom: 7px; 
+    color: red;
+    display: block;
+}

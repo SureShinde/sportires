@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <columns name="sales_order_columns">
+        <column name="itm_sbo_docentry">
+            <argument name="data" xsi:type="array">
+                <item name="js_config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/column</item>
+                </item>
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="align" xsi:type="string">left</item>
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Doc Entry</item>
+                </item>
+            </argument>
+        </column>
+        <column name="itm_sbo_docnum">
+            <argument name="data" xsi:type="array">
+                <item name="js_config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/column</item>
+                </item>
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="align" xsi:type="string">left</item>
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Doc Number</item>
+                </item>
+            </argument>
+        </column>
+        <column name="itm_sbo_download_to_sap">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">ITM\MagB1\Ui\Component\Listing\Column\Status\Options</item>
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">select</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>
+                    <item name="dataType" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true">Download To SAP</item>
+                </item>
+            </argument>
+        </column>
+    </columns>
+    
+    <listingToolbar name="listing_top">
+		<massaction name="listing_massaction" class="ITM\MagB1\Ui\Component\MassAction">
+			<action name="mass_order_magb1_ignoredownloadtosap">
+				<argument name="data" xsi:type="array">
+					<item name="config" xsi:type="array">
+						<item name="type" xsi:type="string">ignore_download_to_sap</item>
+						<item name="label" xsi:type="string" translate="true">Ignore Download to SAP
+						</item>
+						<item name="url" xsi:type="url" path="itm_magb1/order/massIgnoreDownloadToSAP" />
+						<item name="confirm" xsi:type="array">
+							<item name="title" xsi:type="string" translate="true">Ignore Download orders
+							</item>
+							<item name="message" xsi:type="string" translate="true">Are you
+								sure you wan't to ignore download selected orders?
+							</item>
+						</item>
+					</item>
+				</argument>
+			</action>
+			<action name="mass_order_magb1_downloadtosap">
+				<argument name="data" xsi:type="array">
+					<item name="config" xsi:type="array">
+						<item name="type" xsi:type="string">download_to_sap</item>
+						<item name="label" xsi:type="string" translate="true">Download to SAP
+						</item>
+						<item name="url" xsi:type="url" path="itm_magb1/order/massDownloadToSAP" />
+						<item name="confirm" xsi:type="array">
+							<item name="title" xsi:type="string" translate="true">Download orders
+							</item>
+							<item name="message" xsi:type="string" translate="true">Are you
+								sure you wan't to download selected orders?
+							</item>
+						</item>
+					</item>
+				</argument>
+			</action>
+
+            <action name="mass_order_magb1_delete">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">magb_delete</item>
+                        <item name="label" xsi:type="string" translate="true">Delete (By MagB1)
+                        </item>
+                        <item name="url" xsi:type="url" path="itm_magb1/order/massDelete" />
+                        <item name="confirm" xsi:type="array">
+                            <item name="title" xsi:type="string" translate="true">Delete Orders
+                            </item>
+                            <item name="message" xsi:type="string" translate="true">Are you
+                                sure you wan't to delete selected orders?
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </action>
+		</massaction>
+	</listingToolbar>
+
+
+</listing>

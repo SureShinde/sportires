@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- /**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_StorePickup
+ * @author      CedCommerce Core Team <connect@cedcommerce.com >
+ * @copyright   Copyright CEDCOMMERCE (https://cedcommerce.com/)
+ * @license      https://cedcommerce.com/license-agreement.txt
+ */ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Backend/etc/menu.xsd">
+    <menu>
+        <add id="Ced_StorePickup::gird" 
+        	title="Store Pickup" 
+        	module="Ced_StorePickup" 
+        	sortOrder="150"
+        	resource="Ced_StorePickup::gird" 
+        	dependsOnConfig="carriers/storepickupshipping/active"
+        />
+    	<!-- <add id="Ced_StorePickup::manage_gird" title="Manage Store Pickup" module="Ced_StorePickup" sortOrder="20" parent="Ced_StorePickup::gird" resource="Ced_StorePickup::manage_gird"/> -->
+    	<add id="Ced_StorePickup::view_gird" 
+    		title="View Stores" 
+    		module="Ced_StorePickup" 
+    		sortOrder="150"
+    		parent="Ced_StorePickup::gird" 
+    		action="storepick/store" 
+    		resource="Ced_StorePickup::view_gird1"
+    	/>
+    	<add id="Ced_StorePickup::configuration" 
+    		title="Configuration" 
+    		module="Ced_StorePickup" 
+    		sortOrder="150"
+    		resource="Ced_StorePickup::configuration1" 
+    		parent="Ced_StorePickup::gird"
+            action="adminhtml/system_config/edit/section/carriers/"
+        />
+    </menu>
+</config>

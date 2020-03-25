@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement(EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category  Ced
+ * @package   Ced_Claro
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright Copyright CEDCOMMERCE(http://cedcommerce.com/)
+ * @license   http://cedcommerce.com/license-agreement.txt
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Ced_Claro::Claro"
+             title="Claro Integration"
+             translate="title"
+             module="Ced_Claro"
+             sortOrder="14"
+             resource="Ced_Claro::Claro"
+        />
+
+        <add id="Ced_Claro::product"
+             title="Product"
+             translate="title"
+             module="Ced_Claro"
+             sortOrder="10"
+             parent="Ced_Claro::Claro"
+             resource="Ced_Claro::product"
+        />
+        <add id="Ced_Claro::profile"
+             title="Manage Profiles"
+             translate="title"
+             module="Ced_Claro"
+             sortOrder="1"
+             parent="Ced_Claro::product"
+             action="claro/profile/index"
+             resource="Ced_Claro::profile"
+        />
+        <add id="Ced_Claro::listing"
+             title="Manage Products"
+             translate="title"
+             module="Ced_Claro"
+             sortOrder="2"
+             parent="Ced_Claro::product"
+             action="claro/product/index"
+             resource="Ced_Claro::product"
+        />
+
+
+        <!--orders start-->
+        <add id="Ced_Claro::order"
+             title="Order"
+             translate="title"
+             module="Ced_Claro"
+             sortOrder="20"
+             parent="Ced_Claro::Claro"
+             resource="Ced_Claro::order"
+        />
+
+        <add id="Ced_Claro::order_listing"
+             title="Manage Orders"
+             translate="title"
+             module="Ced_Claro"
+             sortOrder="10"
+             parent="Ced_Claro::order"
+             action="claro/order/index"
+             resource="Ced_Claro::order_listing"
+        />
+        <!--order end-->
+
+        <!--developer start-->
+        <add id="Ced_Claro::developer"
+             title="Developer"
+             module="Ced_Claro"
+             sortOrder="35"
+             parent="Ced_Claro::Claro"
+             resource="Ced_Claro::developer"
+        />
+
+        <!--developer start-->
+        <add id="Ced_Claro::cron"
+             title="Cron"
+             translate="title"
+             module="Ced_Claro"
+             sortOrder="40"
+             parent="Ced_Claro::developer"
+             action="integrator/cron/index"
+             resource="Ced_Integrator::cron_log"
+        />
+
+        <add id="Ced_Claro::logs"
+             title="Logs"
+             translate="title"
+             module="Ced_Claro"
+             sortOrder="50"
+             parent="Ced_Claro::developer"
+             action="integrator/log/index"
+             resource="Ced_Integrator::activity_log"
+        />
+        <!--developer end-->
+
+        <add id="Ced_Claro::settings"
+             title="Settings"
+             translate="title"
+             module="Ced_Claro"
+             sortOrder="30"
+             parent="Ced_Claro::Claro"
+             resource="Ced_Claro::settings"
+        />
+
+        <add id="Ced_Claro::configuration"
+             title="Configuration"
+             module="Ced_Claro"
+             sortOrder="2"
+             parent="Ced_Claro::settings"
+             action="adminhtml/system_config/edit/section/claro"
+             resource="Ced_Claro::configuration"
+        />
+
+        <add id="Ced_Claro::extras"
+             title="Extras"
+             translate="title"
+             module="Ced_Claro"
+             sortOrder="40"
+             parent="Ced_Claro::Claro"
+             resource="Ced_Claro::extras"
+        />
+
+        <add id="Ced_Claro::support"
+             title="Help &amp; Support"
+             translate="title"
+             module="Ced_Integrator"
+             sortOrder="10"
+             parent="Ced_Claro::extras"
+             action="integrator/support"
+             resource="Ced_Integrator::support"
+        />
+        <add id="Ced_Claro::knowledgebase"
+             title="Knowledgebase"
+             translate="title"
+             module="Ced_Claro"
+             sortOrder="20"
+             parent="Ced_Claro::extras"
+             action="claro/kb"
+             resource="Ced_Claro::knowledgebase"
+        />
+    </menu>
+</config>

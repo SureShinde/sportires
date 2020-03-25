@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © 2017 x-mage2(Yosto). All rights reserved.
+ * See README.md for details.
+ */
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <listingToolbar  name="listing_top">
+        <massaction name="listing_massaction" class="Yosto\Mpa\Component\MassAction">
+            <action name="yosto_mpa_update_category">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">yosto_mpa_update_category</item>
+                        <item name="label" xsi:type="string" translate="true">Update Category</item>
+                        <item name="callback" xsi:type="array">
+                            <item name="provider" xsi:type="string">product_listing.product_listing.listing_top.listing_massaction</item>
+                            <item name="target" xsi:type="string">assignCategory</item>
+                        </item>
+                    </item>
+                </argument>
+            </action>
+            <action name="yosto_mpa_change_price">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">yosto_mpa_change_price</item>
+                        <item name="label" xsi:type="string" translate="true">Change Price</item>
+                        <item name="callback" xsi:type="array">
+                            <item name="provider" xsi:type="string">product_listing.product_listing.listing_top.listing_massaction</item>
+                            <item name="target" xsi:type="string">changePrice</item>
+                        </item>
+                    </item>
+                </argument>
+            </action>
+            <action name="yosto_mpa_update_related_products">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">yosto_mpa_update_related_products</item>
+                        <item name="label" xsi:type="string" translate="true">Update Related Products</item>
+                        <item name="callback" xsi:type="array">
+                            <item name="provider" xsi:type="string">product_listing.product_listing.listing_top.listing_massaction</item>
+                            <item name="target" xsi:type="string">updateRelatedProducts</item>
+                        </item>
+                    </item>
+                </argument>
+            </action>
+            <action name="yosto_mpa_update_upsell_products">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">yosto_mpa_update_upsell_products</item>
+                        <item name="label" xsi:type="string" translate="true">Update Upsell Products</item>
+                        <item name="callback" xsi:type="array">
+                            <item name="provider" xsi:type="string">product_listing.product_listing.listing_top.listing_massaction</item>
+                            <item name="target" xsi:type="string">updateUpsellProducts</item>
+                        </item>
+                    </item>
+                </argument>
+            </action>
+            <action name="yosto_mpa_update_crosssell_products">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">yosto_mpa_update_crosssell_products</item>
+                        <item name="label" xsi:type="string" translate="true">Update Crosssell Products</item>
+                        <item name="callback" xsi:type="array">
+                            <item name="provider" xsi:type="string">product_listing.product_listing.listing_top.listing_massaction</item>
+                            <item name="target" xsi:type="string">updateCrosssellProducts</item>
+                        </item>
+                    </item>
+                </argument>
+            </action>
+            <action name="yosto_mpa_copy_custom_options">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">yosto_mpa_copy_custom_options</item>
+                        <item name="label" xsi:type="string" translate="true">Copy Custom Options</item>
+                        <item name="callback" xsi:type="array">
+                            <item name="provider" xsi:type="string">product_listing.product_listing.listing_top.listing_massaction</item>
+                            <item name="target" xsi:type="string">copyCustomOptions</item>
+                        </item>
+                    </item>
+                </argument>
+            </action>
+            <action name="yosto_mpa_manage_stock">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">yosto_mpa_manage_stock</item>
+                        <item name="label" xsi:type="string" translate="true">Manage Stock</item>
+                        <item name="callback" xsi:type="array">
+                            <item name="provider" xsi:type="string">product_listing.product_listing.listing_top.listing_massaction</item>
+                            <item name="target" xsi:type="string">manageStock</item>
+                        </item>
+                    </item>
+                </argument>
+            </action>
+            <action name="yosto_mpa_update_text">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">yosto_mpa_update_text</item>
+                        <item name="label" xsi:type="string" translate="true">Update Text</item>
+                        <item name="callback" xsi:type="array">
+                            <item name="provider" xsi:type="string">product_listing.product_listing.listing_top.listing_massaction</item>
+                            <item name="target" xsi:type="string">updateText</item>
+                        </item>
+                    </item>
+                </argument>
+            </action>
+            <action name="yosto_mpa_change_attribute_set">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">yosto_mpa_update_attribute_set</item>
+                        <item name="label" xsi:type="string" translate="true">Change Attribute Set</item>
+                        <item name="callback" xsi:type="array">
+                            <item name="provider" xsi:type="string">product_listing.product_listing.listing_top.listing_massaction</item>
+                            <item name="target" xsi:type="string">changeAttributeSet</item>
+                        </item>
+                    </item>
+                </argument>
+            </action>
+        </massaction>
+    </listingToolbar>
+
+</listing>

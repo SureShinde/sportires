@@ -1,0 +1,48 @@
+<?php
+/* put this code in 
+ * 
+ * <?php echo $block->getChildHtml('product.itm.magb1.info'); ?>
+ * /vendor/magento/module-catalog/view/frontend/templates/product/view/attributes.phtml
+ */
+?>
+<?php
+    $_product = $block->getProduct();
+    $sku = $_product->getSku();
+    $helper = $this->helper('ITM\MagB1\Helper\Data');
+    $files = $helper->getProductFiles($sku);
+    $base_url = $helper->getProductFilesURL();
+
+?>
+<?php if(count($files) == 0) return ; ?>
+
+<div class="box-collateral" id="amfile-list">
+<!-- <h2><?php // __("Files") ?></h2> -->
+    <ul style=" list-style-type: none;">
+    <?php foreach ($files as $file) : ?>
+    <?php
+    $file_info = pathinfo ($file["path"]);
+    $ext = "";
+    if(isset($file_info['extension'])) {
+        $ext =  $file_info['extension'];
+    }
+    ?>
+        <li style="float: left ;  margin:10px;text-align:center">
+            <a target="_blank" href="<?php echo $base_url.$sku."/".$file->getPath(); ?>">
+                <div style="clear: both">
+                <img width=40 src="<?php echo $block->getViewFileUrl('ITM_MagB1::images/'.$ext.'.png'); ?>" title="<?php echo $file->getPath()?> " alt="<?php echo $file->getPath()?> " />
+                </div>
+                <div style="clear: both">
+                <?php
+                if(!empty(trim($file->getDescription()))){
+                    echo $file->getDescription();
+                }else {
+                    echo pathinfo($file->getPath(), PATHINFO_FILENAME);
+                }
+                ?>
+            </a>
+            </div>
+
+        </li>
+<?php endforeach; ?>
+    </ul>
+</div>

@@ -1,0 +1,19 @@
+{
+    "name": "ced/catch-connector-m2",
+    "description": "WalmartMx Magento2 integration connector",
+    "require": {
+        "php": ">=5.5.9"
+    },
+    "type": "magento2-module",
+    "version": "0.0.2",
+    "license": [
+        "EULA"
+    ],
+    "autoload": {
+    "files": [ "registration.php" ],
+        "psr-4": {
+            "Ced\\WalmartMx\\": "",
+            "WalmartMxSdk\\": "catch-sdk/src"
+        }
+    }
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!-- /** * Copyright © 2015 ITM. All rights reserved. */ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/Module/etc/module.xsd">
+	<module name="ITM_MagB1" setup_version="1.4.2">
+		<sequence>
+			<module name="ITM_Main" />
+			<module name="Magento_Sales" />
+			<module name="Magento_Catalog" />
+			<module name="Magento_Customer" />
+			<module name="Magento_Review" />
+		</sequence>
+	</module>
+</config>

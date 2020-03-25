@@ -1,0 +1,302 @@
+<?php
+/**
+* CedCommerce
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the End User License Agreement (EULA)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* https://cedcommerce.com/license-agreement.txt
+*
+* @category    Ced
+* @package     Ced_StorePickup
+* @author      CedCommerce Core Team <connect@cedcommerce.com >
+* @copyright   Copyright CEDCOMMERCE (https://cedcommerce.com/)
+* @license      https://cedcommerce.com/license-agreement.txt
+*/
+    $id = $this->getRequest()->getParam('pickup_id');
+    $pickupInfo = $block->getPickupHour($id);
+	
+    $timing = $block ->getStoreTiming();
+    $storeStatus = $block ->getStoreStatus();
+    $interval = $block ->getStoreInterval();
+?>
+<div class="tab_title">Hour of Operation </div>
+<div class="days_wrapper">
+    <div class="days_title" style="float: left; width: 100%;">
+        <span style="float: left; margin: 18px 0px; font-weight: bold;">Monday</span>
+		<label class="label" style="clear: left;width: auto;"><span>Open</span></label>
+		<div class="cover_di" style="float: left; margin: 4px 10px;">
+			<div class="admin__field-control control">
+				<select class="required-entry _required select admin__control-select" name="days_status[mon]" >
+					<?php foreach($storeStatus as $key => $value) { ?>
+                        <option <?php if(isset($pickupInfo[0]['status']) && $pickupInfo[0]['status'] == $key ){ ?> selected = 'selected' <?php } ?> value = "<?php echo $key; ?>"><?php echo $value; ?></option>
+                    <?php } ?>
+				</select>
+			</div>
+		</div>
+		<label class="label" style="clear: both; width: auto;"><span>Time Slots</span></label>
+		<div class="cover_di" style="float: left; clear: left; margin: 20px 10px;">
+			<div class="admin__field-control control">
+				<label class="select_label"><span>Start</span></label>
+				<select class="required-entry _required select admin__control-select" name="start[mon]" >
+					<?php foreach($timing as $key => $value) { ?>
+                        <option <?php if(isset($pickupInfo[0]['start']) && $pickupInfo[0]['start'] == $key ){ ?> selected = 'selected' <?php } ?>  value="<?php echo $key; ?>"><?php echo $value; ?></option>
+					<?php } ?>
+				</select>
+			</div>
+		</div>
+        <div class="admin__field-control control" style="float: left; margin: 20px 10px;width: auto;">
+            <label class="select_label"><span>End</span></label>
+            <select class="required-entry _required select admin__control-select" name="end[mon]" >
+                	<?php foreach($timing as $key => $value) { ?>
+                        <option <?php if(isset($pickupInfo[0]['end']) && $pickupInfo[0]['end'] == $key ){ ?> selected = 'selected' <?php } ?>  value="<?php echo $key; ?>"><?php echo $value; ?></option>
+					<?php } ?>
+            </select>
+        </div>
+        <div class="admin__field-control control" style="float: left; margin: 20px 10px;width: auto;">
+            <label class="select_label"><span>Interval</span></label>
+            <select class="required-entry _required select admin__control-select" name="interval[mon]" >
+                	<?php foreach($interval as $key => $value) { ?>
+                        <option <?php if(isset($pickupInfo[0]['interval']) && $pickupInfo[0]['interval'] == $key ){ ?> selected = 'selected' <?php } ?> value="<?php echo $key; ?>"><?php echo $value; ?></option>
+                    <?php } ?>
+            </select>
+        </div>
+    </div>
+    <div class="days_title" style="float: left; width: 100%; clear: both;">
+        <span style="float: left; margin: 18px 0px; font-weight: bold;">Tuesday</span>
+        <label class="label" style="clear: left;width: auto;"><span>Open</span></label>
+		<div class="cover_di" style="float: left; margin: 4px 10px;">
+		   <div class="admin__field-control control">
+				<select class="required-entry _required select admin__control-select" name="days_status[tue]" >
+					<?php foreach($storeStatus as $key => $value) { ?>
+                        <option <?php if(isset($pickupInfo[1]['status']) && $pickupInfo[1]['status'] == $key ){ ?> selected = 'selected' <?php } ?> value = "<?php echo $key; ?>"><?php echo $value; ?></option>
+                    <?php } ?>
+				</select>
+			</div>
+		</div>
+       <label class="label" style="clear: both; width: auto;"><span>Time Slots</span></label>
+		<div class="cover_di" style="float: left; clear: left; margin: 20px 10px;">
+			<div class="admin__field-control control">
+				<label class="select_label"><span>Start</span></label>
+				<select class="required-entry _required select admin__control-select" name="start[tue]" >
+				    <?php foreach($timing as $key => $value) { ?>
+                        <option <?php if(isset($pickupInfo[1]['start']) && $pickupInfo[1]['start'] == $key ){ ?> selected = 'selected' <?php } ?> value="<?php echo $key; ?>"><?php echo $value; ?></option>
+					<?php } ?>
+				</select>
+			</div>
+		</div>
+        <div class="admin__field-control control" style="float: left; margin: 20px 10px;width: auto;">
+            <label class="select_label"><span>End</span></label>
+            <select class="required-entry _required select admin__control-select" name="end[tue]" >
+                <?php foreach($timing as $key => $value) { ?>
+                        <option <?php if(isset($pickupInfo[1]['end']) && $pickupInfo[1]['end'] == $key ){ ?> selected = 'selected' <?php } ?> value="<?php echo $key; ?>"><?php echo $value; ?></option>
+		          <?php } ?>
+            </select>
+        </div>
+        <div class="admin__field-control control" style="float: left; margin: 20px 10px;width: auto;">
+            <label class="select_label"><span>Interval</span></label>
+            <select class="required-entry _required select admin__control-select" name="interval[tue]" >
+                <?php foreach($interval as $key => $value) { ?>
+                        <option <?php if(isset($pickupInfo[1]['interval']) && $pickupInfo[1]['interval'] == $key ){ ?> selected = 'selected' <?php } ?> value="<?php echo $key; ?>"><?php echo $value; ?></option>
+                    <?php } ?>
+            </select>
+        </div>
+    </div>
+    <div class="days_title" style="float: left; width: 100%;">
+       <span style="float: left; margin: 18px 0px; font-weight: bold;">Wednesday</span>
+          <label class="label" style="clear: left;width: auto;"><span>Open</span></label>
+        <div class="admin__field-control control">
+            <select class="required-entry _required select admin__control-select" name="days_status[wed]" >
+               <?php foreach($storeStatus as $key => $value) { ?>
+                        <option <?php if(isset($pickupInfo[2]['status']) && $pickupInfo[2]['status'] == $key ){ ?> selected = 'selected' <?php } ?> value = "<?php echo $key; ?>"><?php echo $value; ?></option>
+                    <?php } ?>
+            </select>
+        </div>
+        <label class="label" style="clear: both; width: auto;"><span>Time Slots</span></label>
+		<div class="cover_di" style="float: left; clear: left; margin: 20px 10px;">
+			<div class="admin__field-control control">
+				<label class="select_label"><span>Start</span></label>
+				<select class="required-entry _required select admin__control-select" name="start[wed]" >
+				<?php foreach($timing as $key => $value) { ?>
+                        <option  <?php if(isset($pickupInfo[2]['start']) && $pickupInfo[2]['start'] == $key ){ ?> selected = 'selected' <?php } ?> value="<?php echo $key; ?>"><?php echo $value; ?></option>
+					<?php } ?>
+				</select>
+			</div>
+		</div>
+        <div class="admin__field-control control" style="float: left; margin: 20px 10px;width: auto;">
+            <label class="select_label"><span>End</span></label>
+            <select class="required-entry _required select admin__control-select" name="end[wed]" >
+                <?php foreach($timing as $key => $value) { ?>
+                        <option <?php if(isset($pickupInfo[2]['end']) && $pickupInfo[2]['end'] == $key ){ ?> selected = 'selected' <?php } ?> value="<?php echo $key; ?>"><?php echo $value; ?></option>
+					<?php } ?>
+            </select>
+        </div>
+        <div class="admin__field-control control" style="float: left; margin: 20px 10px;width: auto;">
+            <label class="select_label"><span>Interval</span></label>
+            <select class="required-entry _required select admin__control-select" name="interval[wed]" >
+                <?php foreach($interval as $key => $value) { ?>
+                        <option  <?php if(isset($pickupInfo[2]['interval']) && $pickupInfo[2]['interval'] == $key ){ ?> selected = 'selected' <?php } ?> value="<?php echo $key; ?>"><?php echo $value; ?></option>
+                    <?php } ?>
+            </select>
+        </div>
+    </div>
+	
+	<div class="days_title" style="float: left; width: 100%;">
+       <span style="float: left; margin: 18px 0px; font-weight: bold;">Thursday</span>
+          <label class="label" style="clear: left;width: auto;"><span>Open</span></label>
+        <div class="admin__field-control control">
+            <select class="required-entry _required select admin__control-select" name="days_status[thu]" >
+               <?php foreach($storeStatus as $key => $value) { ?>
+                         <option <?php if(isset($pickupInfo[3]['status']) && $pickupInfo[3]['status'] == $key ){ ?> selected = 'selected' <?php } ?> value = "<?php echo $key; ?>"><?php echo $value; ?></option>
+                    <?php } ?>
+            </select>
+        </div>
+        <label class="label" style="clear: both; width: auto;"><span>Time Slots</span></label>
+		<div class="cover_di" style="float: left; clear: left; margin: 20px 10px;">
+			<div class="admin__field-control control">
+				<label class="select_label"><span>Start</span></label>
+				<select class="required-entry _required select admin__control-select" name="start[thu]" >
+				<?php foreach($timing as $key => $value) { ?>
+                        <option <?php if(isset($pickupInfo[3]['start']) && $pickupInfo[3]['start'] == $key ){ ?> selected = 'selected' <?php } ?> value="<?php echo $key; ?>"><?php echo $value; ?></option>
+					<?php } ?>
+				</select>
+			</div>
+		</div>
+        <div class="admin__field-control control" style="float: left; margin: 20px 10px;width: auto;">
+            <label class="select_label"><span>End</span></label>
+            <select class="required-entry _required select admin__control-select" name="end[thu]" >
+                <?php foreach($timing as $key => $value) { ?>
+                        <option <?php if(isset($pickupInfo[3]['end']) && $pickupInfo[3]['end'] == $key ){ ?> selected = 'selected' <?php } ?> value="<?php echo $key; ?>"><?php echo $value; ?></option>
+					<?php } ?>
+            </select>
+        </div>
+        <div class="admin__field-control control" style="float: left; margin: 20px 10px;width: auto;">
+            <label class="select_label"><span>Interval</span></label>
+            <select class="required-entry _required select admin__control-select" name="interval[thu]" >
+                <?php foreach($interval as $key => $value) { ?>
+                        <option <?php if(isset($pickupInfo[3]['interval']) && $pickupInfo[3]['interval'] == $key ){ ?> selected = 'selected' <?php } ?> value="<?php echo $key; ?>"><?php echo $value; ?></option>
+                    <?php } ?>
+            </select>
+        </div>
+    </div>
+	
+    <div class="days_title" style="float: left; width: 100%;">
+       <span style="float: left; margin: 18px 0px; font-weight: bold;">Friday</span>
+          <label class="label" style="clear: left;width: auto;"><span>Open</span></label>
+        <div class="admin__field-control control">
+            <select class="required-entry _required select admin__control-select" name="days_status[fri]" >
+               <?php foreach($storeStatus as $key => $value) { ?>
+                         <option <?php if(isset($pickupInfo[4]['status']) && $pickupInfo[4]['status'] == $key ){ ?> selected = 'selected' <?php } ?> value = "<?php echo $key; ?>"><?php echo $value; ?></option>
+                    <?php } ?>
+            </select>
+        </div>
+        <label class="label" style="clear: both; width: auto;"><span>Time Slots</span></label>
+		<div class="cover_di" style="float: left; clear: left; margin: 20px 10px;">
+			<div class="admin__field-control control">
+				<label class="select_label"><span>Start</span></label>
+				<select class="required-entry _required select admin__control-select" name="start[fri]" >
+				<?php foreach($timing as $key => $value) { ?>
+                        <option <?php if(isset($pickupInfo[4]['start']) && $pickupInfo[4]['start'] == $key ){ ?> selected = 'selected' <?php } ?> value="<?php echo $key; ?>"><?php echo $value; ?></option>
+					<?php } ?>
+				</select>
+			</div>
+		</div>
+        <div class="admin__field-control control" style="float: left; margin: 20px 10px;width: auto;">
+            <label class="select_label"><span>End</span></label>
+            <select class="required-entry _required select admin__control-select" name="end[fri]" >
+                <?php foreach($timing as $key => $value) { ?>
+                        <option <?php if(isset($pickupInfo[4]['end']) && $pickupInfo[4]['end'] == $key ){ ?> selected = 'selected' <?php } ?> value="<?php echo $key; ?>"><?php echo $value; ?></option>
+					<?php } ?>
+            </select>
+        </div>
+        <div class="admin__field-control control" style="float: left; margin: 20px 10px;width: auto;">
+            <label class="select_label"><span>Interval</span></label>
+            <select class="required-entry _required select admin__control-select" name="interval[fri]" >
+                <?php foreach($interval as $key => $value) { ?>
+                        <option <?php if(isset($pickupInfo[4]['interval']) && $pickupInfo[4]['interval'] == $key ){ ?> selected = 'selected' <?php } ?> value="<?php echo $key; ?>"><?php echo $value; ?></option>
+                    <?php } ?>
+            </select>
+        </div>
+    </div>
+	
+    <div class="days_title" style="float: left; width: 100%;">
+       <span style="float: left; margin: 18px 0px; font-weight: bold;">Saturday</span>
+          <label class="label" style="clear: left;width: auto;"><span>Open</span></label>
+        <div class="admin__field-control control">
+            <select class="required-entry _required select admin__control-select" name="days_status[sat]" >
+               <?php foreach($storeStatus as $key => $value) { ?>
+                         <option <?php if(isset($pickupInfo[5]['status']) && $pickupInfo[5]['status'] == $key ){ ?> selected = 'selected' <?php } ?> value = "<?php echo $key; ?>"><?php echo $value; ?></option>
+                    <?php } ?>
+            </select>
+        </div>
+        <label class="label" style="clear: both; width: auto;"><span>Time Slots</span></label>
+		<div class="cover_di" style="float: left; clear: left; margin: 20px 10px;">
+			<div class="admin__field-control control">
+				<label class="select_label"><span>Start</span></label>
+				<select class="required-entry _required select admin__control-select" name="start[sat]" >
+				<?php foreach($timing as $key => $value) { ?>
+                        <option <?php if(isset($pickupInfo[5]['start']) && $pickupInfo[5]['start'] == $key ){ ?> selected = 'selected' <?php } ?>  value="<?php echo $key; ?>"><?php echo $value; ?></option>
+					<?php } ?>
+				</select>
+			</div>
+		</div>
+        <div class="admin__field-control control" style="float: left; margin: 20px 10px;width: auto;">
+            <label class="select_label"><span>End</span></label>
+            <select class="required-entry _required select admin__control-select" name="end[sat]" >
+                <?php foreach($timing as $key => $value) { ?>
+                        <option <?php if(isset($pickupInfo[5]['end']) && $pickupInfo[5]['end'] == $key ){ ?> selected = 'selected' <?php } ?>  value="<?php echo $key; ?>"><?php echo $value; ?></option>
+					<?php } ?>
+            </select>
+        </div>
+        <div class="admin__field-control control" style="float: left; margin: 20px 10px;width: auto;">
+            <label class="select_label"><span>Interval</span></label>
+            <select class="required-entry _required select admin__control-select" name="interval[sat]" >
+                <?php foreach($interval as $key => $value) { ?>
+                        <option <?php if(isset($pickupInfo[5]['interval']) && $pickupInfo[5]['interval'] == $key ){ ?> selected = 'selected' <?php } ?>  value="<?php echo $key; ?>"><?php echo $value; ?></option>
+                    <?php } ?>
+            </select>
+        </div>
+    </div>
+	
+    <div class="days_title" style="float: left; width: 100%;">
+       <span style="float: left; margin: 18px 0px; font-weight: bold;">Sunday</span>
+          <label class="label" style="clear: left;width: auto;"><span>Open</span></label>
+        <div class="admin__field-control control">
+            <select class="required-entry _required select admin__control-select" name="days_status[sun]" >
+               <?php foreach($storeStatus as $key => $value) { ?>
+                        <option <?php if(isset($pickupInfo[6]['status']) && $pickupInfo[6]['status'] == $key ){ ?> selected = 'selected' <?php } ?> value = "<?php echo $key; ?>"><?php echo $value; ?></option>
+                    <?php } ?>
+            </select>
+        </div>
+        <label class="label" style="clear: both; width: auto;"><span>Time Slots</span></label>
+		<div class="cover_di" style="float: left; clear: left; margin: 20px 10px;">
+			<div class="admin__field-control control">
+				<label class="select_label"><span>Start</span></label>
+				<select class="required-entry _required select admin__control-select" name="start[sun]" >
+				<?php foreach($timing as $key => $value) { ?>
+                        <option <?php if(isset($pickupInfo[6]['start']) && $pickupInfo[6]['start'] == $key ){ ?> selected = 'selected' <?php } ?> value="<?php echo $key; ?>"><?php echo $value; ?></option>
+					<?php } ?>
+				</select>
+			</div>
+		</div>
+        <div class="admin__field-control control" style="float: left; margin: 20px 10px;width: auto;">
+            <label class="select_label"><span>End</span></label>
+            <select class="required-entry _required select admin__control-select" name="end[sun]" >
+                <?php foreach($timing as $key => $value) { ?>
+                        <option <?php if(isset($pickupInfo[6]['end']) && $pickupInfo[6]['end'] == $key ){ ?> selected = 'selected' <?php } ?> value="<?php echo $key; ?>"><?php echo $value; ?></option>
+					<?php } ?>
+            </select>
+        </div>
+        <div class="admin__field-control control" style="float: left; margin: 20px 10px;width: auto;">
+            <label class="select_label"><span>Interval</span></label>
+            <select class="required-entry _required select admin__control-select" name="interval[sun]" >
+                <?php foreach($interval as $key => $value) { ?>
+                        <option <?php if(isset($pickupInfo[6]['interval']) && $pickupInfo[6]['interval'] == $key ){ ?> selected = 'selected' <?php } ?> value="<?php echo $key; ?>"><?php echo $value; ?></option>
+                    <?php } ?>
+            </select>
+        </div>
+    </div>
+</div>
+</div>

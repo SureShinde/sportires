@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Backend/etc/menu.xsd">
+    <menu>
+       <!--  <add id="itm::base" title="ITM Development" module="ITM_MagB1" sortOrder="90" resource="ITM_Main::Base"/>  -->
+        <add id="itm_magb1::magb1" title="MagB1" module="ITM_MagB1" sortOrder="0" parent="itm::base"  resource="ITM_MagB1::main"/>
+        <add id="itm_magb1::productfiles" title="Product Files" module="ITM_MagB1" sortOrder="10" parent="itm_magb1::magb1" action="itm_magb1/productfiles/" resource="ITM_MagB1::main"/>
+         <add id="itm_magb1::magb1_orderfiles" title="Order Files" module="ITM_MagB1" sortOrder="20" parent="itm_magb1::magb1" action="itm_magb1/orderfiles/" resource="ITM_MagB1::main"/>
+        <add id="itm_magb1::magb1_invoicefiles" title="Invoice Files" module="ITM_MagB1" sortOrder="30" parent="itm_magb1::magb1" action="itm_magb1/invoicefiles/" resource="ITM_MagB1::main"/>
+        <add id="itm_magb1::magb1_shipmentfiles" title="Shipment Files" module="ITM_MagB1" sortOrder="40" parent="itm_magb1::magb1" action="itm_magb1/shipmentfiles/" resource="ITM_MagB1::main"/>
+        <add id="itm_magb1::magb1_customerfiles" title="Customer Files" module="ITM_MagB1" sortOrder="50" parent="itm_magb1::magb1" action="itm_magb1/customerfiles/" resource="ITM_MagB1::main"/>
+        <add id="itm_magb1::magb1_categoryfiles" title="Categoryfiles" module="ITM_MagB1" sortOrder="60" parent="itm_magb1::magb1" action="itm_magb1/categoryfiles/" resource="ITM_MagB1::main"/>
+        
+    </menu>
+</config>

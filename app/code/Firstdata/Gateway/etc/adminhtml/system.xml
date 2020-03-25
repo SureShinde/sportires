@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="payment">
+            <group id="firstdata" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Firstdata Payment Gateway</label>
+                <field id="active" translate="label" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enabled</label>
+                    <comment>Enable/Disable this payment gateway</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field> 
+                <field id="heading_localization" translate="label" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Localisation</label>
+                    <frontend_model>Magento\Config\Block\System\Config\Form\Field\Heading</frontend_model>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="country" translate="label" type="select" sortOrder="4" showInDefault="1"
+                       showInWebsite="1" showInStore="0">
+                    <label>Country</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                    <validate>required-entry</validate>
+                    <frontend_model>Firstdata\Gateway\Block\Adminhtml\Form\Field\Country</frontend_model>
+                    <source_model>Firstdata\Gateway\Model\Adminhtml\Source\Country</source_model>
+                </field>
+                <field id="reseller" translate="label" type="text" sortOrder="5" showInDefault="1"
+                       showInWebsite="1" showInStore="0">
+                    <label>Reseller</label>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="support_details" translate="label" type="note" sortOrder="6" showInDefault="1"
+                       showInWebsite="1" showInStore="0">
+                    <label>Support details</label>
+                    <comment><![CDATA[<div id="support_details">loading...</div>]]>
+                    </comment>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="heading_config" translate="label" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Configuration</label>
+                    <frontend_model>Magento\Config\Block\System\Config\Form\Field\Heading</frontend_model>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="title"  translate="label" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Plugin Name</label>
+                    <comment><![CDATA[<div id="logo_details"></div>]]>
+                    </comment>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="display_logo" translate="label" type="select" sortOrder="9" showInDefault="1"
+                       showInWebsite="1" showInStore="0">
+                    <label>Display Logo</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+				
+                <field id="description" translate="label" type="textarea" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="0">
+                    <label>Description</label>
+                    <tooltip>Enter the description.</tooltip>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+				 
+                <field id="environment" translate="label" type="select" sortOrder="11" showInDefault="1"
+                       showInWebsite="1" showInStore="0">
+                    <label>Environment</label>
+                    <tooltip>The operating modes of the plugin i.e testing environment</tooltip>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                    <source_model>Firstdata\Gateway\Model\Adminhtml\Source\Environment</source_model>
+                </field>
+                <field id="integrate_key" translate="label" type="text" sortOrder="12" showInDefault="1"
+                       showInWebsite="1" showInStore="0">
+                    <label>Store ID</label>
+                    <tooltip>Enter the Store ID provided by the support team.</tooltip>
+                    <depends>
+                        <field id="active">1</field>
+                        <field id="environment">Integration</field>
+                    </depends>
+                </field>
+				 
+                <field id="integrate_salt" translate="label" type="text" sortOrder="13" showInDefault="1"
+                       showInWebsite="1" showInStore="0">
+                    <label>Shared secret</label>
+                    <tooltip>Enter the Shared Secret provided by the support team.</tooltip>
+                    <depends>
+                        <field id="active">1</field>
+                        <field id="environment">Integration</field>						
+                    </depends>
+                    <validate>required-entry</validate>
+                </field>
+				 
+                <field id="production_key" translate="label" type="text" sortOrder="14" showInDefault="1"
+                       showInWebsite="1" showInStore="0">
+                    <label>Store ID</label>
+                    <tooltip>Enter the Store ID provided by the support team.</tooltip>
+                    <depends>
+                        <field id="active">1</field>
+                        <field id="environment">Production</field>
+                    </depends>
+                    <validate>required-entry</validate>
+                </field>
+                <field id="production_salt" translate="label" type="text" sortOrder="15" showInDefault="1"
+                       showInWebsite="1" showInStore="0">
+                    <label>Shared secret</label>
+                    <tooltip>Enter the Shared Secret provided by the support team.</tooltip>
+                    <depends>
+                        <field id="active">1</field>
+                        <field id="environment">Production</field>
+                    </depends>
+                    <validate>required-entry</validate>
+                </field>
+                <field id="integrate_success_url" translate="label" type="text" sortOrder="16" showInDefault="1"
+                       showInWebsite="1" showInStore="0">
+                    <label>Response Success URL</label>
+                    <tooltip>URL to which the payment gateway redirects on successful transactions</tooltip>
+                    <depends>
+                        <field id="active">1</field>
+                        <field id="environment">Integration</field>
+                    </depends>
+                    <frontend_model>Firstdata\Gateway\Block\Adminhtml\Form\Field\ResponseURL</frontend_model>
+                </field>
+                <field id="integrate_failure_url" translate="label" type="text" sortOrder="17" showInDefault="1"
+                       showInWebsite="1" showInStore="0">
+                    <label>Response Failure URL</label>
+                    <tooltip>URL to which the payment gateway redirects on failures in transactions</tooltip>
+                    <depends>
+                        <field id="active">1</field>
+                        <field id="environment">Integration</field>
+                    </depends>
+                    <frontend_model>Firstdata\Gateway\Block\Adminhtml\Form\Field\ResponseURL</frontend_model>
+                </field>
+				 
+                <field id="production_success_url" translate="label" type="text" sortOrder="18" showInDefault="1"
+                       showInWebsite="1" showInStore="0">
+                    <label>Response Success URL</label>
+                    <tooltip>URL to which the payment gateway redirects on successful transactions</tooltip>
+                    <depends>
+                        <field id="active">1</field>
+                        <field id="environment">Production</field>
+                    </depends>
+                    <frontend_model>Firstdata\Gateway\Block\Adminhtml\Form\Field\ResponseURL</frontend_model>
+                </field>
+                <field id="production_failure_url" translate="label" type="text" sortOrder="19" showInDefault="1"
+                       showInWebsite="1" showInStore="0">
+                    <label>Response Failure URL</label>
+                    <tooltip>URL to which the payment gateway redirects on failures in transactions</tooltip>
+                    <depends>
+                        <field id="active">1</field>
+                        <field id="environment">Production</field>
+                    </depends>
+                    <frontend_model>Firstdata\Gateway\Block\Adminhtml\Form\Field\ResponseURL</frontend_model>
+                </field>
+                <field id="capture" translate="label" type="select" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="0">
+                    <label>Authorisation</label>
+                    <tooltip>Enable this to capture charges immediately</tooltip>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="checkout_option" translate="label" type="select" sortOrder="21" showInDefault="1"
+                       showInWebsite="1" showInStore="0">
+                    <label>Checkout Option</label>
+                    <tooltip>
+                        <![CDATA[<strong>Classic:</strong>Splits the payment process into multiple pages<br/>
+                        <strong>CombinedPage:</strong>Consolidates the payment method choices and the payment method into a single page]]>
+                    </tooltip>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                    <source_model>Firstdata\Gateway\Model\Adminhtml\Source\CheckoutOption</source_model>
+                </field>
+                <field id="pay_mode" translate="label" type="select" sortOrder="22" showInDefault="1"
+                       showInWebsite="1" showInStore="0">
+                    <label>Pay Mode</label>
+                    <tooltip>
+                        <![CDATA[<strong>PayOnly:</strong>Only the Card Number,Expiry Date and CVC are collected<br/>
+                        <strong>PayPlus:</strong>Card Number, Expiry Date, CVC and a full set of billing information collected<br/>
+                        <strong>FullPay:</strong>Card Number, Expiry Date, CVC and a full set of billing and shipping information collected<br/>]]>
+                    </tooltip>
+                    <depends>
+                        <field  id="active">1</field>
+                        <field id="checkout_option">classic</field>
+                    </depends>
+                    <source_model>Firstdata\Gateway\Model\Adminhtml\Source\PayMode</source_model>
+                </field>
+                <field id="dynamic_descriptor" translate="label" type="text" sortOrder="23" showInDefault="1"
+                       showInWebsite="1" showInStore="0">
+                    <label>Dynamic Descriptor</label>
+                    <tooltip>Content which appears in the user statement</tooltip>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="tokenization" translate="label" type="select" sortOrder="24" showInDefault="1"
+                       showInWebsite="1" showInStore="0">
+                    <label>Tokenisation</label>
+                    <tooltip>Allow users to securely store their card details for future transactions</tooltip>
+                    <depends>
+                        <field id="active">1</field>
+                        <field id="checkout_option">classic</field>
+                    </depends>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+				
+                <field id="three_d_secure" translate="label" type="select" sortOrder="25" showInDefault="1"
+                       showInWebsite="1" showInStore="0">
+                    <label>3D Secure Active</label>
+                    <tooltip>3D Secure is also the only fraud prevention scheme that is available that offers Merchants liability cover for transactions that are verified by the checks. 
+                        In order to use 3D Secure, Merchants will need to be registered and this can be done by contacting the relevant First Data Gateway support team
+                    </tooltip>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                    <source_model>Firstdata\Gateway\Model\Adminhtml\Source\ThreeDSecure</source_model>
+                </field>
+				
+                <field id="edcc" translate="label" type="select" sortOrder="26" showInDefault="1"
+                       showInWebsite="1" showInStore="0">
+                    <label>Edcc</label>
+                    <tooltip>Enable dynamic currency conversion</tooltip>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="logging" translate="label" type="select" sortOrder="27" showInDefault="1"
+                       showInWebsite="1" showInStore="0">
+                    <label>Error Logging</label>
+                    <tooltip>Enable or Disable Error Logging</tooltip>
+                    <comment>The plugin log generated would be saved to the var/log/gateway.log file</comment>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="auth_ux" translate="label" type="select" sortOrder="28" showInDefault="1"
+                       showInWebsite="1" showInStore="0">
+                    <label>Authorisation UX</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                    <source_model>Firstdata\Gateway\Model\Adminhtml\Source\AuthorisationUX</source_model>
+                </field>
+                <field id="heading_installment" translate="label" sortOrder="29" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Instalments Configuration</label>
+                    <frontend_model>Magento\Config\Block\System\Config\Form\Field\Heading</frontend_model>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="emi_active" translate="label" type="select" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="0">
+                    <label>Enable instalments</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <validate>required-entry</validate>
+                </field>
+                <field id="emi_options" translate="label" sortOrder="31" showInDefault="1"
+                       showInWebsite="1" showInStore="0">
+                    <label>Instalments options</label>
+                    <comment>
+                        <![CDATA[Click on add button to configure one or more payment options.<br/>
+                        <strong>Label:</strong>The option label to display on the frontend.<br/>
+                        <strong>Min Amount:</strong>Minimum amount to enable the payment option.<br/>
+                        <strong>Max Amount:</strong>Maximum amount to enable the payment option.<br/>
+                        <strong>Contract:</strong>id of the contract to use with the option(to be preferably left blank).<br/>
+                        <strong>Count:</strong>Total number of payments.<br/>							 
+                        <strong>Period:</strong>Delay (in days) between payments.<br/>
+                        Do not forget to click the "save config' button]]>
+                    </comment>
+                    <depends>
+                        <field id="active">1</field>
+                        <field id="emi_active">1</field>
+                    </depends>
+                    <frontend_model>Firstdata\Gateway\Block\Adminhtml\Form\Field\EmiOptions</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <validate>required-entry</validate>
+                </field>
+                <field id="heading_localpayments" translate="label" sortOrder="32" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Payment methods (Local/Alternative)</label>
+                    <frontend_model>Magento\Config\Block\System\Config\Form\Field\Heading</frontend_model>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="localpayments" translate="label" type="select" sortOrder="33" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Local Payments</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="localpaymentslist" translate="label" type="multiselect" sortOrder="34" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Local Payments List</label>
+                    <depends>
+                        <field id="localpayments">1</field>
+                    </depends>
+                    <source_model>Firstdata\Gateway\Model\Adminhtml\Source\Localpaymentlist</source_model>
+                </field>
+                <field id="heading_api" translate="label" sortOrder="35" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>API Configuration</label>
+                    <frontend_model>Magento\Config\Block\System\Config\Form\Field\Heading</frontend_model>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="heading_api_title" translate="label" type="label" sortOrder="36" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label></label>
+                    <comment>Enter your FirstData API credentials to process different types of API transactions via FirstData Payment Gateway.</comment>                                        
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>               
+                <field id="api_username" translate="label" type="text" sortOrder="37" showInDefault="1"
+                       showInWebsite="1" showInStore="0">
+                    <label>API username</label>
+                    <tooltip>API username</tooltip>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>                    
+                </field>
+				
+                <field id="api_pwd" translate="label" type="text" sortOrder="38" showInDefault="1"
+                       showInWebsite="1" showInStore="0">
+                    <label>API password</label>
+                    <tooltip>API password</tooltip>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>                    
+                </field>
+                <field id="api_cert_pwd" translate="label" type="text" sortOrder="39" showInDefault="1"
+                       showInWebsite="1" showInStore="0">
+                    <label>API certificate password</label>
+                    <tooltip>API certificate password</tooltip>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>                    
+                </field>
+				
+                <field id="api_pem" translate="label" type="Magento\Config\Block\System\Config\Form\Field\File" sortOrder="40" showInDefault="1" showInWebsite="1" >
+                    <label>API PEM file</label>
+                    <backend_model>Firstdata\Gateway\Model\Config\Backend\Pem</backend_model>
+                    <upload_dir>var/upload</upload_dir>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>                    
+                </field>
+                <field id="api_cert_pem" translate="label" type="Magento\Config\Block\System\Config\Form\Field\File" sortOrder="41" showInDefault="1" showInWebsite="1" >
+                    <label>API certificate PEM</label>
+                    <backend_model>Firstdata\Gateway\Model\Config\Backend\Pem</backend_model>
+                    <upload_dir >var/upload</upload_dir>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>                    
+                </field>
+				
+                <field id="api_cert_key" translate="label" type="Magento\Config\Block\System\Config\Form\Field\File" sortOrder="42" showInDefault="1" showInWebsite="1" >
+                    <label>API certificate key</label>
+                    <backend_model>Firstdata\Gateway\Model\Config\Backend\Key</backend_model>
+                    <upload_dir >var/upload</upload_dir>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>                    
+                </field>			
+            </group>
+        </section>
+    </system>
+</config>

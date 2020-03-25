@@ -1,0 +1,74 @@
+<?php
+
+/**
+ * @var $block \ITM\Sportires\Block\Filterblock
+
+<referenceContainer name="page.top">
+<block class="ITM\Sportires\Block\Filterblock" name="custom.file" before="-" template="ITM_Sportires::filter_block.phtml" />
+</referenceContainer>
+
+ * or
+ * {{block class="ITM\Sportires\Block\Filterblock"  template="filter_block.phtml"}}
+ */
+
+
+
+?>
+<div class="search_block_content itm filterproducts-tab-main filter_tire_tab_main col-md-6" id="itm-filter" >
+    <div class="container">
+        <div class=" filterproducts-tab filter_tire_tab">
+            <div class="data items " data-mage-init='{"tabs":{"openedState":"active"}}'>
+                
+                <div class="data item title active" aria-labeledby="tab-label-size-title" data-role="collapsible" aria-expanded="false"
+                     id="tab-label-size">
+                        <a class="data switch" tabindex="-1" data-toggle="switch" href="#size" id="tab-label-size-title">
+                            <?= __("Medida")?></a>
+                </div>
+                <div class="data item content" id="size" data-role="content">
+                    <?php echo $this->getLayout()
+                        ->createBlock("ITM\Sportires\Block\Filterblock")
+                        ->setTemplate("ITM_Sportires::shop_size.phtml")
+                        ->toHtml()
+                    ?>
+                </div>
+                <div class="data item title" aria-labeledby="tab-label-vehicle-title" data-role="collapsible"
+                     id="tab-label-vehicle">
+                    <a class="data switch" tabindex="-1" data-toggle="switch" href="#vehicle"
+                       id="tab-label-vehicle-title "><?= __("Veh&iacute;culo") ?></a>
+                </div>
+                <div class="data item content " id="vehicle" data-role="content"  style="display: none;">
+
+                    <?php echo $this->getLayout()
+                        ->createBlock("ITM\Sportires\Block\Filterblock")
+                        ->setTemplate("ITM_Sportires::shop_vehicle.phtml")
+                        ->toHtml() 
+                    ?>
+
+                </div>  
+				
+				
+				<div class="data item title" aria-labeledby="tab-label-motor-title" data-role="collapsible" aria-expanded="false"
+                     id="tab-label-motor">
+                        <a class="data switch" tabindex="-1" data-toggle="switch" href="#motor" id="tab-label-motor-title">
+                            <?= __("Moto")?></a>
+                </div> 
+
+                <div class="data item content" id="motor" data-role="content" style="display: none;">
+
+                    <?php echo $this->getLayout()
+                        ->createBlock("ITM\Sportires\Block\Filterblock")
+                        ->setTemplate("ITM_Sportires::shop_motor.phtml")
+                        ->toHtml()
+                    ?>
+                </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<style>
+    #vehicle-form, #size-form, #motor-form {
+        margin-top: 20px;
+    }
+
+</style>

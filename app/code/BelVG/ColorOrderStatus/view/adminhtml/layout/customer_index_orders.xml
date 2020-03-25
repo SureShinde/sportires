@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!--
+ * BelVG LLC.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
+ *
+ ********************************************************************
+ * @category   BelVG
+ * @package    BelVG_ColorOrderStatus
+ * @copyright  Copyright (c) BelVG LLC. (http://www.belvg.com)
+ * @license    http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
+ -->
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/layout_generic.xsd">
+    <body>
+        <referenceBlock name="adminhtml.customer.edit.tab.orders">
+            <block class="Magento\Backend\Block\Widget\Grid\ColumnSet" as="grid.columnSet" name="customer_orders.grid.columnSet">
+                <block class="BelVG\ColorOrderStatus\Block\Status\Grid\Column\ColorCustomer"
+                       name="sales_order_status.grid.columnSet.color" after="grand_total" as="color">
+                    <arguments>
+                        <argument name="index" xsi:type="string">status</argument>
+                        <argument name="type" xsi:type="string">text</argument>
+                        <argument name="sortable" xsi:type="string">0</argument>
+                        <argument name="filter" xsi:type="string">0</argument>
+                        <argument name="column_css_class" xsi:type="string">no-column</argument>
+                        <argument name="header_css_class" xsi:type="string">no-column</argument>
+                    </arguments>
+                </block>
+            </block>
+        </referenceBlock>
+    </body>
+</layout>

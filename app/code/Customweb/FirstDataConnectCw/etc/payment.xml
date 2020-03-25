@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<payment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Payment:etc/payment.xsd">
+    <groups>
+        <group id="firstdataconnectcw">
+            <label>FirstData Connect</label>
+        </group>
+    </groups>
+    <methods>
+        <method name="firstdataconnectcw_generic">
+			<allow_multiple_address>1</allow_multiple_address>
+		</method><method name="firstdataconnectcw_creditcard">
+			<allow_multiple_address>1</allow_multiple_address>
+		</method><method name="firstdataconnectcw_mastercard">
+			<allow_multiple_address>1</allow_multiple_address>
+		</method><method name="firstdataconnectcw_visa">
+			<allow_multiple_address>1</allow_multiple_address>
+		</method><method name="firstdataconnectcw_americanexpress">
+			<allow_multiple_address>1</allow_multiple_address>
+		</method><method name="firstdataconnectcw_maestro">
+			<allow_multiple_address>1</allow_multiple_address>
+		</method><method name="firstdataconnectcw_maestrouk">
+			<allow_multiple_address>1</allow_multiple_address>
+		</method><method name="firstdataconnectcw_masterpass">
+			<allow_multiple_address>1</allow_multiple_address>
+		</method><method name="firstdataconnectcw_bcmc">
+			<allow_multiple_address>1</allow_multiple_address>
+		</method>
+    </methods>
+</payment>

@@ -1,0 +1,27 @@
+{
+  "name": "belvg/module-color-order-status",
+  "description": "",
+  "keywords": ["Sales","Marketing","Orders","Order Status","Customize"],
+  "homepage": "https://belvg.com",
+  "type": "magento2-module",
+  "version": "2.0.0",
+  "license": [
+    "OSL-3.0",
+    "AFL-3.0"
+  ],
+  "authors": [
+    {
+      "email": "store@belvg.com",
+      "name": "BelVG LLC"
+    }
+  ],
+  "require": {
+    "php": "7.0.2|7.0.4|~7.0.6|~7.1.0|~7.2.0"
+  },
+  "autoload": {
+        "files": [ "registration.php" ],
+        "psr-4": {
+            "BelVG\\ColorOrderStatus\\": ""
+        }
+  }
+}

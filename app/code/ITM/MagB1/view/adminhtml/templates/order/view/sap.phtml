@@ -1,0 +1,23 @@
+<?php
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php /** @var $block \Magento\Sales\Block\Adminhtml\Order\View\Info */ ?>
+<?php $_order = $block->getOrder() ?>
+
+<div>
+    <div style="background: #f1f1f1;padding: 10px;">
+    	<span> <?php echo __("SAP Document Number")?> </span>
+    	<span style="float:right"><?php echo $_order->getItmSboDocnum(); ?></span>
+    </div>
+    
+    <div style="padding: 10px;">
+    	<span> <?php echo __("SAP Document Entry")?> </span>
+    	<span style="float:right"><?php echo $_order->getItmSboDocentry(); ?></span>
+    </div>
+</div>

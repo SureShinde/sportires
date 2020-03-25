@@ -1,0 +1,359 @@
+<?php 
+/**
+* CedCommerce
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the End User License Agreement (EULA)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* https://cedcommerce.com/license-agreement.txt
+*
+* @category    Ced
+* @package     Ced_StorePickup
+* @author      CedCommerce Core Team <connect@cedcommerce.com >
+* @copyright   Copyright CEDCOMMERCE (https://cedcommerce.com/)
+* @license      https://cedcommerce.com/license-agreement.txt
+*/
+
+$gmapApiKey = $this->helper('Ced\StorePickup\Helper\Data')->getStoreConfig('carriers/storepickupshipping/map_apikey');
+$src = "https://maps.googleapis.com/maps/api/js?key=".$gmapApiKey;
+
+?>
+<script async defer src="<?php echo $src; ?>" type="text/javascript"></script>
+<?php 
+	$storesCollection = $this->getAllStores();
+    $info = $this->getFullRouteInfo();
+	$info = explode('_',$info);
+	$action_name =trim($info[2]);
+	$markers = array();
+	$i = 1;
+    $totalStoreCount = count($storesCollection);
+    $class = '';
+    $model =  \Magento\Framework\App\ObjectManager::getInstance();
+
+    ?>
+
+<div class="sore_map_wrapper">
+	<?php if(!$totalStoreCount) { ?>
+		<?php if($action_name == 'search') {?>
+			<p class="search_note_msg">
+				<?php echo __("Oop's. it seems no stores found.Please change your search criteria or"); ?><br>
+				<a href="<?php echo $this->getUrl('storepick')  ?>"><?php echo __("Click Here"); ?></a><?php echo __("to list all the store."); ?> 
+			</p>
+		<?php } else { ?>
+			<p class="note_msg"><?php echo __("There are no stores."); ?></p>
+		<?php } ?>
+	<?php } else { ?>
+	<?php if($action_name == 'search') { ?>
+		<p class="search_count_msg"><b><?php echo $totalStoreCount ?> <?php echo __("record's found."); ?></b></p>
+	<?php } ?>
+	<div class="store_wrapper">
+	
+		<?php foreach($storesCollection as $stores) {  $x = ($stores->getData());?>
+		<?php 
+			if ($i % 2 == 0)
+				$class = 'even';
+			else
+				$class = 'odd';
+		?>
+		<div class="storeslist <?php echo $class;?>">
+
+
+<div class="store_name">
+			<h2><?php echo __(" Store#"); ?><?php echo $stores->getStoreName();?> </h2>
+			<ul style="list-style-type:none">
+				<li id="cnt-name">
+					<?php echo __("Country :"); ?> <?php echo $model->create('\Magento\Directory\Model\Country')->load($stores->getStoreCountry())->getName();?></li>
+				<li id="region-name">
+					<?php echo __("Region :"); ?> <?php echo $stores->getStoreState();?></li>
+				<li id="city-name">
+					<?php echo __("City :"); ?> <?php echo $stores->getStoreCity();?></li>
+				<li id="street-name">
+					<?php echo __("Street :"); ?> <?php echo $stores->getStoreAddress();?></li>
+				<li id="phone">
+					<?php echo __("Phone :"); ?> <?php echo $stores->getStorePhone();?></li>
+				<li id="store_owner_name">
+					<?php echo __("Store Manager Name :"); ?> <?php echo $stores->getStoreManagerName();?></li>
+				<li id="store_owner_email">
+					<?php echo __("Store Manager Email :"); ?> <?php echo $stores->getStoreManagerEmail();?></li>
+				<li id="timing">
+					<?php				
+					  $storeinfo = $model->create('Magento\Framework\Setup\ModuleDataSetupInterface')->getTable('store_pickup');
+						
+					  $storetable = $model->create('\Ced\StorePickup\Model\StoreHour')->getCollection()->addFieldToFilter('pickup_id',$x['pickup_id'] );
+					  $storetable = ($storetable->getData());
+
+					  foreach ($storetable as $k=>$v)
+					  {
+					  	if($v['status'] != 0)
+						  {
+						    if($v['days'] )
+						    {
+							    echo "Day :" ;	echo $v['days'];echo "<br>";
+							    echo "Opening Time :";	echo $v['start'];echo "<br>";
+							    echo "Closing Time :";	echo $v['end'];echo "<br>";
+							    echo "Interval  :";	echo $v['interval'];echo "<br>";
+							    echo "<br>";
+						    }
+						 }
+						 else{
+				 				echo "The Store is closed on <b>";echo $v['days'];
+				 				echo "</b><br>";
+				 				echo "<br>";
+				 			}
+					  }
+						?>
+				</li>
+				
+			</ul>
+			</div>
+			<?php
+				$storeName = $stores->getStoreName();
+				$storeLat =  $stores->getLatitude();
+				$storeLong = $stores->getLongitude();
+				$storeRadius = '0';
+				$storeZoomLevel ='15';
+			?>
+		<div style="clear: both;"></div>
+		<?php if($storeLat && $storeLong) { ?>
+			<button onclick="initialize(<?php echo $storeLat ;?>, <?php echo $storeLong ;?>, <?php echo $storeRadius ;?>, <?php echo $storeZoomLevel ;?>, '<?php echo $storeName ;?>', 'store-list-map-canvas');" class="button" title="View Map" type="button">
+				<span>
+					<span>
+					<?php echo __("View Store on Map"); ?>
+					</span>
+				</span>
+			</button>
+		<?php } ?>
+	</div>
+	<?php 
+		$markers[$i]['name'] = $stores->getStoreName();
+		$markers[$i]['address'] = $stores->getStoreAddress();
+		$markers[$i]['contact'] = $stores->getStorePhone();
+        $markers[$i]['lat'] = $stores->getLatitude();
+        $markers[$i]['long'] = $stores->getLongitude();
+		$i++;
+	?>
+	<?php } ?>
+	</div>
+	<div id="map-wrapper">
+		<div id="stores-list-gmap-div">
+			<div id="store-list-map-canvas">&nbsp;</div>
+		</div>
+			<?php if($totalStoreCount) {  ?>
+			<div id="search_stores">
+				<button onclick="showSeachForm(markers, googleMapDivId);" class="button" title="Show All Stores" type="button">
+					<span>
+					  <span>
+						<?php echo __("Search Store"); ?>					  </span>
+					</span>
+				</button>
+				<button onclick="place_multiple_markers(markers, googleMapDivId);" class="button" title="Show All Stores" type="button">
+					<span>
+					  <span>
+					  	<?php echo __("Show All Stores on Map"); ?>					  </span>
+					</span>
+				</button>
+				<?php if($action_name == 'searchstore') { ?>
+					<a class="button" href="<?php echo $this->getUrl('storepick')?>">
+						<span>
+						  <span>
+							<?php echo __("View All Store"); ?>
+						  </span>
+						</span>
+					</a>
+				<?php } ?>
+			</div>
+		<?php } ?>
+	</div>
+	<div class="clear"></div>
+	<?php } ?>
+</div>
+<script type="text/javascript">
+	var markers = [
+	<?php foreach ($markers as $marker) : ?>
+	['<?php echo $marker['name'];?>',<?php echo $marker['lat'];?>,<?php echo $marker['long'];?>,'<?php echo $marker['address'];?>','<?php echo $marker['contact'];?>'],
+	<?php endforeach ?>
+	];
+</script>
+
+<script type="text/javascript">
+window.onload = function() {
+	place_multiple_markers(markers, googleMapDivId);
+	};
+	var googleMapDivId = 'store-list-map-canvas';
+
+</script>
+<div class="search_form" style="display:none">
+	<?php
+		$currentUrl = $model->create('\Magento\Store\Model\StoreManagerInterface')->getStore()->getCurrentUrl();
+		if(strpos($currentUrl, 'csstorepickup/stores/index')){
+			$searchUrl = $this->getUrl('csstorepickup/stores/search');
+		}else{
+			$searchUrl = $this->getUrl('storepick/index/search');
+		}
+		
+	?>
+	<form action="<?php echo $searchUrl; ?>" method="post" id="addressSearch">
+		<div class="form_fieldset">
+			<h2 class="legend"><?php echo __("Search Store"); ?></h2>
+			<span class="close_search" onclick="closeSearch()">X</span>
+			<ul class="form-list store-list">
+				<li>
+					<div class="field city">
+						<label class="label" for="city"><span><?php echo __('City') ?></span></label>
+						<div class="control">
+							<input type="text" name="city" value="" class="input-text" id="city">
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="field region">
+						<label class="label" for="region_id"><span><?php echo __('State/Province') ?></span></label>
+						<div class="control">
+							<input type="text" name="region_id" value="" class="input-text" id="region_id">
+						</div>
+					</div>
+				</li>
+				<li>
+					 <div class="field country required">
+						<label class="label" for="country"><span><?php echo __('Country') ?></span></label>
+						<div class="control">
+							<?php echo $block->getFullCon() ?>
+						</div>
+					</div>
+				</li>
+				<li>
+					<button type="submit" title="Search" class="button"><span><span>Search</span></span></button>
+				</li>
+			</ul>
+		</div>
+	</form>
+	<script type="text/javascript">
+	function initialize(storeLat, storeLong, storeRadius, storeZoomLevel, storeInfoText, googleMapDivId)
+	{
+	    var myCenter = new google.maps.LatLng(storeLat, storeLong);
+	    //convert distance from miles to meters
+	    var storeRadius = storeRadius * 1609.34;
+	    var mapProp = {
+	      center : myCenter,
+	      zoom : storeZoomLevel,
+	      mapTypeId : google.maps.MapTypeId.ROADMAP  
+	      };
+
+	    var map = new google.maps.Map(document.getElementById(''+googleMapDivId), mapProp);
+
+	    //Draw marker
+	    var marker = new google.maps.Marker({
+	      position : myCenter,
+	      });
+	    marker.setMap(map);
+
+	    //Draw circle radius is in meter
+	    if(storeRadius) {
+	        var myCity = new google.maps.Circle({
+	            center : myCenter,
+	            radius : storeRadius,
+	            strokeColor : "#FF00C4",
+	            strokeOpacity : 0.8,
+	            strokeWeight : 1,
+	            fillColor : "#CF74C5",
+	            fillOpacity : 0.4
+	        });
+	        myCity.setMap(map);
+	    }
+	    
+	    // Open information window
+	    if(storeInfoText) {
+	        var infowindow = new google.maps.InfoWindow({
+	            content:storeInfoText
+	        });
+	    infowindow.open(map, marker);
+	    }
+	}
+	function place_multiple_markers(markers, googleMapDivId)
+	{
+	    
+	    var map;
+	    var bounds = new google.maps.LatLngBounds();
+	    var mapOptions = {
+	        mapTypeId: 'roadmap'
+	    };
+	    // Display a map on the page
+	    map = new google.maps.Map(document.getElementById(''+googleMapDivId), mapOptions);
+	    map.setTilt(45);
+	                        
+	    // Display multiple markers on a map
+	    var infoWindow = new google.maps.InfoWindow(), marker, i;
+	    
+	    // Loop through our array of markers & place each one on the map  
+	    for( i = 0; i < markers.length; i++ ) {
+
+	        var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
+	        bounds.extend(position);
+	        marker = new google.maps.Marker({
+	            position: position,
+	            map: map,
+	            title: markers[i][0]
+	        });
+	        
+	        // Allow each marker to have an info window    
+	        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+	            return function() {
+	                
+	                infoWindow.setContent('<p><span><b>Store Name: </b>' +markers[i][0] +'</span></p><p><span><b>Store Address: </b>' 
+	                +markers[i][3]+'</span></p><span><b>Store Contact: </b>'+markers[i][4]);
+	                //infoWindow.setContent('<h4>Store Address : </h4>' +);
+	                //infoWindow.setContent('<h4>Store Contact : </h4>' +markers[i][2]);
+	                infoWindow.open(map, marker);
+	            }
+	        })(marker, i));
+
+	        // Automatically center the map fitting all markers on the screen
+	        map.fitBounds(bounds);
+	    }
+	}
+
+
+	define('js/theme', [
+	                    'jquery',
+	                    'domReady!'
+	                ], function ($) {
+	                    'use strict';
+	                  
+	                });
+
+	                function showSeachForm()
+	                {
+	                	jQuery('.search_form').show();
+	                	jQuery('.search_form_overlay').show();
+	                }
+
+	                function closeSearch()
+	                {
+	                	jQuery('.search_form').hide();
+	                	jQuery('.search_form_overlay').hide();
+	                }
+	
+	</script>
+</div>
+<div class="search_form_overlay" style="display:none"></div>
+<script type="text/x-magento-init">
+    {
+        "#addressSearch": {
+            "validation": {}
+        },
+        "#country_id": {
+            "regionUpdater": {
+                "optionalRegionAllowed": <?php  echo($block->getConfig('general/region/display_all') ? 'true' : 'false'); ?>,
+                "regionListId": "#region_id",
+                "regionInputId": "#region",
+                "postcodeId": "#zip_code",
+                "form": "#addressSearch",
+                "regionJson": <?php  echo $this->helper('Magento\Directory\Helper\Data')->getRegionJson() ?>,
+                "defaultRegion": "<?php echo $block->getRegionId() ?>",
+                "countriesWithOptionalZip": <?php  echo $this->helper('Magento\Directory\Helper\Data')->getCountriesWithOptionalZip(true) ?>
+            }
+        }
+    }
+</script>

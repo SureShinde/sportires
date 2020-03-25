@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- /**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://cedcommerce.com/license-agreement.txt
+ *
+ * @category  Ced
+ * @package   Ced_StorePickup
+ * @author    CedCommerce Core Team <connect@cedcommerce.com >
+ * @copyright Copyright CEDCOMMERCE (https://cedcommerce.com/)
+ * @license      https://cedcommerce.com/license-agreement.txt
+ */ -->
+<page layout="1column">
+	<body>
+		<referenceContainer name="content">
+			<block class="Ced\StorePickup\Block\Storeviews" name="storemaps" as="storemaps" template="Ced_StorePickup::ced/storedetails.phtml" cacheable="false"></block>
+       </referenceContainer>
+	</body>
+</page>

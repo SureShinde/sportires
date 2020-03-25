@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!-- /** * Copyright © 2016 Magento. All rights reserved. * See COPYING.txt 
+	for license details. */ -->
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+
+	<body>
+		<!--
+		<referenceBlock name="product.attributes">
+			<block class="Magento\Catalog\Block\Product\View\Attributes" name="product.itm.magb1.info" template="ITM_MagB1::product/view/product_files.phtml" />
+		</referenceBlock>
+		-->
+
+		<referenceBlock name="product.info.details">
+			<block class="Magento\Catalog\Block\Product\View"  name="itm.files.tab" template="ITM_MagB1::product/view/product_files.phtml" group="detailed_info"  ifconfig='itm_magb1_section/general/display_files_tab'>
+				<arguments>
+				<!--	<argument translate="true" name="title" xsi:type="string">Files</argument> -->
+					<argument name="title" xsi:type="helper" helper="ITM\MagB1\Helper\Data::getFilesTabTitle"></argument>
+				</arguments>
+			</block>
+		</referenceBlock>
+
+	</body>
+</page>

@@ -1,0 +1,147 @@
+<?php
+
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Claro
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright © 2018 CedCommerce. All rights reserved.
+ * @license     EULA http://cedcommerce.com/license-agreement.txt
+ */
+
+use Ced\Claro\Block\Adminhtml\Profile\Ui\Form\Js;
+
+/** @var Js $block */
+
+/** @var array $selected */
+?>
+<div class="admin__fieldset" id="claro_category_set">
+    <div class="admin__field _required" id="claro_category_box_level">
+        <label class="admin__field-label">
+            <span>Select Categories</span>
+        </label>
+        <div class="admin__field-control">
+            <select id="category_level_0" style="width: 100%;" data-form-part="claro_profile_form"
+                    class="admin__control-select required-entry claro_category" required="required" name="category_level_0">
+                <option data-title="Please select a category" value="">Please select a category</option>
+                <?php
+                /** @var array $categories */
+                $categories = $block->getCategoryHelper()->getList();
+                ?>
+                <?php
+                if (isset($categories['categorias']) && !empty($categories['categorias'])) {
+                    foreach ($categories['categorias'] as $category) {
+                        $rootCategory = $category['nombre'];
+                        foreach ($category['subcategorias'] as $values) {
+                            $subCategory = $values['nombre'];
+                            foreach ($values['subcategorias'] as $value) {
+                                $selected = $block->getSelectedCategory();
+                                if (isset($selected['category_level_0'])) {
+                                    $selected = ($selected['category_level_0'] == $value['idcategoria']) ? 'selected="selected"' : ''; ?>
+                                    <option <?= $selected ?> value="<?= $value['idcategoria'] ?>"><?= $rootCategory ?>
+                                        --><?= $subCategory ?>
+                                        --><?= $value['nombre'] ?></option>
+                                    <?php
+                                } else {
+                                    ?>
+                                    <option value="<?= $value['idcategoria'] ?>"><?= $rootCategory ?>
+                                        --><?= $subCategory ?>
+                                        --><?= $value['nombre'] ?></option>
+                                    <?php
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    echo "Claro Configuration is Not Set or Keys are in Correct !! Please check Configuration";
+                }
+                ?>
+            </select>
+        </div>
+    </div>
+    <div class="admin__field _required" id="claro_filter_box">
+        <label class="admin__field-label">
+            <span>Select Filters</span>
+        </label>
+        <div class="admin__field-control">
+            <select id="category_level_1" style="width: 100%;" data-form-part="claro_profile_form"
+                    class="admin__control-select claro_filter" name="category_level_1">
+                <option data-title="Please select a Filter" value="">Please select a Filter</option>
+                <?php
+                /** @var array $categories */
+                $categories = $block->getCategoryHelper()->getList();
+                ?>
+                <?php
+                if (isset($categories['categorias']) && !empty($categories['categorias'])) {
+                    foreach ($categories['categorias'] as $category) {
+                        foreach ($category['subcategorias'] as $values) {
+                            foreach ($values['subcategorias'] as $value) {
+                                $selected = $block->getSelectedCategory();
+                                if (isset($selected['category_level_1'])) {
+                                    if ($value['idcategoria'] == $selected['category_level_0'] && isset($value['filtros'])) {
+                                        foreach ($value['filtros'] as $v) {
+                                            $selected = $block->getSelectedCategory();
+                                            $selected = ($selected['category_level_1'] == $v['idFiltro']) ? 'selected="selected"' : ''; ?>
+                                            <option <?= $selected ?>
+                                                    value="<?= $v['idFiltro'] ?>"><?= $v['filtro'] ?></option>
+                                            <?php
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    echo "Claro Configuration is Not Set or Keys are in Correct !! Please check Configuration";
+                }
+                ?>
+            </select>
+        </div>
+    </div>
+</div>
+<script>
+    var CONTROLLER_FILTERS_FILTER_URL =
+        '<?php echo $block->getUrl('claro/filters/filter', ['_nosid' => true])?>';
+    require([
+        'jquery'
+    ], function ($) {
+        if($('#category_level_1').val() === ""){
+            $('#claro_filter_box').hide();
+        }
+        else $('#claro_filter_box').show();
+        $("#category_level_0").change(function(){
+
+            $('#category_level_1').find('option').remove();
+            var selectedId = $(this).val();
+            $.ajax({
+                url: CONTROLLER_FILTERS_FILTER_URL ,
+                type: 'POST',
+                data: {selectedId:selectedId},
+                dataType: 'json',
+                showLoader: true,
+                success: function (response) {
+                    if(response.length > 0){
+                        $('#claro_filter_box').show();
+                        $.each(response,function (index,object) {
+                            var filterId = object.idFiltro;
+                            var filterName = object.filtro;
+                            $('#category_level_1').append(
+                                '<option value ="'+filterId+'">'+filterName+'</option>'
+                            );
+                        });
+                    }
+                    else $('#claro_filter_box').hide();
+                // $('.admin__control-select required-entry claro_category').html(response);
+                }
+            });
+        });
+    });
+</script>

@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+
+
+    <preference for="ITM\MagB1\Api\Catalog\CategoryInterface" type="ITM\MagB1\Model\Catalog\Category"/>
+
+    <preference for="ITM\MagB1\Api\Config\ConfigInterface" type="ITM\MagB1\Model\Config\Config"/>
+
+    <preference for="ITM\MagB1\Api\Attribute\AttributeInterface" type="ITM\MagB1\Model\Attribute\Attribute"/>
+
+    <preference for="ITM\MagB1\Api\Catalog\ProductInterface" type="ITM\MagB1\Model\Catalog\Product"/>
+
+    <preference for="ITM\MagB1\Api\Catalog\InventoryInterface" type="ITM\MagB1\Model\Catalog\Inventory"/>
+
+    <preference for="ITM\MagB1\Api\Customer\CustomerInterface" type="ITM\MagB1\Model\Customer\Customer"/>
+
+    <preference for="ITM\MagB1\Api\Customer\AccountManagementInterface"
+                type="ITM\MagB1\Model\Customer\AccountManagement"/>
+
+    <preference for="ITM\MagB1\Api\Sales\OrderInterface" type="ITM\MagB1\Model\Sales\Order"/>
+
+    <preference for="ITM\MagB1\Api\Sales\ShipmentInterface" type="ITM\MagB1\Model\Sales\Order\Shipment"/>
+
+    <preference for="ITM\MagB1\Api\Data\ShipmentDataInterface" type="ITM\MagB1\Model\Sales\Order\ShipmentData"/>
+
+    <preference for="ITM\MagB1\Api\Sales\InvoiceInterface" type="ITM\MagB1\Model\Sales\Order\Invoice"/>
+
+    <preference for="ITM\MagB1\Api\Data\InvoiceDataInterface" type="ITM\MagB1\Model\Sales\Order\InvoiceData"/>
+
+    <preference for="ITM\MagB1\Api\Entity\EntityInterface" type="ITM\MagB1\Model\Entity\Entity"/>
+
+    <preference for="ITM\MagB1\Api\Data\EntityDataInterface" type="ITM\MagB1\Model\EntityData"/>
+
+    <preference for="ITM\MagB1\Api\Data\EntityLineDataInterface" type="ITM\MagB1\Model\EntityLineData"/>
+
+    <preference for="ITM\MagB1\Api\Data\EntityLineColumnDataInterface" type="ITM\MagB1\Model\EntityLineColumnData"/>
+
+    <preference for="ITM\MagB1\Api\Data\ItemDetailsDataInterface" type="ITM\MagB1\Model\ItemDetailsData"/>
+
+
+    <preference for="ITM\MagB1\Api\ProductfilesInterface" type="ITM\MagB1\Model\Api\Productfiles"/>
+
+    <preference for="ITM\MagB1\Api\Data\ProductfilesDataInterface" type="ITM\MagB1\Model\Api\Data\ProductfilesData"/>
+
+
+    <preference for="ITM\MagB1\Api\OrderfilesInterface" type="ITM\MagB1\Model\Api\Orderfiles"/>
+
+    <preference for="ITM\MagB1\Api\Data\OrderfilesDataInterface" type="ITM\MagB1\Model\Api\Data\OrderfilesData"/>
+
+    <preference for="ITM\MagB1\Api\InvoicefilesInterface" type="ITM\MagB1\Model\Api\Invoicefiles"/>
+
+    <preference for="ITM\MagB1\Api\Data\InvoicefilesDataInterface" type="ITM\MagB1\Model\Api\Data\InvoicefilesData"/>
+
+    <preference for="ITM\MagB1\Api\ShipmentfilesInterface" type="ITM\MagB1\Model\Api\Shipmentfiles"/>
+
+    <preference for="ITM\MagB1\Api\Data\ShipmentfilesDataInterface" type="ITM\MagB1\Model\Api\Data\ShipmentfilesData"/>
+
+    <preference for="ITM\MagB1\Api\CustomerfilesInterface" type="ITM\MagB1\Model\Api\Customerfiles"/>
+
+    <preference for="ITM\MagB1\Api\Data\CustomerfilesDataInterface" type="ITM\MagB1\Model\Api\Data\CustomerfilesData"/>
+
+
+    <virtualType name="Magento\Sales\Model\ResourceModel\Order\Grid" type="Magento\Sales\Model\ResourceModel\Grid">
+        <arguments>
+            <argument name="columns" xsi:type="array">
+                <item name="itm_sbo_docentry" xsi:type="string">sales_order.itm_sbo_docentry</item>
+                <item name="itm_sbo_docnum" xsi:type="string">sales_order.itm_sbo_docnum</item>
+                <item name="itm_sbo_download_to_sap" xsi:type="string">sales_order.itm_sbo_download_to_sap</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="ITM\MagB1\Helper\Data">
+        <arguments>
+            <argument name="urlInterface" xsi:type="object" shared="false">Magento\Framework\Url</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="ItmFlushCatalogImagesCache" xsi:type="object">ITM\MagB1\Console\FlushCatalogImagesCache</item>
+                <item name="ItmClearProductImages" xsi:type="object">ITM\MagB1\Console\ClearProductImages</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Sales\Controller\AbstractController\OrderViewAuthorization">
+        <plugin name="afterCanView" type="ITM\MagB1\Plugin\OrderViewAuthorization"/>
+    </type>
+
+    <type name="Magento\Framework\Webapi\ServiceInputProcessor">
+        <plugin name="dontConvertEmptyString" type="ITM\MagB1\Plugin\Framework\Webapi\ServiceInputProcessorPlugin"/>
+    </type>
+
+    <type name="Magento\Customer\Block\Adminhtml\Group\Edit\Form">
+        <plugin name="itm_magb1_after_set_form_customer_group" type="ITM\MagB1\Plugin\Group\Form" sortOrder="1"/>
+    </type>
+    <type name="Magento\Customer\Controller\Adminhtml\Group\Save">
+        <plugin name="save_field" type="ITM\MagB1\Plugin\Group\Form" sortOrder="1"/>
+    </type>
+
+</config>

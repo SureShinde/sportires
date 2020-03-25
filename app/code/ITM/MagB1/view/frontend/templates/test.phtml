@@ -1,0 +1,78 @@
+<?php
+// {{block class="Magento\Framework\View\Element\Template" template="ITM_MagB1::test.phtml"}}
+
+
+$options1 = [];
+
+for ($i=1 ;$i<100 ;$i++) {
+    $options1[] = ["value"=>$i, "label"=>"Label-$i"];
+}
+$options2 = [];
+
+for ($i=1 ;$i<100 ;$i++) {
+    $options2[] = ["value"=>$i, "label"=>"Label-$i"];
+}
+?>
+<form data-mage-init='{"validation": {}}' class="form " action="" id="size-form" method="get" autocomplete="off">
+<div style="border: solid 1px red;">
+<?php
+echo $this->getLayout()
+    ->createBlock('Magento\Framework\View\Element\Template')
+    ->setTemplate('ITM_MagB1::dropdown.phtml')
+    ->setData('options',$options1)
+    ->setData('attribute_code',"color")
+    ->setData('attribute_label',"Color")
+    ->setData('col',"col-2")
+    ->toHtml();
+?>
+</div>
+    <button type="submit" class="btn-spt-1 action submit primary btn col-md-12" title="<?php  echo __('View Results') ?>"><span><?php echo __('Buscar') ?></span></button>
+
+</form>
+
+<script type="text/javascript">
+    require([
+        'jquery',
+        'mage/mage'
+    ], function($){
+
+        var dataForm = $('#size-form');
+        dataForm.mage('validation', {});
+
+    });
+
+</script>
+
+
+    <div style="border: solid 1px red;width:500px;height: 500px;">
+<?php
+    echo $this->getLayout()
+    ->createBlock('Magento\Framework\View\Element\Template')
+        ->setTemplate('ITM_MagB1::dropdown.phtml')
+        ->setData('options',$options2)
+        ->setData('attribute_code',"size")
+        ->setData('attribute_label',"Size")
+        ->setData('col',"col-3")
+    ->toHtml();
+?>
+</div>
+
+
+<div style="border: solid 1px red;width:500px;height: 500px;">
+    <?php
+
+    $options3 = [];
+
+    for ($i=1 ;$i<35 ;$i++) {
+        $options3[] = ["value"=>$i, "label"=>"Label-$i"];
+    }
+    echo $this->getLayout()
+        ->createBlock('Magento\Framework\View\Element\Template')
+        ->setTemplate('ITM_MagB1::dropdown.phtml')
+        ->setData('options',$options3)
+        ->setData('attribute_code',"robert")
+        ->setData('attribute_label',"Robert")
+        ->setData('col',"col-3")
+        ->toHtml();
+    ?>
+</div>

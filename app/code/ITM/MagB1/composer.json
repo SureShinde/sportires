@@ -1,0 +1,23 @@
+{
+	"name" : "itm/module-magb1",
+	"description" : "MagB1 module for Magento2",
+	"require" : {
+		"itm/module-main" : "*"
+	},
+	"type" : "magento2-module",
+	"version" : "1.4.2",
+	"autoload" : {
+		"files" : [
+			"registration.php"
+		],
+		"psr-4" : {
+			"ITM\\MagB1\\" : ""
+		}
+	},
+	"authors" : [{
+			"name" : "WH",
+			"homepage" : "https://www.itm-development.com/",
+			"role" : "Developer"
+		}
+	]
+}

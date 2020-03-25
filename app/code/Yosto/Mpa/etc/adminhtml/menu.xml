@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2017 x-mage2(Yosto). All rights reserved.
+ * See README.md for details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Backend/etc/menu.xsd">
+    <menu>
+        <add id="Yosto_Mpa::mpa_menu" title="Mass Product Actions"
+             module="Yosto_Mpa" parent="Magento_Catalog::catalog"
+             resource="Yosto_Mpa::mpa_menu"
+             sortOrder="100"/>
+        <add id="Yosto_Mpa::mpa_menu_configuration" title="Configuration"
+             module="Yosto_Mpa"
+             sortOrder="10"
+             parent="Yosto_Mpa::mpa_menu"
+             action="adminhtml/system_config/edit/section/yosto_mpa"
+             resource="Yosto_Mpa::mpa_menu_configuration" />
+    </menu>
+</config>

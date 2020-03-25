@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+    	<add id="Customweb_FirstDataConnectCw::transactions" title="FirstData Connect Transactions" module="Customweb_FirstDataConnectCw" sortOrder="10" parent="Customweb_Base::sales_customweb" action="firstdataconnectcw/transaction" resource="Customweb_FirstDataConnectCw::transaction" />
+
+        <add id="Customweb_FirstDataConnectCw::config" title="FirstData Connect" module="Customweb_FirstDataConnectCw" sortOrder="100" parent="Customweb_Base::config" action="firstdataconnectcw/config" resource="Customweb_FirstDataConnectCw::config"/>
+    </menu>
+</config>

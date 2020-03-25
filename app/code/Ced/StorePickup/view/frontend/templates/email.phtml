@@ -1,0 +1,85 @@
+<?php
+
+?>
+<?php $order = $block->getOrderDetails();
+$storeId = $order->getStorePickupId();
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+if($storeId != '0'){
+	$pickup_date = $order->getStorePickupDate();
+	$storeData = $objectManager->create('\Ced\StorePickup\Model\StoreInfo')->load($storeId);
+	$store_Name = $storeData->getStoreName();
+	$store_mgr_name = $storeData->getStoreManagerName();
+	$store_address = $storeData->getStoreAddress();
+	$store_city = $storeData->getStoreState();
+	$store_country = $storeData->getStoreCountry();
+	$storeContact = $storeData->getStorePhone();
+	$country_name = $objectManager->create('\Magento\Directory\Model\Country')->load($store_country)->getName();
+	$storezip = $storeData->getStoreZcode();      	
+}  
+?>
+
+<?php 	if($storeId != '0'){?>
+	
+
+	<table cellpadding="0" cellspacing="0" border="1">
+		<tbody>
+			<tr>
+				<td style="padding: 5px;">
+					<span style="font-weight: bold;"><?php echo 'PickUp Date';?></span>
+				</td>
+				<td style="padding: 5px;">
+					<span style="color: #616161;"><?php echo $pickup_date;?></span>
+				</td>
+			</tr>
+			<tr>
+				<td style="padding: 5px;">
+					<span style="font-weight: bold;"><?php echo 'Store Name';?></span>
+				</td>
+				<td style="padding: 5px;">
+					<span style="color: #616161;"><?php echo $store_Name;?></span>
+				</td>
+			</tr>
+			<tr>
+				<td style="padding: 5px;">
+					<span style="font-weight: bold;"><?php echo 'StoreManager Name';?></span>
+				</td>
+				<td style="padding: 5px;">
+					<span style="color: #616161;"><?php echo $store_mgr_name;?></span>
+				</td>
+			</tr>
+			<tr>
+				<td style="padding: 5px;">
+					<span style="font-weight: bold;"><?php echo 'Store Contact';?></span>
+				</td>
+				<td style="padding: 5px;">
+					<span style="color: #616161;"><?php echo $storeContact;?></span>
+				</td>
+			</tr>
+			<tr>
+				<td style="padding: 5px;">
+					<span style="font-weight: bold;"><?php echo 'Store Address';?></span>
+				</td>
+				<td style="padding: 5px;">
+					<span style="color: #616161;"><?php echo $store_address;?></span>
+				</td>
+			</tr>
+			<tr>
+				<td style="padding: 5px;">
+					<span style="font-weight: bold;"><?php echo 'Store City';?></span>
+				</td>
+				<td style="padding: 5px;">
+					<span style="color: #616161;"><?php echo $store_city;?></span>
+				</td>
+			</tr>
+			<tr>
+				<td style="padding: 5px;">
+					<span style="font-weight: bold;"><?php echo 'Store Country';?></span>
+				</td>
+				<td style="padding: 5px;">
+					<span style="color: #616161;"><?php echo $country_name;?></span>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+<?php }?>

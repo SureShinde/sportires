@@ -1,0 +1,25 @@
+<?php
+$_magb_helper = $this->helper('ITM\MagB1\Helper\Data');
+$customer_id = $_magb_helper->getCustomerId();
+if($customer_id == 0 ) {
+    return;
+}
+$files = $_magb_helper->getCustomerFiles($customer_id);
+?>
+<?php if(count($files) == 0) return; ?>
+<div class="block block-dashboard-addresses">
+    <div class="block-title">
+        <strong><?php echo __("Customer Files"); ?></strong>
+    </div>
+    <div class="block-content">
+    	<ul>
+    	   	<?php foreach ($files as $file): ?>
+       		<li><a target="_blank" href="<?php echo $this->getUrl('magb1/download/index',["type"=>"customer_customer","id" =>$file["entity_id"]]); ?>"><?php echo $file["path"]?> </a>
+       		<?php if(!empty($file["description"])):?>
+       		<div><?php echo $file["description"];?></div>
+       		<?php endif;?>
+       		</li>
+       		<?php endforeach; ?>
+   	 </ul>
+    </div>
+</div>

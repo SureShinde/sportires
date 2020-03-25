@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement(EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category  Ced
+ * @package   Ced_WalmartMx
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright Copyright CEDCOMMERCE(http://cedcommerce.com/)
+ * @license   http://cedcommerce.com/license-agreement.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Ced_WalmartMx::WalmartMx" title="WalmartMx" sortOrder="50">
+                    <resource id="Ced_WalmartMx::product" title="Products">
+                        <resource id="Ced_WalmartMx::walmartmx_profile" title="Manage Profiles"/>
+                        <resource id="Ced_WalmartMx::walmartmx_product" title="Manage Products"/>
+                    </resource>
+                    <resource id="Ced_WalmartMx::walmartmx_orders" title="Orders">
+                        <resource id="Ced_WalmartMx::walmartmx_order_listing" title="Manage Orders"/>
+                        <resource id="Ced_WalmartMx::walmartmx_failed_order" title="Failed Orders"/>
+                    </resource>
+                    <resource id="Ced_WalmartMx::developer" title="Developer">
+                        <resource id="Ced_WalmartMx::walmartmx_feeds" title="Feeds"/>
+                        <resource id="Ced_WalmartMx::walmartmx_cron" title="Cron Logs"/>
+                        <resource id="Ced_WalmartMx::walmartmx_logs" title="WalmartMx Logs"/>
+                        <resource id="Ced_WalmartMx::walmartmx_category" title="Categories"/>
+                        <resource id="Ced_WalmartMx::walmartmx_attribute" title="Attributes"/>
+                    </resource>
+
+                    <resource id="Ced_WalmartMx::configuration" title="Configuration">
+                        <resource id="Ced_WalmartMx::walmartmx_configuration" title="Configuration"/>
+                    </resource>
+
+                    <resource id="Ced_WalmartMx::extras" title="Extras">
+                        <resource id="Ced_WalmartMx::walmartmx_support" title="Support"/>
+                    </resource>
+                </resource>
+
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Ced_WalmartMx::system_config" title="WalmartMx Configurations"/>
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

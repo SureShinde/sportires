@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!-- /**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_StorePickup
+ * @author      CedCommerce Core Team <connect@cedcommerce.com >
+ * @copyright   Copyright CEDCOMMERCE (https://cedcommerce.com/)
+ * @license      https://cedcommerce.com/license-agreement.txt
+ */ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Magento/Store/etc/config.xsd">
+    <default>
+        <carriers>
+            <storepickupshipping>
+                <active>1</active>
+                <sallowspecific>0</sallowspecific>
+				<model>Ced\StorePickup\Model\Carrier\Storepickup</model>
+                <name>Store Pickup</name>
+                <price>0.00</price>
+                <title>Store Pickup Shipping</title>
+               <specificerrmsg>Store Pickup is not available for your area. If you would like to collect from store please contact us.</specificerrmsg>
+            </storepickupshipping>
+        </carriers>
+        <system>
+            <csmarketplace>
+                <feed_url>cedcommerce.com/licensing/log/post</feed_url>
+                <popup_url>widgets.magentocommerce.com/notificationPopup</popup_url>
+                <severity_icons_url>widgets.magentocommerce.com/%s/%s.gif</severity_icons_url>
+                <frequency>72</frequency>
+                <last_update>0</last_update>
+		</csmarketplace>
+        </system>
+        <cedcore>
+               <feeds_group>
+                    <feeds>INFO,PROMO,UPDATE_RELEASE,NEW_RELEASE,INSTALLED_UPDATE</feeds>
+               </feeds_group>
+          </cedcore>
+    </default>
+</config>

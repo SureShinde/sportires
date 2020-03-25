@@ -1,0 +1,355 @@
+<?php
+/**
+ * Copyright © 2017 x-mage2(Yosto). All rights reserved.
+ * See README.md for details.
+ */
+?>
+
+<?php
+/**@var \Yosto\Mpa\Block\Adminhtml\Product\MassActions $block */
+//$categories = $block->getCategoryTree();
+$attributeArray = $block->getTextAttributes();
+$attributeSetArray = $block->getAttributeSet();
+$stores = $block->getAllStores();
+?>
+
+<div id="yosto-mpa-handle-category" style="display: none">
+        <fieldset class="admin__fieldset">
+            <div class="admin__field">
+                <label class="admin__field-label">
+                    <span><?php echo __('Assign Categories') . " (IDs)" ?></span>
+                </label>
+                <div class="admin__field-control">
+                    <input type="text" placeholder="<?php echo __('E.g. 10,20,30 or 10') ?>" class="admin__control-text" id="assign-categories-list" />
+                    <label class="massaction-form-error" id="assign-categories-list-error"></label>
+                </div>
+                <!--<button class="category-chooser" id="assign-categories-list-chooser"><?php /*echo __('Select categories') */?></button>-->
+            </div>
+            <div class="admin__field">
+                <label class="admin__field-label">
+                    <span><?php echo __('Remove Categories') . " (IDs)" ?></span>
+                </label>
+                <div class="admin__field-control">
+                    <input type="text" placeholder="<?php echo __('E.g. 10,20,30 or 10') ?>" class="admin__control-text" id="remove-categories-list" />
+                    <label class="massaction-form-error" id="remove-categories-list-error"></label>
+                </div>
+               <!-- <button class="category-chooser" id="remove-categories-list-chooser"><?php /*echo __('Select categories') */?></button>-->
+            </div>
+            <div class="admin__field">
+                <label class="admin__field-label">
+                    <span><?php echo __('Replace Category') . " (ID)"?></span>
+                </label>
+                <div class="admin__field-control replace-category">
+                    <input placeholder="<?php echo __('Old, e.g. 10') ?>" type="text" class="admin__control-text" id="current-category" />
+                    <!--<button class="category-chooser" id="current-category-chooser"><?php /*echo __('Select') */?></button>-->
+                    <span>--</span>
+                    <input placeholder="<?php echo __('New, e.g. 20') ?>" type="text" class="admin__control-text" id="new-category" />
+                    <!--<button class="category-chooser" id="new-category-chooser"><?php /*echo __('Select') */?></button>-->
+                </div>
+                <div class="admin__field-control replace-category-error">
+                    <label class="massaction-form-error" id="current-category-error"></label>
+                    <label class="massaction-form-error" id="new-category-error"></label>
+                </div>
+            </div>
+            <input type="hidden" id="massaction-category-submit-url" value="<?php echo $block->getUrl('yosto_mpa/product/massCategory', ["_secure" => $this->getRequest()->isSecure()]) ?>"/>
+            <button type="submit" class="massaction-submit-btn action-primary" id="massaction-category-btn" name="category-btn"><?php echo __('Submit') ?></button>
+        </fieldset>
+</div>
+<!--<div id="multiselect-category-popup" style="display: none">
+    <select id="select-categories" class="admin-input__select" multiple>
+        <?php /*foreach ($categories as $category): */?>
+            <option value="<?php /*echo $category['value'] */?>"><?php /*echo $category['label'] */?></option>
+        <?php /*endforeach; */?>
+    </select>
+</div>
+<div id="select-category-popup" style="display: none">
+    <select id="select-category" class="admin-input__select">
+        <?php /*foreach ($categories as $category): */?>
+            <option value="<?php /*echo $category['value'] */?>"><?php /*echo $category['label'] */?></option>
+        <?php /*endforeach; */?>
+    </select>
+</div>-->
+<div id="yosto-mpa-handle-price" style="display: none">
+    <fieldset class="admin__fieldset">
+        <div class="admin__field">
+            <label class="admin__field-label">
+                <span><?php echo __('Update Price') ?></span>
+            </label>
+            <div class="admin__field-control">
+                <input placeholder="<?php echo __('E.g. +10, -10, +10%, -10% or 10') ?>" type="text" class="admin__control-text" id="modify-price" />
+                <label class="massaction-form-error" id="modify-price-error"></label>
+            </div>
+        </div>
+        <div class="admin__field">
+            <label class="admin__field-label">
+                <span><?php echo __('Update Special Price') ?></span>
+            </label>
+            <div class="admin__field-control">
+                <input placeholder="<?php echo __('E.g. +10, -10, +10%, -10%, 10 or -10%pp, -10pp') ?>" type="text" class="admin__control-text" id="modify-special-price" />
+                <label class="massaction-form-error" id="modify-special-price-error"></label>
+                <p><i><?php echo __("Use suffix 'pp' to modify special price based on product price, e.g.") . " -10%pp, -10pp" ?></i></p>
+            </div>
+        </div>
+        <div class="admin__field">
+            <label class="admin__field-label">
+                <span><?php echo __('Update Cost') ?></span>
+            </label>
+            <div class="admin__field-control">
+                <input placeholder="<?php echo __('E.g. +10, -10, +10%, -10% or 10') ?>" type="text" class="admin__control-text" id="modify-cost" />
+                <label class="massaction-form-error" id="modify-cost-error"></label>
+            </div>
+        </div>
+        <input type="hidden" id="massaction-price-submit-url" value="<?php echo $block->getUrl('yosto_mpa/product/massPrice', ["_secure" => $this->getRequest()->isSecure()]) ?>"/>
+        <button type="submit" class="massaction-submit-btn action-primary" id="massaction-price-btn" name="price-btn"><?php echo __('Submit') ?></button>
+    </fieldset>
+</div>
+<div id="yosto-mpa-handle-related-products" style="display: none">
+    <fieldset class="admin__fieldset">
+        <div class="admin__field">
+            <label class="admin__field-label">
+                <span><?php echo __('Add Related Products') ?></span>
+            </label>
+            <div class="admin__field-control">
+                <input placeholder="<?php echo __('E.g. 10,20,30 or 10') ?>" type="text" class="admin__control-text" id="add-related-products" />
+                <label class="massaction-form-error" id="add-related-products-error"></label>
+            </div>
+        </div>
+        <div class="admin__field">
+            <label class="admin__field-label">
+                <span><?php echo __('Remove Related Products') ?></span>
+            </label>
+            <div class="admin__field-control">
+                <input placeholder="<?php echo __('E.g. 10,20,30 or 10') ?>" type="text" class="admin__control-text" id="remove-related-products" />
+                <label class="massaction-form-error" id="remove-related-products-error"></label>
+            </div>
+        </div>
+        <input type="hidden" id="massaction-related-products-submit-url" value="<?php echo $block->getUrl('yosto_mpa/product/massRelate', ["_secure" => $this->getRequest()->isSecure()]) ?>"/>
+        <button type="submit" class="massaction-submit-btn action-primary" id="massaction-related-products-btn" name="related-products-btn"><?php echo __('Submit') ?></button>
+    </fieldset>
+</div>
+<div id="yosto-mpa-handle-upsell-products" style="display: none">
+    <fieldset class="admin__fieldset">
+        <div class="admin__field">
+            <label class="admin__field-label">
+                <span><?php echo __('Add Up Sell Products') ?></span>
+            </label>
+            <div class="admin__field-control">
+                <input placeholder="<?php echo __('E.g. 10,20,30 or 10') ?>" type="text" class="admin__control-text" id="add-upsell-products" />
+                <label class="massaction-form-error" id="add-upsell-products-error"></label>
+            </div>
+        </div>
+        <div class="admin__field">
+            <label class="admin__field-label">
+                <span><?php echo __('Remove Up Sell Products') ?></span>
+            </label>
+            <div class="admin__field-control">
+                <input placeholder="<?php echo __('E.g. 10,20,30 or 10') ?>" type="text" class="admin__control-text" id="remove-upsell-products" />
+                <label class="massaction-form-error" id="remove-upsell-products-error"></label>
+            </div>
+        </div>
+        <input type="hidden" id="massaction-upsell-products-submit-url" value="<?php echo $block->getUrl('yosto_mpa/product/massUpsell', ["_secure" => $this->getRequest()->isSecure()]) ?>"/>
+        <button type="submit" class="massaction-submit-btn action-primary" id="massaction-upsell-products-btn" name="upsell-products-btn"><?php echo __('Submit') ?></button>
+    </fieldset>
+</div>
+<div id="yosto-mpa-handle-crosssell-products" style="display: none">
+    <fieldset class="admin__fieldset">
+        <div class="admin__field">
+            <label class="admin__field-label">
+                <span><?php echo __('Add Cross Sell Products') ?></span>
+            </label>
+            <div class="admin__field-control">
+                <input placeholder="<?php echo __('E.g. 10,20,30 or 10') ?>" type="text" class="admin__control-text" id="add-crosssell-products" />
+                <label class="massaction-form-error" id="add-crosssell-products-error"></label>
+            </div>
+        </div>
+        <div class="admin__field">
+            <label class="admin__field-label">
+                <span><?php echo __('Remove Cross Sell Products') ?></span>
+            </label>
+            <div class="admin__field-control">
+                <input placeholder="<?php echo __('E.g. 10,20,30 or 10') ?>" type="text" class="admin__control-text" id="remove-crosssell-products" />
+                <label class="massaction-form-error" id="remove-crosssell-products-error"></label>
+            </div>
+        </div>
+        <input type="hidden" id="massaction-crosssell-products-submit-url" value="<?php echo $block->getUrl('yosto_mpa/product/massCrosssell', ["_secure" => $this->getRequest()->isSecure()]) ?>"/>
+        <button type="submit" class="massaction-submit-btn action-primary" id="massaction-crosssell-products-btn" name="crosssell-products-btn"><?php echo __('Submit') ?></button>
+    </fieldset>
+</div>
+<div id="yosto-mpa-handle-copy-custom-options" style="display: none">
+    <fieldset class="admin__fieldset">
+        <div class="admin__field">
+            <label class="admin__field-label">
+                <span><?php echo __('Copy Options from Products') ?></span>
+            </label>
+            <div class="admin__field-control">
+                <input placeholder="<?php echo __('E.g. 10,20,30 or 10') ?>" type="text" class="admin__control-text" id="copy-custom-options" />
+                <label class="massaction-form-error" id="copy-custom-options-error"></label>
+            </div>
+        </div>
+        <input type="hidden" id="massaction-copy-custom-options-submit-url" value="<?php echo $block->getUrl('yosto_mpa/product/massCustomOptions', ["_secure" => $this->getRequest()->isSecure()]) ?>"/>
+        <button type="submit" class="massaction-submit-btn action-primary" id="massaction-copy-custom-options-btn" name="custom-options-btn"><?php echo __('Submit') ?></button>
+    </fieldset>
+</div>
+<div id="yosto-mpa-handle-stock" style="display: none">
+    <fieldset class="admin__fieldset">
+        <div class="admin__field">
+            <label class="admin__field-label">
+                <span><?php echo __('Quantity') ?></span>
+            </label>
+            <div class="admin__field-control">
+                <input type="text" class="admin__control-text" id="quantity" />
+                <label class="massaction-form-error" id="quantity-error"></label>
+            </div>
+        </div>
+        <div class="admin__field">
+            <label class="admin__field-label">
+                <span><?php echo __('Stock Status') ?></span>
+            </label>
+            <div class="admin__field-control">
+                <select class="admin__control-select" name="stock_status" id="stock-status">
+                    <option><?php echo __('   ') ?></option>
+                    <option value="1"><?php echo __('In Stock') ?></option>
+                    <option value="0"><?php echo __('Out of Stock') ?></option>
+                </select>
+            </div>
+        </div>
+        <div class="admin__field">
+            <label class="admin__field-label">
+                <span><?php echo __('Manage Stock') ?></span>
+            </label>
+            <div class="admin__field-control">
+                <select class="admin__control-select" name="manage_stock" id="manage-stock">
+                    <option><?php echo __('   ') ?></option>
+                    <option value="2"><?php echo __('Use config settings') ?></option>
+                    <option value="1"><?php echo __('Yes') ?></option>
+                    <option value="0"><?php echo __('No') ?></option>
+                </select>
+            </div>
+        </div>
+        <div class="admin__field">
+            <label class="admin__field-label">
+                <span><?php echo __('Out of Stock Threshold') ?></span>
+            </label>
+            <div class="admin__field-control">
+                <input type="text" class="admin__control-text" id="stock-threshold" />
+                <label class="massaction-form-error" id="stock-threshold-error"></label>
+            </div>
+        </div>
+        <div class="admin__field">
+            <label class="admin__field-label">
+                <span><?php echo __('Use Config Settings for Threshold ') ?></span>
+            </label>
+            <div class="admin__field-control">
+                <select class="admin__control-select" name="use-config-settings-for-threshold" id="use-config-settings-for-threshold">
+                    <option><?php echo __('   ') ?></option>
+                    <option value="1"><?php echo __('Yes') ?></option>
+                    <option value="0"><?php echo __('No') ?></option>
+                </select>
+            </div>
+        </div>
+        <input type="hidden" id="massaction-stock-submit-url" value="<?php echo $block->getUrl('yosto_mpa/product/massStock', ["_secure" => $this->getRequest()->isSecure()]) ?>"/>
+        <button type="submit" class="massaction-submit-btn action-primary" id="massaction-stock-btn" name="stock-btn"><?php echo __('Submit') ?></button>
+    </fieldset>
+</div>
+
+<div id="yosto-mpa-handle-text" style="display: none">
+    <fieldset class="admin__fieldset">
+        <div class="admin__field">
+            <label class="admin__field-label">
+                <span><?php echo __('Attribute') ?></span>
+            </label>
+            <div class="admin__field-control">
+                <select class="admin__control-select" id="attribute-code">
+                    <?php foreach ($attributeArray as $key=>$value): ?>
+                        <option value="<?php echo $key ?>"><?php echo $value ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+        </div>
+        <div class="admin__field">
+            <label class="admin__field-label">
+                <span><?php echo __('Store') ?></span>
+            </label>
+            <div class="admin__field-control">
+                <select class="admin__control-select" id="text-store">
+                    <option value="0"><?php echo __("All Store Views")?></option>
+                    <?php foreach ($stores as $store): ?>
+                        <option value="<?php echo $store->getId() ?>"><?php echo $store->getName() ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+        </div>
+        <div class="admin__field">
+            <label class="admin__field-label">
+                <span><?php echo __('Action') ?></span>
+            </label>
+            <div class="admin__field-control">
+                <select class="admin__control-select" name="text-action" id="text-action">
+                    <option value="1"><?php echo __('Replace') ?></option>
+                    <option value="0"><?php echo __('Append') ?></option>
+                </select>
+            </div>
+        </div>
+        <div class="admin__field is-show-if-replace">
+            <label class="admin__field-label">
+                <span><?php echo __('Old Text') ?></span>
+            </label>
+            <div class="admin__field-control">
+                <input placeholder="<?php echo __('Contains word, digit, -, _ only')?>" type="text" class="admin__control-text" id="old-text"/>
+                <label class="massaction-form-error" id="old-text-error"></label>
+            </div>
+        </div>
+        <div class="admin__field is-show-if-replace">
+            <label class="admin__field-label">
+                <span><?php echo __('New Text') ?></span>
+            </label>
+            <div class="admin__field-control">
+                <input placeholder="<?php echo __('Contains word, digit, -, _ only')?>" type="text" class="admin__control-text" id="new-text"/>
+                <label class="massaction-form-error" id="new-text-error"></label>
+            </div>
+        </div>
+        <div class="admin__field is-show-if-append" style="display: none">
+            <label class="admin__field-label">
+                <span><?php echo __('Append Text') ?></span>
+            </label>
+            <div class="admin__field-control">
+                <input placeholder="<?php echo __('Contains word, digit, -, _ only')?>" type="text" class="admin__control-text" id="append-text"/>
+                <label class="massaction-form-error" id="append-text-error"></label>
+            </div>
+        </div>
+        <div class="admin__field is-show-if-append" style="display: none">
+            <label class="admin__field-label">
+                <span><?php echo __('Append Position ') ?></span>
+            </label>
+            <div class="admin__field-control">
+                <select class="admin__control-select" id="append-position">
+                    <option value="1"><?php echo __('First') ?></option>
+                    <option value="0"><?php echo __('Last') ?></option>
+                </select>
+            </div>
+        </div>
+        <input type="hidden" id="massaction-text-submit-url" value="<?php echo $block->getUrl('yosto_mpa/product/massText', ["_secure" => $this->getRequest()->isSecure()]) ?>"/>
+        <button type="submit" class="massaction-submit-btn action-primary" id="massaction-text-btn" name="text-btn"><?php echo __('Submit') ?></button>
+    </fieldset>
+</div>
+
+
+<div id="yosto-mpa-handle-attribute-set" style="display: none">
+    <fieldset class="admin__fieldset">
+        <div class="admin__field">
+            <label class="admin__field-label">
+                <span><?php echo __('Attribute Set') ?></span>
+            </label>
+            <div class="admin__field-control">
+                <select class="admin__control-select" id="attribute-set">
+                    <option><?php echo __('   ') ?></option>
+                    <?php foreach ($attributeSetArray as $key=>$value): ?>
+                        <option value="<?php echo $key ?>"><?php echo $value ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+        </div>
+        <input type="hidden" id="massaction-attribute-set-submit-url" value="<?php echo $block->getUrl('yosto_mpa/product/massAttributeSet', ["_secure" => $this->getRequest()->isSecure()]) ?>"/>
+        <button type="submit" class="massaction-submit-btn action-primary" id="massaction-attribute-set-btn" name="attribite-set-btn"><?php echo __('Submit') ?></button>
+    </fieldset>
+</div>

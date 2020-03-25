@@ -1,0 +1,348 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement(EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category  Ced
+ * @package   Ced_Claro
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright Copyright CEDCOMMERCE(http://cedcommerce.com/)
+ * @license   http://cedcommerce.com/license-agreement.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="cedcommerce" translate="label" sortOrder="1">
+            <label>Cedcommerce</label>
+        </tab>
+        <!-- section start for Claro Configuration Tab in Cedcommerce section -->
+        <section id="claro" translate="label" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Claro Configuration</label>
+            <tab>cedcommerce</tab>
+            <resource>Ced_Claro::system_config</resource>
+            <group id="settings" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0"
+                   showInStore="0"
+            >
+                <label>Claro Settings</label>
+
+                <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0"
+                       showInStore="0">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <!--<field id="site" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="0"
+                       showInStore="0">
+                    <label>Site</label>
+                    <source_model>Ced\Claro\Model\Source\Site</source_model>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>-->
+
+                <!--<field id="currency" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="0"
+                       showInStore="0">
+                    <label>Currency</label>
+                    <source_model>Ced\Claro\Model\Source\Currency</source_model>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>-->
+
+                <!--<field id="redirect_uri" translate="label" type="text" sortOrder="35" showInDefault="1" showInWebsite="0"
+                       showInStore="0">
+                    <label>Redirect Uri</label>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                    <frontend_model>Ced\Integrator\Block\System\Config\Form\Field\Disable</frontend_model>
+                    <backend_model>Ced\Claro\Model\Config\Backend\RedirectUri</backend_model>
+                </field>-->
+                <field id="app_id" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="0"
+                       showInStore="0">
+                    <label>App Id</label>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="endpoint_uri" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="0"
+                       showInStore="0">
+                    <label>End Point Url</label>
+                    <source_model>Ced\Claro\Model\Source\Config\EndpointUrl</source_model>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="public_key" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="0"
+                       showInStore="0">
+                    <label>Public Key</label>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="private_key" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="0"
+                       showInStore="0">
+                    <label>Private Key</label>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="store_id" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Select Store</label>
+                    <source_model>Magento\Config\Model\Config\Source\Store</source_model>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <!--<field id="install" translate="label comment" type="button" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <frontend_model>Ced\Claro\Block\Adminhtml\System\Config\Install</frontend_model>
+                </field>-->
+            </group>
+            <!--<group id="product" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0"
+                   showInStore="0"
+            >
+                <label>Claro Products Attributes Settings</label>
+                <field id="attributes" translate="label" type="multiselect" sortOrder="40" showInDefault="1" showInWebsite="0"
+                       showInStore="0">
+                    <label>Attributes</label>
+                    <source_model>Ced\Claro\Model\Source\Config\Attributes</source_model>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+            </group>-->
+            <!--<group id="product" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1"
+                   showInStore="0">
+                <label>Claro Product Settings</label>
+                <group id="chunk_settings" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" >
+                    <label>Claro Chunk Settings</label>
+                    <field id="product_upload" translate="label comment" type="text" sortOrder="20" showInDefault="1"
+                           showInWebsite="0" showInStore="0">
+                        <label>Product Chunk Size</label>
+                        <validate>validate-number</validate>
+                        <comment><![CDATA[Enter the size of a chunk for a product upload task.]]></comment>
+                    </field>
+                    <field id="product_description_update" translate="label comment" type="text" sortOrder="40" showInDefault="1"
+                           showInWebsite="0" showInStore="0">
+                        <label>Product Description Chunk Size</label>
+                        <validate>validate-number</validate>
+                        <comment><![CDATA[Enter the size of a chunk for product description update task.]]></comment>
+                    </field>
+                    <field id="product_delete" translate="label comment" type="text" sortOrder="70" showInDefault="1"
+                           showInWebsite="0" showInStore="0">
+                        <label>Product Delete Chunk Size</label>
+                        <validate>validate-number</validate>
+                        <comment><![CDATA[Enter the size of a chunk for a product delete|reactivate|deactivate task.]]></comment>
+                    </field>
+                </group>
+
+                <group id="price_settings" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" >
+                    <label>Claro Price Settings</label>
+                    <field id="price" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>Product Price</label>
+                        <source_model>Ced\Claro\Model\Source\Config\Price</source_model>
+                        <comment><![CDATA[Select to send a different product price to <b>Claro</b>]]></comment>
+                    </field>
+                    <field id="fix_price" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>Modify by Fix Price</label>
+                        <validate>required-entry validate-number</validate>
+                        <depends>
+                            <field id="price" separator=",">plus_fixed,min_fixed</field>
+                        </depends>
+                    </field>
+                    <field id="percentage_price" translate="label" type="text" sortOrder="12" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>Modify by Percenctage Price</label>
+                        <validate>required-entry validate-number</validate>
+                        <comment><![CDATA[Numeric value Required for <b>Add/subtract % on Magento price</b> 5 for Example: Magento price +/- 5% of Magento price.<b>]]></comment>
+                        <depends>
+                            <field id="price" separator=",">plus_per,min_per</field>
+                        </depends>
+                    </field>
+                    <field id="different_price" translate="label" type="text" sortOrder="13" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>Map Price Attribute</label>
+                        <validate>required-entry</validate>
+                        <comment><![CDATA[<b>Attribute Code Required in case of <b>Custom Fixed Price</b>]]></comment>
+                        <depends>
+                            <field id="price">differ</field>
+                        </depends>
+                    </field>
+                </group>
+                <group id="inventory_settings" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1" >
+                    <label>Claro Inventory Settings</label>
+                    <field id="zero_inventory_condition" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>Zero Inventory Product Upload</label>
+                        <source_model>Ced\Claro\Model\Source\Config\Inventory\ZeroCondition</source_model>
+                        <comment><![CDATA[ Select the action to be performed in-case the product have zero inventory on upload/update on <b>Claro</b>]]></comment>
+                    </field>
+                    <field id="advanced_threshold_status" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0" >
+                        <label>Set Inventory on Basis of Threshold</label>
+                        <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                        <comment>Choose yes to send inventory on claro by condition </comment>
+                    </field>
+                    <field id="inventory_rule_threshold" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0" >
+                        <label>Inventory Threshold Value</label>
+                        <comment>Set inventory quantity on which lesser and greater condition can control.</comment>
+                        <depends>
+                            <field id="advanced_threshold_status">1</field>
+                        </depends>
+                    </field>
+                    <field id="send_inventory_for_lesser_than_threshold" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0" >
+                        <label>Send Inventory for Lesser Than Threshold Case</label>
+                        <comment>Send Quantity to Claro for those products, whose inventory is LESSER than the inventory threshold.
+                        </comment>
+                        <depends>
+                            <field id="advanced_threshold_status">1</field>
+                        </depends>
+                    </field>
+                    <field id="send_inventory_for_greater_than_threshold" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0" >
+                        <label>Send Inventory for Greater Than Threshold Case</label>
+                        <comment>Send Quantity to Claro for those products, whose inventory is GREATER than the inventory threshold.
+                        </comment>
+                        <depends>
+                            <field id="advanced_threshold_status">1</field>
+                        </depends>
+                    </field>
+                </group>
+            </group>
+            <group id="order" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1"
+                   showInStore="0">
+                <label>Claro Order Settings</label>
+                <field id="to_be_agreed" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Use seller information for 'To be Agreed' Order</label>
+                    <comment>Use seller information in case of 'To be Agreed' orders. Seller address will set to order shipping address.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="auto_invoice" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Auto invoice imported order</label>
+                    <comment>Auto Invoice Order Imported from Claro in any case of successfull import.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="auto_cancellation" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Auto cancel failed order</label>
+                    <comment>Auto Cancel Order on Claro in any case of failure such as 'No Inventory'.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="order_id_prefix" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Claro order id prefix</label>
+                    <comment>Prefix for Claro Increment ID</comment>
+                </field>
+
+                <field id="order_notify_email_enable" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Notification</label>
+                    <comment>Order import notification via email to store admin</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="order_notify_email" translate="label comment" type="text" sortOrder="60" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Notification Email</label>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="order_notify_email_enable">1</field>
+                    </depends>
+                </field>
+
+                <field id="enable_default_customer" translate="label comment" type="select" sortOrder="70" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Enable Default Customer</label>
+                    <validate>required-entry</validate>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="default_customer" translate="label comment" type="select" sortOrder="80" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Default Customer</label>
+                    <validate>required-entry</validate>
+                    <source_model>Ced\Claro\Model\Source\Customer</source_model>
+                    <depends>
+                        <field id="enable_default_customer">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="cron" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Claro Cron Settings</label>
+                <field id="order_cron" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Order Cron</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>Order Fetch Cron </comment>
+                </field>
+                <field id="price_cron" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Price Cron</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>Price Sync Cron</comment>
+                </field>
+                <field id="inventory_cron" translate="label comment" type="select" sortOrder="3" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Inventory Cron</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>Inventory Sync Cron</comment>
+                </field>
+                <field id="shipment_cron" translate="label comment" type="select" sortOrder="3" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Shipment Cron</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>This will automatically generate shipments</comment>
+                </field>
+            </group>
+            <group id="developer" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Claro Developer Settings</label>
+                <field id="debug_mode" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="0"
+                       showInStore="0">
+                    <label>Debug</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="logging_level" translate="label comment" type="select" sortOrder="30" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Logging Level</label>
+                    <validate>required-entry</validate>
+                    <source_model>Ced\Integrator\Model\Source\Logging</source_model>
+                </field>
+            </group>-->
+        </section>
+        <!-- section end for Claro Cofiguration Tab in Cedcommerce Tab -->
+
+        <!-- section start for Shipping Methods Tab in Sales Tab -->
+        <!--<section id="carriers">
+            <group id="shipbyclaro" translate="label" type="text" sortOrder="21" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Claro Shipping Method(Default)</label>
+                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="title" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Title</label>
+                </field>
+            </group>
+        </section>-->
+        <!-- section end for Shipping Methods Tab in Sales Tab -->
+
+        <!-- section start for Payment Methods Tab in Sales Tab -->
+        <!--<section id="payment">
+            <group id="paybyclaro" translate="label" type="text" sortOrder="22" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Claro</label>
+                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="title" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Title</label>
+                </field>
+                <field id="order_status" translate="label" type="select" sortOrder="3" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>New order status</label>
+                    <source_model>Magento\Sales\Model\Config\Source\Order\Status</source_model>
+                </field>
+            </group>
+        </section>-->
+    </system>
+</config>

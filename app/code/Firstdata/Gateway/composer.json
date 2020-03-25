@@ -1,0 +1,25 @@
+{
+  "name": "firstdata/firstdata-magento-2",
+  "description": "Firstdata integration for Magento 2",
+  "type": "magento2-module",
+  "homepage": "https://firstdata.com",
+  "keywords": ["firstdata", "magento", "magento 2", "plugin", "extension", "payment", "gateway"],
+  "version": "2.0.0",
+  "license": [
+      "MIT"
+  ],
+  "require": {
+    "php": "~5.6.0|~7.0.0"
+  },
+  "autoload": {
+    "files": [ "registration.php" ],
+    "psr-4": {
+      "Firstdata\\Gateway\\": ""
+    }
+  },
+  "support": {
+        "issues": "https://firstdata.com",
+        "docs": "https://firstdata.com",
+        "email": "support@firstdata.com"
+    }
+}

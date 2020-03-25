@@ -1,0 +1,74 @@
+<?php
+/**
+* CedCommerce
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the End User License Agreement (EULA)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* https://cedcommerce.com/license-agreement.txt
+*
+* @category    Ced
+* @package     Ced_StorePickup
+* @author      CedCommerce Core Team <connect@cedcommerce.com >
+* @copyright   Copyright CEDCOMMERCE (https://cedcommerce.com/)
+* @license      https://cedcommerce.com/license-agreement.txt
+*/
+
+?>
+<?php /** @var $block \Magento\Shipping\Block\Adminhtml\View */ ?>
+<?php $order = $block->getOrder();
+	  $storeId = $order->getStorePickupId();
+
+      $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+	  if($storeId != '0'){
+	  	//$pickup_date = $order->getStorePickupDate();
+      	$storeData = $objectManager->create('\Ced\StorePickup\Model\StoreInfo')->load($storeId);
+      	$store_Name = $storeData->getStoreName();
+      	$store_mgr_name = $storeData->getStoreManagerName();
+      	$store_address = $storeData->getStoreAddress();
+      	$store_city = $storeData->getStoreState();
+      	$store_country = $storeData->getStoreCountry();
+        $storeContact = $storeData->getStorePhone();
+      	$country_name = $objectManager->create('\Magento\Directory\Model\Country')->load($store_country)->getName();
+      	$storezip = $storeData->getStoreZcode();
+      	
+	  }
+
+
+ ?>
+<?php if ($order->getIsVirtual()) : return '';endif; ?>
+
+<?php /* Shipping Method */ ?>
+
+            <?php if ($storeId>0): ?>
+                <p><strong><?php echo(__('Store Pickup Information : ')); ?></strong></p><br>
+            		<p>
+            			<span><b><?php echo __('Store Name'); ?></b></span>
+            			<span><?php echo $store_Name; ?></span>
+            		</p>
+            		<p>
+            			<span><b><?php echo __('Store Address'); ?></b></span>
+            			<span><?php echo $store_address; ?></span>
+            		</p>
+            		<p>
+            			<span><b><?php echo __('Store City'); ?></b></span>
+            			<span><?php echo $store_city; ?></span>
+            		</p>
+            		<p>
+            			<span><b><?php echo __('Store Country'); ?></b></span>
+            			<span><?php echo $country_name; ?></span>
+            		</p>
+            		<p>
+            			<span><b><?php echo __('Store Zip Code'); ?></b></span>
+            			<span><?php echo $storezip; ?></span>
+            		</p>
+                    <p>
+                        <span><b><?php echo __('Store Contact Number'); ?></b></span>
+                        <span><?php echo $storeContact; ?></span>
+                    </p>
+                    
+                    <br>
+
+        <?php endif; ?>

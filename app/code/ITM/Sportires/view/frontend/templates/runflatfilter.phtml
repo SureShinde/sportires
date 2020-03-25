@@ -1,0 +1,38 @@
+<?php
+/**
+ * @var $block \ITM\Sportires\Block\Runflatfilter
+ */
+?>
+
+<?php
+    $runflate = $block->getRunFlat();
+    if($runflate == null || $runflate == 770) {
+        $yesno = false;
+        $datapost="769";
+    }else{
+        $yesno = true ;
+        $datapost="770";
+    }
+
+    $_query = array('run_flat' => $datapost);
+    $current_url = $block->getUrl('*/*/*', array('_current' => true,'_use_rewrite' => true, '_query' => $_query));
+?>
+
+<div class="runflat-filter">
+    <span class='custom-tittle'><?=__('RunFlat')?></span>
+    <div class="center">
+        <input type="checkbox" <?php if($yesno) echo 'checked="checked"'; ?> id="cbx" style="display:none"/>
+        <label for="cbx" class="toggle"><span></span></label>
+    </div>
+</div>
+
+<script>
+    require(['jquery'], function($) {
+        jQuery(document).ready(function () {
+            $("#cbx").click(function(){
+                window.location.href = '<?= $current_url ?>';
+            });
+
+        });
+    });
+</script>

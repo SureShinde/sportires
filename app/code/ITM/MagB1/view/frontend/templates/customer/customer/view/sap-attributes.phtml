@@ -1,0 +1,25 @@
+<?php
+$_magb_helper = $this->helper('ITM\MagB1\Helper\Data');
+$display_attributes = $_magb_helper->getDisplayAttributes();
+?>
+<?php if($_magb_helper->displayGeneralInfomration()) :?>
+<div class="block block-dashboard-info">
+    <div class="block-title"><strong><?= $block->escapeHtml(__('General Information')) ?></strong></div>
+    <div class="block-content">
+        <div class="box box-information">
+            <strong class="box-title">
+                <?= $block->escapeHtml(__('General Information')) ?>
+            </strong>
+            <div class="box-content">
+                <?php foreach ($display_attributes as $attribute): ?>
+                    <p>
+                        <strong><span><?= $attribute["label"] ?>: </span></strong>
+                        <?= $attribute["value"] ?>
+                    </p>
+                <?php endforeach; ?>
+            </div>
+        </div>
+   </div>
+
+</div>
+<?php endif; ?>

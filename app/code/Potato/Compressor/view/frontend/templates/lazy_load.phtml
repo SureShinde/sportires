@@ -1,0 +1,90 @@
+<script type="text/javascript">
+    (function() {
+        var botPattern = "(googlebot\/|Googlebot-Mobile|Googlebot-Image|Google favicon|Mediapartners-Google|bingbot|slurp|java|wget|curl|Commons-HttpClient|Python-urllib|libwww|httpunit|nutch|phpcrawl|msnbot|jyxobot|FAST-WebCrawler|FAST Enterprise Crawler|biglotron|teoma|convera|seekbot|gigablast|exabot|ngbot|ia_archiver|GingerCrawler|webmon |httrack|webcrawler|grub.org|UsineNouvelleCrawler|antibot|netresearchserver|speedy|fluffy|bibnum.bnf|findlink|msrbot|panscient|yacybot|AISearchBot|IOI|ips-agent|tagoobot|MJ12bot|dotbot|woriobot|yanga|buzzbot|mlbot|yandexbot|purebot|Linguee Bot|Voyager|CyberPatrol|voilabot|baiduspider|citeseerxbot|spbot|twengabot|postrank|turnitinbot|scribdbot|page2rss|sitebot|linkdex|Adidxbot|blekkobot|ezooms|dotbot|Mail.RU_Bot|discobot|heritrix|findthatfile|europarchive.org|NerdByNature.Bot|sistrix crawler|ahrefsbot|Aboundex|domaincrawler|wbsearchbot|summify|ccbot|edisterbot|seznambot|ec2linkfinder|gslfbot|aihitbot|intelium_bot|facebookexternalhit|yeti|RetrevoPageAnalyzer|lb-spider|sogou|lssbot|careerbot|wotbox|wocbot|ichiro|DuckDuckBot|lssrocketcrawler|drupact|webcompanycrawler|acoonbot|openindexspider|gnam gnam spider|web-archive-net.com.bot|backlinkcrawler|coccoc|integromedb|content crawler spider|toplistbot|seokicks-robot|it2media-domain-crawler|ip-web-crawler.com|siteexplorer.info|elisabot|proximic|changedetection|blexbot|arabot|WeSEE:Search|niki-bot|CrystalSemanticsBot|rogerbot|360Spider|psbot|InterfaxScanBot|Lipperhey SEO Service|CC Metadata Scaper|g00g1e.net|GrapeshotCrawler|urlappendbot|brainobot|fr-crawler|binlar|SimpleCrawler|Livelapbot|Twitterbot|cXensebot|smtbot|bnf.fr_bot|A6-Indexer|ADmantX|Facebot|Twitterbot|OrangeBot|memorybot|AdvBot|MegaIndex|SemanticScholarBot|ltx71|nerdybot|xovibot|BUbiNG|Qwantify|archive.org_bot|Applebot|TweetmemeBot|crawler4j|findxbot|SemrushBot|yoozBot|lipperhey|y!j-asr|Domain Re-Animator Bot|AddThis)";
+        var re = new RegExp(botPattern, 'i');
+        var userAgent = navigator.userAgent;
+        if (re.test(userAgent)) {
+            var images = document.getElementsByTagName('img');
+            images = Array.prototype.slice.call( images );
+            images.forEach(function(el){
+                var src = el.getAttribute('data-po-cmp-src');
+                el.removeAttribute('data-po-cmp-src');
+                if (null === src) {
+                    return false;
+                }
+                el.src = src;
+            });
+            return false;
+        }
+
+        window.PO_COMPRESSOR_LAZY_LOAD_IS_ON_SCROLL = <?php echo Zend_Json::encode($this->isOnScrollLoad());?>;
+        var loadImgListFn = function(imgList){
+            imgList.forEach(function(el){
+                var src = el.getAttribute('data-po-cmp-src');
+                el.removeAttribute('data-po-cmp-src');
+                if (null === src) {
+                    return false;
+                }
+                el.src = src;
+            });
+        };
+
+        var getImgListFn = function(){
+            var images = document.getElementsByTagName('img');
+            images = Array.prototype.slice.call( images );
+            return Array.from(images).filter(function(el){
+                return el.hasAttribute('data-po-cmp-src');
+            });
+        };
+        if (window.PO_COMPRESSOR_LAZY_LOAD_IS_ON_SCROLL) {
+            var runInScrollListener = function(){
+                var getVisibleElement = function(el) {
+                    var elTop = el.getBoundingClientRect().top;
+                    var documentH = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+                    if (elTop > 0 && elTop <= documentH || el.nodeName == 'BODY') {
+                        return true;
+                    }
+                    var elHeight = el.getBoundingClientRect().height;
+                    if (elTop + elHeight <= 0) {
+                        return getVisibleElement(el.parentElement);
+                    }
+                    return false;
+                };
+                var onResizeFn = function(){
+                    var imgListToLoad = [];
+                    var indexListToRemove = [];
+                    getImgListFn().forEach(function(el, index){
+                        var elTop = el.getBoundingClientRect().top;
+                        var documentH = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+                        if (getVisibleElement(el)) {
+                            imgListToLoad.push(el);
+                            indexListToRemove.push(index);
+                        }
+                    });
+                    loadImgListFn(imgListToLoad);
+                };
+                var fn = function(){
+                    onResizeFn();
+                    if (getImgListFn().length === 0) {
+                        document.removeEventListener("scroll", fn);
+                    }
+                };
+                document.addEventListener("scroll", fn);
+
+                //run on page load
+                onResizeFn();
+            };
+            document.addEventListener("readystatechange", function(){
+                if (document.readyState == 'complete') {
+                    runInScrollListener();
+                }
+            });
+        } else {
+            document.addEventListener("readystatechange", function(e){
+                if (document.readyState == 'complete') {
+                    loadImgListFn(getImgListFn());
+                }
+            });
+        }
+    })();
+</script>

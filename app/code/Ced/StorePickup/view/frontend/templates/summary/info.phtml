@@ -1,0 +1,111 @@
+<?php
+/**
+* CedCommerce
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the End User License Agreement (EULA)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* https://cedcommerce.com/license-agreement.txt
+*
+* @category    Ced
+* @package     Ced_StorePickup
+* @author      CedCommerce Core Team <connect@cedcommerce.com >
+* @copyright   Copyright CEDCOMMERCE (https://cedcommerce.com/)
+* @license      https://cedcommerce.com/license-agreement.txt
+*/
+
+?>
+<?php /** @var $block \Magento\Sales\Block\Order\Info */ ?>
+<?php $_order = $block->getOrder();
+        $pickupDeatil = $this->helper('Ced\StorePickup\Helper\Data')->getStoreDetail($_order->getData('store_pickup_id'));
+        $deliveryDate = $_order->getData('store_pickup_date');
+        $day = date('l',strtotime($deliveryDate));
+        $storeTiming = $this->helper('Ced\StorePickup\Helper\Data')->getStoreTimings($_order->getData('store_pickup_id'),$day);
+
+?>
+<div class="block block-order-details-view">
+    <div class="block-title">
+        <strong><?php /* @escapeNotVerified */ echo __('Order Information') ?></strong>
+    </div>
+    <div class="block-content">
+        <?php if (!$_order->getIsVirtual()): ?>
+            <div class="box box-order-shipping-address">
+                <strong class="box-title"><span><?php /* @escapeNotVerified */ echo __('Shipping Address') ?></span></strong>
+                <div class="box-content">
+                    <address><?php /* @escapeNotVerified */ echo $block->getFormattedAddress($_order->getShippingAddress()); ?></address>
+                </div>
+            </div>
+
+
+
+            <div class="box box-order-shipping-method">
+                <strong class="box-title">
+                    <span><?php /* @escapeNotVerified */ echo __('Shipping Method') ?></span>
+                </strong>
+                <div class="box-content">
+                    <?php if ($_order->getShippingDescription()): ?>
+                        <p><?php echo $block->escapeHtml($_order->getShippingDescription()) ?></p>
+                        <?php if(isset($deliveryDate) && count($pickupDeatil->getData()) && $_order->getData('store_pickup_id') ):?>
+
+                                <?php if($pickupDeatil->getStoreName()){ ?>
+                                <p>
+                                    <strong><?php echo(__('Store Name : ')); ?></strong>
+                                    <span><?php echo(__($pickupDeatil->getStoreName())); ?></span>
+                                </p>
+                                <?php } ?>
+                                <?php if(isset($deliveryDate)):?>
+                                    <!--<p>
+                                        <strong><?php /*echo(__('Pickup Date : ')); */?></strong>
+                                        <span><?php /*echo(__($deliveryDate)); */?></span>
+                                    </p>-->
+                                <?php endif; ?>
+
+                                <!--<p>
+                                    <strong><?php /*echo(__('Store Timing : ')); */?></strong>
+                                    <?php /*if($storeTiming['status']){ */?>
+                                        <span><?php /*echo $storeTiming['start'].' - '.$storeTiming['end']; */?></span>
+                                    <?php /*}else{ */?>
+                                        <span><?php /*echo(__('Closed')); */?></span>
+                                    <?php /*} */?>
+                                </p>-->
+
+                                <?php if($pickupDeatil->getStoreName()){ ?>
+                                    <p>
+                                        <strong><?php echo(__('Store Address : ')); ?></strong>
+                                        <span><?php echo(__($pickupDeatil->getStoreAddress())); ?></span>
+                                    </p>
+                                <?php } ?>
+
+
+
+
+
+                        <?php endif; ?>
+                    <?php else: ?>
+                        <?php /* @escapeNotVerified */ echo __('No shipping information available'); ?>
+                    <?php endif; ?>
+
+                </div>
+            </div>
+        <?php endif; ?>
+
+        <div class="box box-order-billing-address">
+            <strong class="box-title">
+                <span><?php /* @escapeNotVerified */ echo __('Billing Address') ?></span>
+            </strong>
+            <div class="box-content">
+                <address><?php /* @escapeNotVerified */ echo $block->getFormattedAddress($_order->getBillingAddress()); ?></address>
+            </div>
+        </div>
+        <div class="box box-order-billing-method">
+            <strong class="box-title">
+                <span><?php /* @escapeNotVerified */ echo __('Payment Method') ?></span>
+            </strong>
+            <div class="box-content">
+                <?php echo $block->getPaymentInfoHtml() ?>
+            </div>
+        </div>
+    </div>
+</div>

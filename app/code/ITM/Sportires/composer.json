@@ -1,0 +1,24 @@
+{
+    "name": "itm/module-sportires",
+    "description": "",
+    "type": "magento2-module",
+    "license": "proprietary",
+    "authors": [
+        {
+            "email": "support@itm-development.com",
+            "name": "DB-RB-WH",
+            "homepage": "https://www.itm-development.com/",
+            "role": "Developer"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "ITM\\Sportires\\": ""
+        },
+        "files": [
+            "registration.php"
+        ]
+    }
+}

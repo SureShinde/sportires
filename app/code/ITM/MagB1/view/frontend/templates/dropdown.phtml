@@ -1,0 +1,245 @@
+<?php
+$options = $this->getData("options");
+$att_code = $this->getData("attribute_code");
+$att_label = $this->getData("attribute_label");
+$col = $this->getData("col");
+$select_label= "Select $att_label";
+$option =  ["value"=>"", "label"=>$select_label];
+
+array_unshift($options,$option);
+?>
+<style>
+
+    .itm-dropdown-wrapper {
+        margin-left: 13px;
+    }
+    .itm-dropdown-wrapper {
+        display: inline-block;
+        position: relative;
+        float: right;
+
+    }
+    .itm-dropdown-wrapper::before, .itm-dropdown-wrapper::after {
+        content: '';
+        display: table;
+    }
+    .itm-dropdown-wrapper.active {
+        overflow: visible;
+    }
+    .itm-dropdown-wrapper.active .block-itm-dropdown {
+        display: block;
+    }
+    .itm-dropdown-wrapper .block-itm-dropdown {
+
+    }
+    .itm-dropdown-wrapper .block-itm-dropdown {
+        /*padding: 25px 20px;*/
+    }
+    .itm-dropdown-wrapper .block-itm-dropdown {
+        margin: 0;
+        list-style: none none;
+        background: #fff;
+        border: 1px solid #bbb;
+        min-width: 100%;
+        width: 320px;
+        z-index: 101;
+        box-sizing: border-box;
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: -10px;
+        box-shadow: 0 3px 3px rgba(0,0,0,0.15);
+    }
+    .itm-dropdown-wrapper .block-itm-dropdown::before {
+        right: 12px;
+        top: -12px;
+    }
+    .itm-dropdown-wrapper .block-itm-dropdown::before {
+        border: 6px solid;
+        border-top-color: currentcolor;
+        border-right-color: currentcolor;
+        border-bottom-color: currentcolor;
+        border-left-color: currentcolor;
+        border-color: transparent transparent #fff transparent;
+        z-index: 99;
+    }
+    .itm-dropdown-wrapper .block-itm-dropdown::before, .itm-dropdown-wrapper .block-itm-dropdown::after {
+        border-bottom-style: solid;
+        content: '';
+        display: block;
+        height: 0;
+        position: absolute;
+        width: 0;
+    }
+    .itm-dropdown-wrapper .block-itm-dropdown {
+        list-style: none none;
+    }
+    .itm-dropdown-wrapper .block-itm-dropdown::before, .itm-dropdown-wrapper .block-itm-dropdown::after {
+        border-bottom-style: solid;
+        content: '';
+        display: block;
+        height: 0;
+        position: absolute;
+        width: 0;
+    }
+
+    .itm-dropdown-wrapper .block-itm-dropdown::after {
+        right: 11px;
+        top: -14px;
+    }
+    .itm-dropdown-wrapper .block-itm-dropdown::after {
+        border: 7px solid;
+        border-top-color: currentcolor;
+        border-right-color: currentcolor;
+        border-bottom-color: currentcolor;
+        border-left-color: currentcolor;
+        border-color: transparent transparent #bbb transparent;
+        z-index: 98;
+    }
+    .itm-dropdown-wrapper ul{
+        list-style-type: none;
+        padding: 0;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+
+    }
+    .itm-dropdown-wrapper .block-itm-dropdown li {
+        margin: 0;
+       line-height: 2em;
+        cursor: pointer;
+        /*width: 25%;*/
+        text-align: left;
+        white-space: nowrap;
+        padding: 0;
+       /* display: flex;
+        align-items: flex-end;*/
+    }
+    .itm-dropdown-wrapper .block-itm-dropdown ul.col-2 li {
+        flex: 0 0 50%;
+    }
+    .itm-dropdown-wrapper .block-itm-dropdown ul.col-3 li {
+        flex: 0 0 33.333333%;
+    }
+    .itm-dropdown-wrapper .block-itm-dropdown ul.col-5 li {
+        flex: 0 0 20%;
+    }
+    .itm-dropdown-wrapper .block-itm-dropdown ul.col-6 li {
+        flex: 0 0 16.666666%;
+    }
+    .itm-dropdown-wrapper .itm-dropdown-title-bar {
+        position: relative;
+        border-bottom: solid 1px #ccc;
+    }
+    .itm-dropdown-wrapper .itm-dropdown-close {
+        position: absolute;
+        right: 5px;
+        cursor: pointer;
+     }
+    .itm-dropdown-wrapper .down {
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+    }
+    .itm-dropdown-wrapper   i {
+        border: solid black;
+        border-width: 0 3px 3px 0;
+        display: inline-block;
+        padding: 3px;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+    }
+    .itm-dropdown-wrapper input[type="text"] {
+        width: 99% !important;
+    }
+    .itm-dropdown-wrapper .itm-dropdown-input-text .input-text{
+        cursor: pointer;
+    }
+    .block-itm-dropdown {
+        max-height: 200px;
+        overflow-y: scroll;
+    }
+    .itm-dropdown-wrapper .itm-dropdown-content-wrapper {
+        padding: 10px 5px 10px 25px;
+    }
+    .itm-dropdown-wrapper  span.itmSelected {
+        color: #ffffff;
+        background-color: #d70000;
+        padding: 2px 10px;
+        border-radius: 14px;
+    }
+    .itm-dropdown-wrapper  span:hover {
+        color: #d70000;
+        background-color: #ccc;
+        padding: 2px 10px;
+        border-radius: 14px;
+    }
+    .itm-dropdown-wrapper span {
+        padding: 2px 10px
+    }
+</style>
+
+    <div data-block="dropdown_<?=$att_code?>" class="itm-dropdown-wrapper">
+       <div class="itm-dropdown-input-text">
+           <input id="<?=$att_code ?>_label"  type="text" name="<?=$att_code ?>_label" placeholder="<?=$select_label?>" value="" class="input-text " data-validate="{required:true}" autocomplete="off" data-trigger="trigger_<?=$att_code?>">
+           <i class="down" data-trigger="trigger_<?=$att_code?>"></i>
+       </div>
+        <input id="<?=$att_code ?>_value" type="hidden" name="<?=$att_code ?>_value" value=""  >
+
+       <!-- <button type="button" class="action itm-dropdown-button" data-trigger="trigger_<?=$att_code?>">
+            <span data-bind="i18n: 'Click Here'"></span>
+        </button>
+-->
+    </div>
+    <div class="block block-itm-dropdown" id="<?=$att_code;?>_drodown" style="display: none;"
+         data-mage-init='{
+        "dropdownDialog": {
+            "appendTo": "[data-block=dropdown_<?=$att_code?>]",
+            "triggerTarget":"[data-trigger=trigger_<?=$att_code?>]",
+            "timeout": 2000,
+            "closeOnMouseLeave": false,
+            "closeOnEscape": true,
+            "autoOpen": false,
+            "triggerClass": "active",
+            "parentClass": "active",
+            "buttons": []
+        }
+     }'>
+        <div class="itm-dropdown-content-wrapper">
+            <div class="itm-dropdown-title-bar" style="display: none">
+                <span class="tittle"><?=$att_label?></span>
+                <span class="itm-dropdown-close">x</span>
+            </div>
+            <ul id="itm-dropdown-<?=$att_code?>" class="<?=$col?>">
+                <?php $i=0; foreach ($options as $item) :?>
+                    <li data-bind="<?= $item["value"]?>">
+                        <span <?= $i==0? "class='itmSelected'":"" ?> >
+                         <?= $item["label"]?>
+                        </span>
+                    </li>
+                <?php $i++; endforeach;?>
+            </ul>
+        </div>
+    </div>
+
+
+
+<script>
+    require(['jquery', 'jquery/ui'], function($){
+        jQuery(document).ready( function() {
+            $(".itm-dropdown-close").click(function(){
+                $("#<?=$att_code ?>_drodown").dropdownDialog("close");
+            });
+
+            $("#itm-dropdown-<?=$att_code?> li").click(function(){
+                $("#<?=$att_code ?>_label").attr('value', $(this).find("span").text().trim());
+                //$("#<?=$att_code ?>_label").val($(this).children('span').text().trim());
+                $("#<?=$att_code ?>_value").val($(this).data().bind);
+                $("#<?=$att_code ?>_drodown").dropdownDialog("close");
+                $('#<?=$att_code ?>_drodown span').removeClass('itmSelected');
+                $($(this)).find("span").addClass('itmSelected');
+            });
+        });
+    });
+</script>

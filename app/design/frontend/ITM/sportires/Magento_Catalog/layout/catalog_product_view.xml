@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright Â© 2018 Porto. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page layout="2columns-right" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="ITM\Sportires\Block\Template" name="product_view_add_marka" template="Magento_Catalog::product/view/addmarka.phtml"/>
+        </referenceContainer>
+		<referenceContainer name="product.info.stock.sku">
+            <block class="ITM\Sportires\Block\Template" name="product_view_add_flat" template="Magento_Catalog::product/view/addflate.phtml"/>
+        </referenceContainer>
+		<move element="product_view_add_marka" destination="product.info.main" before="-"/>
+		<referenceBlock name="product.info.mailto" remove="true" />
+		<referenceBlock name="catalog.compare.sidebar" remove="true"/> 
+		<referenceBlock name="view.addto.compare" remove="true" /> 
+		<referenceBlock name="view.addto.wishlist" remove="true" /> 
+        <referenceContainer name="content">
+            <container name="product.atributes.block" htmlTag="div" htmlClass="product-atributes-blocks" after="product.info.details">
+
+                <block class="Magento\Catalog\Block\Product\View\Description" name="product.info.description.full" template="product/view/attribute.phtml" group="detailed_info">
+                    <arguments>
+                        <argument name="at_call" xsi:type="string">getDescription</argument>
+                        <argument name="at_code" xsi:type="string">description</argument>
+                        <argument name="css_class" xsi:type="string">description</argument>
+                        <argument name="at_label" xsi:type="string">Descripción</argument>
+                        <argument name="title" translate="true" xsi:type="string">Details</argument>
+                    </arguments> 
+                </block>
+
+                <block class="Magento\Catalog\Block\Product\View\Attributes" name="product.attributes" as="additional" template="product/view/attributes.phtml" group="detailed_info">
+                    <arguments>
+                        <argument translate="true" name="title" xsi:type="string">Especificaciones técnicas</argument>
+                    </arguments>
+                </block>
+
+                <block class="Magento\Catalog\Block\Product\View" name="deliveryinfo.tab" as="deliveryinfo" template="product/view/delivery_info.phtml" group="detailed_info" >
+                    <arguments>
+                        <argument translate="true" name="title" xsi:type="string">Modelo 3D</argument>
+                    </arguments>
+                </block>
+
+            </container>
+        </referenceContainer>
+        <referenceBlock name="reviews.tab" remove="true" />
+        <referenceBlock name="product.info.description" remove="true" />
+
+    </body>
+</page>

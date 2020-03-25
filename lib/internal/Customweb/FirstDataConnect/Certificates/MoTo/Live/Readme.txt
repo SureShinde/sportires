@@ -1,0 +1,1 @@
+Copy your Live MoTo API Certificates into this folder

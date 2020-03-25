@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Backend/etc/menu.xsd">
+    <menu>
+       <add id="itm::base" title="ITM Development" module="ITM_Main" sortOrder="90" resource="ITM_Main::Base"/>
+    </menu>
+</config>

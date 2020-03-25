@@ -1,0 +1,109 @@
+<div class="payment-method" data-bind="css: {'_active': (getCode() == isChecked())}">
+    <div class="payment-method-title field choice">
+        <input type="radio"
+               name="payment[method]"
+               class="radio"
+               data-bind="attr: {'id': getCode()}, value: getCode(), checked: isChecked, click: selectPaymentMethod, visible: isRadioButtonVisible()"/>
+        <label data-bind="attr: {'for': getCode()}" class="label"><span data-bind="text: getTitle()"></span></label>
+        <!--ko if: getDisplayLogo() == 1 -->
+        <label data-bind="attr: {'for': getCode()}" class="label">
+            <img data-bind="attr: {src: getLogoUrl(), alt: $t('Logo')}" class="payment-icon" />      
+        </label>
+        <!--/ko-->
+    </div>
+
+    <div class="payment-method-content">
+        <!-- ko foreach: getRegion('messages') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+        <div class="payment-method-billing-address">
+            <!-- ko foreach: $parent.getRegion(getBillingAddressFormName()) -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </div>
+        <div class="payment-method-description">
+            <span data-bind="text: getDescription()" style="font-weight: bold;"></span>		            
+            <!--ko if: getEmi() == 1 && getAvailableOptions().length >= 1 -->
+            <div class="payment-emi-options">
+                <div>
+                    <input type="radio" id="payfull" name="pay_mode" value="fullpayment" checked />
+                    <label for="payfull"><span data-bind="i18n: 'Full Payment'"></span></label>
+                </div>
+                <div>
+                    <input type="radio" id="payinstallment" name="pay_mode" value="installment"/>
+                    <label for="payinstallment"><span data-bind="i18n: 'Payment by installments'"></span></label>
+                </div>
+                <div id="installment_wrapper" style="display:none">
+                <div>
+                    <!-- ko foreach: {data: getAvailableOptions(), as: 'option'} -->
+                    <div class="emi_item" style="padding-left: 25px; padding-bottom: 6px; " >
+                        <input type="radio"
+                            class="radio"
+                            data-bind="attr: {id: $parent.getCode() + '_emi_' + option.value, name: 'pay_installment', value: option.value }" />
+                        <label data-bind="attr: {for: $parent.getCode() + '_emi_' + option.value}, text: option.label" ></label>    
+                    </div>
+                    <!--/ko-->
+                </div>
+                </div>
+            </div>
+            <!--/ko-->
+            <!-- ko ifnot: getEmi() == 1 && getAvailableOptions().length >= 1 -->
+            <input type="hidden" id="payfull" name="pay_mode" value="fullpayment" />
+            <!--/ko-->
+        </div>
+
+        <!--ko if: getTokenization() == 1 || getLocalpayments() == 1 -->	
+            <div class="payment_heading" style="font-weight: bold;"><span data-bind="i18n: 'Payment Options'"></span></div>    
+            <!-- ko foreach: {data: getStoreCard(), as: 'cards'} -->
+            <div class="item" data-bind="css: {'_active': true}" style="padding-right: 25px; padding-bottom: 6px;">
+                <input type="radio"
+                    class="radio"
+                    data-bind="attr: {id: $parent.getCode() + '_savedcard_' + cards.value, name: 'pay_type', value: cards.value }" />
+                <label data-bind="attr: {for: $parent.getCode() + '_savedcard_' + cards.value}, text: $t('Pay with Card')+cards.label" ></label>    
+            </div>
+            <!--/ko--> 
+            <input type="radio" id="paytype" name="pay_type" value="newpayment" >
+            <label for="paytype"><span data-bind="i18n: 'Use a new payment method'"></span></label>
+            <div id="newpayment_wrapper" style="display:none">	
+            <div class="alternate_payment"  style="padding: 20px;">
+                <!--ko if:  getLocalpayments() == 1 -->
+                <input type="checkbox" name="alternate_enable" id="alternate_enable" value="1"/>
+                <label data-bind="attr: {for: 'paytype'}" ><span data-bind="i18n: 'Enable local payments'"></span></label>                             
+                <div id="local_wrapper" style="display:none">				
+                <div class="alternate_payment_option"  >                    
+                    <label data-bind="attr: {for: 'alternate_payment'}" ><span data-bind="i18n: 'Choose your payment options:'"></label>             
+                    <select id="alternate_payment" name="alternate_payment" class="select input-text required-entry" 
+                            data-bind="                            
+                                options: getLocalpaymentslist(),
+                                optionsValue: 'value',
+                                optionsText: 'label',
+                                optionsCaption: $t('--Please Select--')">
+                    </select>
+                </div>
+                </div>
+                <!--/ko-->
+                <div class="carddiv" id="carddiv" >                
+                </div>
+            </div>
+            </div>
+        <!--/ko-->
+        <div class="checkout-agreements-block">
+            <!-- ko foreach: $parent.getRegion('before-place-order') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </div>
+        <div class="actions-toolbar">
+            <div class="primary">
+                <button class="action primary checkout"
+                        type="submit"
+                        data-bind="
+                        click: placeOrder,
+                        attr: {title: $t('Place Order')},
+                        css: {disabled: !isPlaceOrderActionAllowed()},
+                        enable: (getCode() == isChecked())" disabled>
+                    <span data-bind="i18n: 'Place Order'"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

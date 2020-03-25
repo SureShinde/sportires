@@ -1,0 +1,113 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+	<tab id="itm_extension" translate="label" sortOrder="1000">
+            <label>ITM Extensions</label>
+        </tab>
+         <section id="itm_magb1_section" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>MagB1</label>
+            <tab>itm_extension</tab>
+            <resource>ITM_Extensions::config</resource>
+           
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="10">
+                <label>General</label>
+                <field id="links" translate="label" type="label" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Information</label>
+                    <frontend_model>\ITM\MagB1\Block\System\Config\Information</frontend_model>
+                </field>
+                <field id="clear_product_cache" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Clear product cache when Update the Product</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>  
+                </field>
+				<field id="display_files_tab" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+					<label>Display Files Tab</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment><![CDATA[  ]]></comment>
+				</field>
+
+				<field id="files_tab_label" translate="label" type="text" sortOrder="35" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Files Tab's Label</label>
+					<depends>
+						<field id="*/*/display_files_tab">1</field>
+					</depends>
+				</field>
+
+				<field id="send_order_email" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>Send email to customer when uplaod order from SAP</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment><![CDATA[  ]]></comment>
+				</field>
+				<field id="display_all_orders" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>Allow contact persons to see all BP orders</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment><![CDATA[  ]]></comment>
+				</field>
+				<field id="allow_delete_orders" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>Allow Delete Order Mass Action</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment><![CDATA[  ]]></comment>
+				</field>
+				<field id="check_disabled_payment_methods" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>Check Disabled Payment Methods for Customer Group</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment><![CDATA[  ]]></comment>
+				</field>
+				<field id="display_general_infomration" translate="label" type="select" sortOrder="80" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>Display the General Infomration</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment><![CDATA[  ]]></comment>
+				</field>
+				<field id="dgi_customer_groups" translate="label" type="multiselect" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Display the General Infomration to</label>
+					<depends>
+						<field id="*/*/display_general_infomration">1</field>
+					</depends>
+					<source_model>Magento\Customer\Model\Customer\Source\Group</source_model>
+				</field>
+				<field id="dgi_customer_attributes" translate="label" type="textarea" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Display Attributes</label>
+					<depends>
+						<field id="*/*/display_general_infomration">1</field>
+					</depends>
+					<comment><![CDATA[ Label:Attribute Code:Type <br/> Example1: Customer Number|itm_cardcode|#<br/> Example2: Credit Balance|itm_credit_balance|price<br/> Example2: Credit Limit|itm_credit_limit|price ]]></comment>
+				</field>
+            </group>
+
+        </section>
+		<section id="carriers" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="1000" translate="label">
+			<group id="magb1rate" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+				<label>MagB1Rate</label>
+				<field id="active" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="select">
+					<label>Enabled</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="name" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20" translate="label" type="text">
+					<label>Method Name</label>
+				</field>
+				<field id="price" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="30" translate="label" type="text">
+					<label>Price</label>
+					<validate>validate-number validate-zero-or-greater</validate>
+				</field>
+				<field id="sort_order" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="40" translate="label" type="text">
+					<label>Sort Order</label>
+				</field>
+				<field id="title" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="50" translate="label" type="text">
+					<label>Title</label>
+				</field>
+				<field id="sallowspecific" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="60" translate="label" type="select">
+					<label>Ship to Applicable Countries</label>
+					<frontend_class>shipping-applicable-country</frontend_class>
+					<source_model>Magento\Shipping\Model\Config\Source\Allspecificcountries</source_model>
+				</field>
+				<field id="specificcountry" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="70" translate="label" type="multiselect">
+					<label>Ship to Specific Countries</label>
+					<can_be_empty>1</can_be_empty>
+					<source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+				</field>
+				<field id="specificerrmsg" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="80" translate="label" type="textarea">
+					<label>Displayed Error Message</label>
+				</field>
+			</group>
+		</section>
+	</system>
+</config>

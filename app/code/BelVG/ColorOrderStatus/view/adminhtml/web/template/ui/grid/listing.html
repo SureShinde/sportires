@@ -1,0 +1,32 @@
+<!--
+ * BelVG LLC.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
+ *
+ ********************************************************************
+ * @category   BelVG
+ * @package    BelVG_ColorOrderStatus
+ * @copyright  Copyright (c) BelVG LLC. (http://www.belvg.com)
+ * @license    http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
+ -->
+<div class="admin__data-grid-wrap" data-role="grid-wrapper">
+    <table class="data-grid" data-role="grid">
+        <thead>
+        <tr each="data: getVisible(), as: '$col'" render="getHeader()"/>
+        </thead>
+        <tbody>
+        <tr class="data-row" repeat="foreach: rows, item: '$row'" css="'_odd-row': $index % 2">
+            <td outerfasteach="data: getVisible(), as: '$col'"
+                attr="style: $parent.getRowStyle($row())" css="getFieldClass($row())" click="getFieldHandler($row())" template="getBody()"/>
+        </tr>
+        <tr ifnot="hasData()" class="data-grid-tr-no-data">
+            <td attr="colspan: countVisible()" translate="'We couldn\'t find any records.'"/>
+        </tr>
+        </tbody>
+    </table>
+</div>

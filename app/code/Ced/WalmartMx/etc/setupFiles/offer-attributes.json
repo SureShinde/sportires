@@ -1,0 +1,552 @@
+[{
+        "code" : "price",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Price",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Price"
+        } ],
+        "required" : true,
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Price"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false
+}, {
+        "code" : "state",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "State",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "State"
+        } ],
+        "required" : true,
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "State"
+        } ],
+        "type" : "LIST",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : [{"code":"New","label":"New","label_translations":{"label_translation":{"locale":"en","value":"New"}}},{"code":"Refurbished","label":"Refurbished","label_translations":{"label_translation":{"locale":"en","value":"Refurbished"}}}],
+        "variant" : false
+},{
+        "code" : "tipo",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Tipo de impuesto en %",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Tipo de impuesto en %"
+        } ],
+        "required" : true,
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Tipo de impuesto en %"
+        } ],
+        "type" : "LIST",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : [{"code":"0","label":"0","label_translations":{"label_translation":{"locale":"en","value":"0"}}},{"code":"16","label":"16","label_translations":{"label_translation":{"locale":"en","value":"16"}}}],
+        "variant" : false
+},{
+        "code" : "msi",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Meses sin intereses",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Meses sin intereses"
+        } ],
+        "required" : true,
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Meses sin intereses"
+        } ],
+        "type" : "LIST",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : [{"code":"0","label":"0","label_translations":{"label_translation":{"locale":"en","value":"0"}}}],
+        "variant" : false
+},{
+        "code" : "freeship",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Envio gratis",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Envio gratis"
+        } ],
+        "required" : true,
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Envio gratis"
+        } ],
+        "type" : "LIST",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : [{"code":"No","label":"No","label_translations":{"label_translation":{"locale":"en","value":"No"}}}],
+        "variant" : false
+},{
+        "code" : "subsidiodeenvio",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Subsidio de Envío",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Subsidio de Envío"
+        } ],
+        "required" : true,
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Subsidio de Envío"
+        } ],
+        "type" : "LIST",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : [{"code":"0","label":"0","label_translations":{"label_translation":{"locale":"en","value":"0"}}}],
+        "variant" : false
+},{
+        "code" : "largoemp",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Largo del empaque en centí­metros",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Largo del empaque en centí­metros"
+        } ],
+        "required" : true,
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Largo del empaque en centí­metros"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false
+},{
+        "code" : "altoempaque",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Alto del empaque en centímetros",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Alto del empaque en centímetros"
+        } ],
+        "required" : true,
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Alto del empaque en centímetros"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false
+},{
+        "code" : "anchodelempaque",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Ancho del empaque en centí­metros",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Ancho del empaque en centí­metros"
+        } ],
+        "required" : true,
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Ancho del empaque en centí­metros"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false
+},{
+        "code" : "package-weight",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Peso del Empaque en kilogramos",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Peso del Empaque en kilogramos"
+        } ],
+        "required" : true,
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Peso del Empaque en kilogramos"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false
+},{
+        "code" : "garante",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Garante",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Garante"
+        } ],
+        "required" : true,
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Garante"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false
+},{
+        "code" : "condiciones",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Condiciones de Garantía",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Condiciones de Garantía"
+        } ],
+        "required" : true,
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Condiciones de Garantía"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false
+},{
+        "code" : "garantia",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Garantía",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Garantía"
+        } ],
+        "required" : true,
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Garantía"
+        } ],
+        "type" : "LIST",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : [{"code":3,"label":3,"label_translations":{"label_translation":{"locale":"en","value":3}}},{"code":4,"label":4,"label_translations":{"label_translation":{"locale":"en","value":4}}},{"code":5,"label":5,"label_translations":{"label_translation":{"locale":"en","value":5}}},{"code":6,"label":6,"label_translations":{"label_translation":{"locale":"en","value":6}}},{"code":7,"label":7,"label_translations":{"label_translation":{"locale":"en","value":7}}},{"code":8,"label":8,"label_translations":{"label_translation":{"locale":"en","value":8}}},{"code":9,"label":9,"label_translations":{"label_translation":{"locale":"en","value":9}}},{"code":10,"label":10,"label_translations":{"label_translation":{"locale":"en","value":10}}},{"code":11,"label":11,"label_translations":{"label_translation":{"locale":"en","value":11}}},{"code":12,"label":12,"label_translations":{"label_translation":{"locale":"en","value":12}}},{"code":13,"label":13,"label_translations":{"label_translation":{"locale":"en","value":13}}},{"code":14,"label":14,"label_translations":{"label_translation":{"locale":"en","value":14}}},{"code":15,"label":15,"label_translations":{"label_translation":{"locale":"en","value":15}}},{"code":16,"label":16,"label_translations":{"label_translation":{"locale":"en","value":16}}},{"code":17,"label":17,"label_translations":{"label_translation":{"locale":"en","value":17}}},{"code":18,"label":18,"label_translations":{"label_translation":{"locale":"en","value":18}}},{"code":19,"label":19,"label_translations":{"label_translation":{"locale":"en","value":19}}},{"code":20,"label":20,"label_translations":{"label_translation":{"locale":"en","value":20}}},{"code":21,"label":21,"label_translations":{"label_translation":{"locale":"en","value":21}}},{"code":22,"label":22,"label_translations":{"label_translation":{"locale":"en","value":22}}},{"code":23,"label":23,"label_translations":{"label_translation":{"locale":"en","value":23}}},{"code":24,"label":24,"label_translations":{"label_translation":{"locale":"en","value":24}}},{"code":25,"label":25,"label_translations":{"label_translation":{"locale":"en","value":25}}},{"code":26,"label":26,"label_translations":{"label_translation":{"locale":"en","value":26}}},{"code":27,"label":27,"label_translations":{"label_translation":{"locale":"en","value":27}}},{"code":28,"label":28,"label_translations":{"label_translation":{"locale":"en","value":28}}},{"code":29,"label":29,"label_translations":{"label_translation":{"locale":"en","value":29}}},{"code":30,"label":30,"label_translations":{"label_translation":{"locale":"en","value":30}}},{"code":31,"label":31,"label_translations":{"label_translation":{"locale":"en","value":31}}},{"code":32,"label":32,"label_translations":{"label_translation":{"locale":"en","value":32}}},{"code":33,"label":33,"label_translations":{"label_translation":{"locale":"en","value":33}}},{"code":34,"label":34,"label_translations":{"label_translation":{"locale":"en","value":34}}},{"code":35,"label":35,"label_translations":{"label_translation":{"locale":"en","value":35}}},{"code":36,"label":36,"label_translations":{"label_translation":{"locale":"en","value":36}}},{"code":37,"label":37,"label_translations":{"label_translation":{"locale":"en","value":37}}},{"code":38,"label":38,"label_translations":{"label_translation":{"locale":"en","value":38}}},{"code":39,"label":39,"label_translations":{"label_translation":{"locale":"en","value":39}}},{"code":40,"label":40,"label_translations":{"label_translation":{"locale":"en","value":40}}},{"code":41,"label":41,"label_translations":{"label_translation":{"locale":"en","value":41}}},{"code":42,"label":42,"label_translations":{"label_translation":{"locale":"en","value":42}}},{"code":43,"label":43,"label_translations":{"label_translation":{"locale":"en","value":43}}},{"code":44,"label":44,"label_translations":{"label_translation":{"locale":"en","value":44}}},{"code":45,"label":45,"label_translations":{"label_translation":{"locale":"en","value":45}}},{"code":46,"label":46,"label_translations":{"label_translation":{"locale":"en","value":46}}}],
+        "variant" : false
+}, {
+        "code" : "description",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Description",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Description"
+        } ],
+        "required" : false,
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Description"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false
+},{
+        "code" : "paisdeenvio",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "País de envío",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "País de envío"
+        } ],
+        "required" : false,
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "País de envío"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false
+},{
+        "code" : "claveprodserv",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Clave de Producto",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Clave de Producto"
+        } ],
+        "required" : false,
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Clave de Producto"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false
+}, {
+        "code" : "internal-description",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Internal Description",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Internal Description"
+        } ],
+        "required" : false,
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Internal Description"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false
+}, {
+        "code" : "price-additional-info",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Price Additional Info",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Price Additional Info"
+        } ],
+        "required" : false,
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Price Additional Info"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false
+}, {
+        "code" : "min-quantity-alert",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Min Quantity Alert",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Min Quantity Alert"
+        } ],
+        "required" : false,
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Min Quantity Alert"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false
+}, {
+        "code" : "available-start-date",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Available Start Date",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Available Start Date"
+        } ],
+        "required" : false,
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Available Start Date"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false
+}, {
+        "code" : "available-end-date",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Available End Date",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Available End Date"
+        } ],
+        "required" : false,
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Available End Date"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false
+}, {
+        "code" : "discount-price",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Discount Price",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Discount Price"
+        } ],
+        "required" : false,
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Discount Price"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false
+}, {
+        "code" : "discount-start-date",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Discount Start Date",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Discount Start Date"
+        } ],
+        "required" : false,
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Discount Start Date"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false
+}, {
+        "code" : "discount-end-date",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Discount End Date",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Discount End Date"
+        } ],
+        "required" : false,
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Discount End Date"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false
+}, {
+        "code" : "leadtime-to-ship",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Leadtime To Ship",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Leadtime To Ship"
+        } ],
+        "required" : false,
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Leadtime To Ship"
+        } ],
+        "type" : "LIST",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : [{"code":1,"label":"1 Days","label_translations":{"label_translation":{"locale":"en","value":"1 Days"}}},{"code":2,"label":"2 Days","label_translations":{"label_translation":{"locale":"en","value":"2 Days"}}},{"code":3,"label":"3 Days","label_translations":{"label_translation":{"locale":"en","value":"3 Days"}}},{"code":4,"label":"4 Days","label_translations":{"label_translation":{"locale":"en","value":"4 Days"}}},{"code":5,"label":"5 Days","label_translations":{"label_translation":{"locale":"en","value":"5 Days"}}},{"code":6,"label":"6 Days","label_translations":{"label_translation":{"locale":"en","value":"6 Days"}}},{"code":7,"label":"7 Days","label_translations":{"label_translation":{"locale":"en","value":"7 Days"}}},{"code":8,"label":"8 Days","label_translations":{"label_translation":{"locale":"en","value":"8 Days"}}},{"code":9,"label":"9 Days","label_translations":{"label_translation":{"locale":"en","value":"9 Days"}}},{"code":10,"label":"10 Days","label_translations":{"label_translation":{"locale":"en","value":"10 Days"}}},{"code":11,"label":"11 Days","label_translations":{"label_translation":{"locale":"en","value":"11 Days"}}},{"code":12,"label":"12 Days","label_translations":{"label_translation":{"locale":"en","value":"12 Days"}}},{"code":13,"label":"13 Days","label_translations":{"label_translation":{"locale":"en","value":"13 Days"}}},{"code":14,"label":"14 Days","label_translations":{"label_translation":{"locale":"en","value":"14 Days"}}},{"code":15,"label":"15 Days","label_translations":{"label_translation":{"locale":"en","value":"15 Days"}}},{"code":16,"label":"16 Days","label_translations":{"label_translation":{"locale":"en","value":"16 Days"}}},{"code":17,"label":"17 Days","label_translations":{"label_translation":{"locale":"en","value":"17 Days"}}},{"code":18,"label":"18 Days","label_translations":{"label_translation":{"locale":"en","value":"18 Days"}}},{"code":19,"label":"19 Days","label_translations":{"label_translation":{"locale":"en","value":"19 Days"}}},{"code":20,"label":"20 Days","label_translations":{"label_translation":{"locale":"en","value":"20 Days"}}},{"code":21,"label":"21 Days","label_translations":{"label_translation":{"locale":"en","value":"21 Days"}}},{"code":22,"label":"22 Days","label_translations":{"label_translation":{"locale":"en","value":"22 Days"}}},{"code":23,"label":"23 Days","label_translations":{"label_translation":{"locale":"en","value":"23 Days"}}},{"code":24,"label":"24 Days","label_translations":{"label_translation":{"locale":"en","value":"24 Days"}}},{"code":25,"label":"25 Days","label_translations":{"label_translation":{"locale":"en","value":"25 Days"}}},{"code":26,"label":"26 Days","label_translations":{"label_translation":{"locale":"en","value":"26 Days"}}},{"code":27,"label":"27 Days","label_translations":{"label_translation":{"locale":"en","value":"27 Days"}}},{"code":28,"label":"28 Days","label_translations":{"label_translation":{"locale":"en","value":"28 Days"}}},{"code":29,"label":"29 Days","label_translations":{"label_translation":{"locale":"en","value":"29 Days"}}},{"code":30,"label":"30 Days","label_translations":{"label_translation":{"locale":"en","value":"30 Days"}}},{"code":31,"label":"31 Days","label_translations":{"label_translation":{"locale":"en","value":"31 Days"}}},{"code":32,"label":"32 Days","label_translations":{"label_translation":{"locale":"en","value":"32 Days"}}},{"code":33,"label":"33 Days","label_translations":{"label_translation":{"locale":"en","value":"33 Days"}}},{"code":34,"label":"34 Days","label_translations":{"label_translation":{"locale":"en","value":"34 Days"}}},{"code":35,"label":"35 Days","label_translations":{"label_translation":{"locale":"en","value":"35 Days"}}},{"code":36,"label":"36 Days","label_translations":{"label_translation":{"locale":"en","value":"36 Days"}}},{"code":37,"label":"37 Days","label_translations":{"label_translation":{"locale":"en","value":"37 Days"}}},{"code":38,"label":"38 Days","label_translations":{"label_translation":{"locale":"en","value":"38 Days"}}},{"code":39,"label":"39 Days","label_translations":{"label_translation":{"locale":"en","value":"39 Days"}}},{"code":40,"label":"40 Days","label_translations":{"label_translation":{"locale":"en","value":"40 Days"}}},{"code":41,"label":"41 Days","label_translations":{"label_translation":{"locale":"en","value":"41 Days"}}},{"code":42,"label":"42 Days","label_translations":{"label_translation":{"locale":"en","value":"42 Days"}}},{"code":43,"label":"43 Days","label_translations":{"label_translation":{"locale":"en","value":"43 Days"}}},{"code":44,"label":"44 Days","label_translations":{"label_translation":{"locale":"en","value":"44 Days"}}},{"code":45,"label":"45 Days","label_translations":{"label_translation":{"locale":"en","value":"45 Days"}}}],
+        "variant" : false
+}]
+

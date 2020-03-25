@@ -1,0 +1,42 @@
+<div class="custom-container">
+
+	<div class="show-search toolbar-amount">
+		<a href="#" id="click-me">(<?= __('New Search') ?>)</a>
+	</div>
+</div>
+<div id="popup-mpdal" >
+	<div class="filter-container" style="display:none">
+		<?php echo $this->getLayout()
+			->createBlock("ITM\Sportires\Block\Filterblock")
+			->setTemplate("ITM_Sportires::filter_block.phtml")
+			->toHtml()
+		?>
+	</div>
+</div>
+
+<script>
+	require(
+		[
+			'jquery',
+			'Magento_Ui/js/modal/modal'
+		],
+		function(
+			$,
+			modal
+		) {
+			var options = {
+				type: 'popup',
+				responsive: true,
+				innerScroll: true,
+				modalClass: 'search',
+			};
+			
+			var popup = modal(options, $('#popup-mpdal'));
+			$("#click-me").on('click',function(){
+				$("#popup-mpdal").modal("openModal");
+				$(".filter-container").show();
+			});
+
+		}
+	);
+</script>

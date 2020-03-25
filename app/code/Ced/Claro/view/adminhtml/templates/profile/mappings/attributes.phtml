@@ -1,0 +1,318 @@
+<?php
+/** @var \Ced\Claro\Block\Adminhtml\Profile\Ui\Form\AttributeMapping $block */
+?>
+<div id="claro-mappings-container">
+    <?php $_htmlId = 'claro-attributes'; ?>
+    <?php $_htmlClass = 'claroAttributesClass'; ?>
+    <?php $_htmlName = 'claro_attributes'; ?>
+    <?php $_readonly = false ?>
+    <div class="field" id="attribute-<?php /* @escapeNotVerified */echo $_htmlId ?>-container" data-attribute-code="<?php /* @escapeNotVerified */echo $_htmlId ?>">
+        <div class="control">
+            <table class="admin__control-table tiers_table" id="tiers_table">
+                <thead>
+                <tr>
+                    <th colspan="4">Please map all Claro attributes with Magento attributes.</th>
+                </tr>
+                <tr>
+                    <th class="col-customer-group"><?php /* @escapeNotVerified */
+                        echo __('Claro Attribute') ?></th>
+                    <th class="col-qty required"><?php /* @escapeNotVerified */
+                        echo __('Magento Catalog Attribute') ?></th>
+                    <th class="col-qty required"><?php /* @escapeNotVerified */ echo __('Default Value') ?></th>
+                    <th class="col-delete"><?php /* @escapeNotVerified */
+                        echo __('Action') ?></th>
+                </tr>
+                </thead>
+                <tbody id="<?php /* @escapeNotVerified */
+                echo $_htmlId ?>_container"></tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="5" class="col-actions-add"><?php echo $block->getAddButtonHtml();?></td>
+                </tr>
+                </tfoot>
+            </table>
+            <script>
+                function empty (e) {
+                    switch (e) {
+                        case "":
+                        case 0:
+                        case "0":
+                        case null:
+                        case false:
+                            return true;
+                        default:
+                            if (typeof e === "undefined") {
+                                return true;
+                            } else if (typeof e === "object" && Object.keys(e).length === 0){
+                                return true;
+                            } else {
+                                return false;
+                            }
+                    }
+                }
+
+                require([
+                    'mage/template',
+                    "prototype",
+                    "mage/adminhtml/form"
+                ], function (mageTemplate) {
+
+    //<![CDATA[
+                    var requiredAttributeRowTemplate = '<tr>'
+                        + '<input data-form-part="claro_profile_form" type="hidden" name="<?php echo $_htmlName ?>[<%- data.index %>][name]" id="claro_attribute_row_<%- data.index %>_name" />'
+                        + '<input data-form-part="claro_profile_form" type="hidden" name="<?php echo $_htmlName ?>[<%- data.index %>][id]" id="claro_attribute_row_<%- data.index %>_id" />'
+                        + '<input data-form-part="claro_profile_form" type="hidden" name="<?php echo $_htmlName ?>[<%- data.index %>][required]" id="claro_attribute_row_<%- data.index %>_min_occurs" />'
+                        + '<input data-form-part="claro_profile_form" type="hidden" name="<?php echo $_htmlName ?>[<%- data.index %>][input_type]" id="claro_attribute_row_<%- data.index %>_input_type" />'
+                        + '<input data-form-part="claro_profile_form" type="hidden" name="<?php echo $_htmlName ?>[<%- data.index %>][values]" id="claro_attribute_row_<%- data.index %>_option_values" />'
+                        + '<td><select data-form-part="claro_profile_form" style="margin-left: 10px;" onchange="return claroAttributeControl.setClaroValues(this, <%- data.index %>);" class="<?php echo $_htmlClass ?> custgroup required-entry" name="<?php echo $_htmlName ?>[<%- data.index %>][value]" id="claro_attribute_row_<%- data.index %>_claro_attribute">'
+
+                        <?php foreach ($block->getClaroAttributes() as $optGroup) {
+                        $disable = '';
+                        if ($optGroup['label']['text:Magento\Framework\Phrase:private'] == 'Required Attributes') {
+                            $disable = 'disabled="disabled"';
+                        }
+                        ?>
+                        + '<optgroup <?php echo $disable ?> label="<?php echo $optGroup['label']['text:Magento\Framework\Phrase:private'] ?>">'
+                        <?php
+                        foreach ($optGroup['value'] as $id => $attribute):
+                            $label = $block->getAttributeName($attribute);
+                        ?>
+                        + '<option value="<?=  $block->escapeHtml($id)  ?>" required="<?= $block->escapeHtml($block->getAttributeRequired($attribute)) ?>" values=\'<?= $block->escapeHtml(json_encode($block->getAttributeOptions($attribute))) ?>\' input_type="<?= $block->escapeHtml($block->getAttributeType($attribute)) ?>"><?= $block->escapeHtml(__($label)) ?></option>'
+                        <?php endforeach;
+                        ?>
+                        + '</optgroup>'
+                        <?php  }
+                        ?>
+                        + '</select></td>'
+                        + '<td> <select data-form-part="claro_profile_form" class="<?php echo $_htmlClass ?> required_magento_attribute required-entry" name="<?php echo $_htmlName ?>[<%- data.index %>][magento_attribute_code]" id="claro_attribute_row_<%- data.index %>_magento_attribute">'
+                        <?php foreach ($block->getMagentoAttributes() as $_groupId=>$_groupName): ?>
+                        + "<option value='<?php echo $_groupId ?>' ><?php echo __($_groupName) ?></option>"
+                        <?php endforeach ?>
+                        + '</select>'
+                        + ' </td>'
+                        + '<td><input data-form-part="claro_profile_form"  class="default-text" style="display:none; width: 100%" type="text" name="<?php /* @escapeNotVerified */ echo $_htmlName ?>[<%- data.index %>][default_value]" value="" id="claro_attribute_row_<%- data.index %>_default_text" />'
+                        + '<select data-form-part="claro_profile_form" style="display:none; width: 100%" class="<?php echo $_htmlClass ?> required_magento_attribute default-select" name="<?php echo $_htmlName ?>[<%- data.index %>][default_value]" id="claro_attribute_row_<%- data.index %>_default_select">'
+                        + '</select></td>'
+                        + '<td class="col-delete"><input type="hidden" name="<?php /* @escapeNotVerified */ echo $_htmlName ?>[<%- data.index %>][delete]" class="delete" value="" id="claro_attribute_row_<%- data.index %>_delete" />'
+                        + '<button title="<?php /* @escapeNotVerified */ echo $block->escapeHtml(__('Delete Tier')); ?>" type="button" class="action- scalable delete icon-btn delete-product-option" id="claro_attribute_row_<%- data.index %>_delete_button" onclick="return claroAttributeControl.deleteItem(event);">'
+                        + '<span><?php /* @escapeNotVerified */ echo __("Delete") ?></span></button></td>'
+                        + '</tr>';
+
+                    var claroAttributeControl = {
+                        template: mageTemplate(requiredAttributeRowTemplate),
+                        itemsCount: 0,
+                        addItem: function () {
+                            <?php if ($_readonly): ?>
+                            if (arguments.length < 4) {
+                                return;
+                            }
+                            <?php endif; ?>
+                            var data = {
+                                claro_attribute: '',
+                                claro_attribute_name: '',
+                                magento_attribute: '',
+                                required: '',
+                                input_type: '',
+                                values: '',
+                                default_value: '',
+                                index: this.itemsCount++
+                            };
+
+                            if (arguments.length >= 4) {
+                                data.claro_attribute = arguments[0];
+                                data.claro_attribute_name = arguments[1];
+                                data.magento_attribute = arguments[2];
+                                data.required = arguments[3];
+                                data.input_type = arguments[4];
+                                data.values = arguments[5];
+                                data.default_value = arguments[6];
+                            }
+                            Element.insert($('<?php /* @escapeNotVerified */ echo $_htmlId ?>_container'), {
+                                bottom: this.template({
+                                    data: data
+                                })
+                            });
+
+                            var claroAttribute = $('claro_attribute_row_' + data.index + '_claro_attribute');
+                            var magentoAttribute = $('claro_attribute_row_' + data.index + '_magento_attribute');
+
+                            claroAttribute.value = data.claro_attribute;
+                            magentoAttribute.value = data.magento_attribute;
+                            $('claro_attribute_row_' + data.index + '_min_occurs').value = data.required;
+                            $('claro_attribute_row_' + data.index + '_input_type').value = data.input_type;
+                            $('claro_attribute_row_' + data.index + '_option_values').value = data.values;
+                            $('claro_attribute_row_' + data.index + '_name').value =
+                                data.claro_attribute_name;
+                            $('claro_attribute_row_' + data.index + '_id').value =
+                                data.claro_attribute;
+                            if (data.required == 1) {
+                                $('claro_attribute_row_' + data.index + '_delete_button').remove();
+                                claroAttribute.disabled = true;
+
+                                claroAttribute.removeClassName('required-entry');
+                            }
+
+                            if (data.readOnly == '1') {
+                                ['website', 'cust_group', 'qty', 'price', 'delete'].each(function (idx) {
+                                    $('claro_attribute_row_' + data.index + '_' + idx).disabled = true;
+                                });
+                                $('claro_attribute_row_' + data.index + '_delete_button').hide();
+                            }
+
+                            <?php if ($_readonly): ?>
+                            $('<?php /* @escapeNotVerified */ echo $_htmlId ?>_container').select('input', 'select').each(this.disableElement);
+                            $('<?php /* @escapeNotVerified */ echo $_htmlId ?>_container').up('table').select('button').each(this.disableElement);
+                            <?php else: ?>
+                            $('<?php /* @escapeNotVerified */ echo $_htmlId ?>_container').select('input', 'select').each(function (el) {
+                                Event.observe(el, 'change', el.setHasChanges.bind(el));
+                            });
+                            <?php endif; ?>
+
+                            var text = $('claro_attribute_row_'+data.index+'_default_text');
+                            var select = $('claro_attribute_row_'+data.index+'_default_select');
+                            claroAttributeControl.showDefault(data.index);
+                            if (data.default_value !== '') {
+                                select.value = data.default_value;
+                                text.value = data.default_value;
+
+                            }
+                        },
+                        disableElement: function (el) {
+                            el.disabled = true;
+                            el.addClassName('disabled');
+                        },
+                        deleteItem: function (event) {
+                            var tr = Event.findElement(event, 'tr');
+                            if (tr) {
+                                Element.remove(tr);
+                                // Hiding allows validations enabled.
+                                /*Element.select(tr, '.delete').each(function (elem) {
+                                    elem.value = '1'
+                                });
+                                Element.select(tr, ['input', 'select']).each(function (elem) {
+                                    elem.hide()
+                                });
+                                Element.hide(tr);
+                                Element.addClassName(tr, 'no-display template');*/
+                            }
+                            return false;
+                        },
+                        setClaroValues: function (e, index) {
+                            if (e.__proto__.hasOwnProperty('selectedIndex')) {
+                                var attribute = e.options[e.selectedIndex];
+                                var required = !empty(attribute.getAttribute('required')) ? attribute.getAttribute('required') : '0';
+                                var name = attribute.text;
+                                var id = attribute.value;
+                                var input_type = attribute.getAttribute('input_type') != null ? attribute.getAttribute('input_type') : 'text';
+                                var options = attribute.getAttribute('values') != null ? attribute.getAttribute('values') : '[]';
+                                $('claro_attribute_row_' + index + '_name').value = name;
+                                $('claro_attribute_row_' + index + '_id').value = id;
+                                $('claro_attribute_row_' + index + '_min_occurs').value = required;
+                                $('claro_attribute_row_' + index + '_input_type').value = input_type;
+                                $('claro_attribute_row_' + index + '_option_values').value = options;
+                                // Updating default
+                                this.showDefault(index);
+                            }
+                        },
+                        showDefault: function (index) {
+                            var type = 'text';
+                            var claroAttribute = $('claro_attribute_row_' + index + '_claro_attribute');
+                            var claroAttributeOptions = "";
+                            if (claroAttribute.selectedIndex >= 0) {
+                                claroAttributeOptions = claroAttribute.options[claroAttribute.selectedIndex]
+                                    .getAttribute('values');
+                                type = claroAttribute.options[claroAttribute.selectedIndex]
+                                    .getAttribute('input_type');
+                            }
+
+                            var select = $('claro_attribute_row_' + index + '_default_select');
+                            var text = $('claro_attribute_row_' + index + '_default_text');
+                            if (claroAttributeOptions !== "" && (type === "select")) {
+                                claroAttributeOptions = claroAttributeOptions.replace(/\n/g, '').replace(/EVOLATREE "EARRINGS"/g, 'EVOLATREE EARRINGS').replace(/EFACTORY-TABLET 7"/g, 'EFACTORY-TABLET 7');
+                                claroAttributeOptions = JSON.parse(claroAttributeOptions);
+                                if (claroAttributeOptions !== null && Object.keys(claroAttributeOptions).length > 0) {
+                                    // removing all options
+                                    while (select.options.length > 0) {
+                                        select.remove(0);
+                                    }
+
+                                    // add blank option
+                                    select.insert(new Element('option', {"value": ''}).update(' '));
+
+                                    // adding all options
+                                    for (var i = 0; i < Object.keys(claroAttributeOptions).length; i++) {
+                                        select.insert(new Element('option', {"value": claroAttributeOptions[i]['id']})
+                                            .update(claroAttributeOptions[i]['name']));
+                                    }
+
+                                    select.setAttribute('data-form-part', 'claro_profile_form');
+                                    select.enable();
+                                    select.show();
+                                    text.setAttribute('data-form-part', '');
+                                    text.disable();
+                                    text.hide();
+                                } else {
+                                    select.setAttribute('data-form-part', '');
+                                    select.disable();
+                                    select.hide();
+
+                                    text.setAttribute('data-form-part', 'claro_profile_form');
+                                    text.enable();
+                                    text.show();
+                                }
+                            } else {
+                                select.setAttribute('data-form-part', '');
+                                select.disable();
+                                select.hide();
+
+                                if (type === "numeric") {
+                                    text.setAttribute('type', 'number');
+                                } else if (type === "date") {
+                                    text.setAttribute('type', 'date');
+                                } else {
+                                    text.setAttribute('type', 'text');
+                                }
+                                text.setAttribute('data-form-part', 'claro_profile_form');
+                                text.enable();
+                                text.show();
+                            }
+                        }
+                    };
+                    <?php if (count($block->getMappedAttribute()) > 0 )
+                    foreach ($block->getMappedAttribute() as $id => $attribute):
+                        $value = $id;
+                        $name = $block->getAttributeName($attribute);
+                        $code = isset($attribute['magento_attribute_code']) ? $attribute['magento_attribute_code'] : "";
+                        $mandatory = isset($attribute['required']) ? $attribute['required'] : "0";
+                        $type = $block->getAttributeType($attribute);
+                        $options = json_encode($block->getAttributeOptions($attribute));
+                        $default = isset($attribute['default_value']) ? $attribute['default_value'] : "";
+                    ?>
+
+                    claroAttributeControl.addItem(
+                        '<?= $block->escapeHtml($value) ?>',
+                        '<?= $block->escapeHtml($name) ?>',
+                        '<?= $block->escapeHtml($code)?>',
+                        '<?= $block->escapeHtml($mandatory) ?>',
+                        '<?= $block->escapeHtml($type) ?>',
+                        '<?= $block->escapeHtml($options) ?>',
+                        '<?= $block->escapeHtml($default) ?>'
+                    );
+
+                    <?php endforeach; ?>
+
+                    <?php if ($_readonly): ?>
+
+                    $('<?php /* @escapeNotVerified */ echo $_htmlId ?>_container').up('table').select('button')
+                        .each(claroAttributeControl.disableElement);
+                    <?php endif; ?>
+
+                    window.claroAttributeControl = claroAttributeControl;
+    //]]>
+                });
+            </script>
+
+        </div>
+    </div>
+
+</div>

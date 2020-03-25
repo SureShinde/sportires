@@ -1,0 +1,27 @@
+<?php
+namespace  ITM\MagB1\Plugin;
+
+
+class OrderViewAuthorization
+{
+
+    protected $_helper;
+
+    public function __construct(
+        \ITM\MagB1\Helper\Data $helper
+    ) {
+        $this->_helper = $helper;
+    }
+
+    ////////////////////////////////////////// Not Applied Now /////////////////////////////
+    /**
+     * {@inheritDoc}
+     */
+    public function afterCanView(\Magento\Sales\Controller\AbstractController\OrderViewAuthorization $subject, $result,$order) {
+
+        if($this->_helper->canViewOrder($order)) {
+            return true;
+        }
+        return $result;
+    }
+}

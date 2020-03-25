@@ -1,0 +1,21 @@
+{
+    "name": "itm/module-main",
+    "description": "Main Module for MagB1",
+    "license": "OSL-3.0",
+    "authors": [
+        {
+           "homepage" : "https://www.itm-development.com/",
+            "name": "WH"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "ITM\\Main\\": ""
+        },
+        "files": [
+            "registration.php"
+        ]
+    }
+}

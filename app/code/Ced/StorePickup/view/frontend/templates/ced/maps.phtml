@@ -1,0 +1,92 @@
+<?php
+/**
+* CedCommerce
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the End User License Agreement (EULA)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* https://cedcommerce.com/license-agreement.txt
+*
+* @category    Ced
+* @package     Ced_StorePickup
+* @author      CedCommerce Core Team <connect@cedcommerce.com >
+* @copyright   Copyright CEDCOMMERCE (https://cedcommerce.com/)
+* @license      https://cedcommerce.com/license-agreement.txt
+*/
+    
+    $key = $block->getMapKey();
+    $markers = $block->getAllStoresMarker();
+
+?>
+
+<div id="googleMap" style="width:100%;height:400px;"></div>
+<input type="hidden" id="baseurl" value="<?php echo $block->getBaseUrl(); ?>">
+<script src="https://maps.googleapis.com/maps/api/js?callback=initMap&key=<?php echo $key ?>"
+        async defer>
+</script>
+<script type="text/javascript">
+	var markers = [
+	<?php foreach ($markers as $marker) : ?>
+	['<?php echo $marker['name'];?>',<?php echo $marker['lat'];?>,<?php echo $marker['long'];?>,<?php echo $marker['storeid'];?>
+        ,'<?php echo $marker['storemgrname'];?>','<?php echo $marker['storephone'];?>','<?php echo $marker['storeemail'];?>'],
+	<?php endforeach ?>
+	];
+</script>
+<script>
+function initMap() {
+    var mapkey = "<?php echo $key ?>";
+    if(!mapkey.length>0){
+        alert('You have to enter the Google MAP KEY');
+    }
+    //console.log(markers);
+	var map;
+    var bounds = new google.maps.LatLngBounds();
+    var mapOptions = {
+        mapTypeId: 'roadmap'
+    };
+    
+    map = new google.maps.Map(document.getElementById("googleMap"), mapOptions);
+    map.setTilt(45);                        
+    
+    var infoWindow = new google.maps.InfoWindow(), marker, i;
+ 
+    for( i = 0; i < markers.length; i++ ) {
+        var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
+        bounds.extend(position);
+        marker = new google.maps.Marker({
+            position: position,
+            map: map,
+            title: markers[i][0]
+        });
+
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+                infoWindow.setContent('<p><span><b>Store Name: </b>' +markers[i][0]+ '</span></p><p><span><b>Store Manager Name: </b>'
+                    +markers[i][4]+ '</span></p><span><b>Store Manager Email: </b>' +markers[i][6]+
+                    '</span></p><span><b>Store Manager Phone: </b>' +markers[i][5]+ '</span></p>');
+                infoWindow.open(map, marker);
+                jQuery("#carrier-store-list").val(markers[i][3]);
+                var getUrl = jQuery('#baseurl').val();
+            	var newUrl = getUrl + "/" + "storepick" + "/" + "getmap" + "/" + "view" + "/" + "storeId" + "/" + markers[i][3];  
+                jQuery.ajax({
+                    method: 'GET',
+                    dataType: 'html',
+                    url: newUrl,
+                }).success(function (result) {
+                    if(jQuery('#oneValue').length){
+                        jQuery('#oneValue').empty();
+                    }
+                    jQuery('#oneValue').append(result);
+                });
+            }
+        })(marker, i));
+
+        map.fitBounds(bounds);
+	}
+}
+/*myMap(markers);
+*/</script>
+
+<?php die();?>

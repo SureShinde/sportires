@@ -1,0 +1,26 @@
+<?php 
+//if($_product == null)
+ $_product = $block->getProduct(); 
+ $_url = $_product->getResource()->getAttribute('attr_3d_model')->getFrontend()->getValue($_product);
+
+?> 
+
+<?php if($_url!=null and $_url!='') :?>
+<div class="product attribute description" style="margin-top: 1em;">
+	<strong class="type">Vista en realidad virtual</strong>	
+	
+
+	<div class="sketchfab-embed-wrapper">
+    	<iframe 
+    		title="Vista en realidad virtual" 
+    		style="width: 100%" 
+    		height="500" 
+    		src="<?php echo $_url; ?>" 
+    		frameborder="0" 
+    		allow="autoplay; fullscreen; vr" 
+    		mozallowfullscreen="true" 
+    		webkitallowfullscreen="true"></iframe>
+	</div>
+
+</div>
+<?php endif ?>

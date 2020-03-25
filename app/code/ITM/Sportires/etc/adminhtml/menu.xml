@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Backend/etc/menu.xsd">
+    <menu>
+        <add id="itm_sportires::sportires" title="Sportires" module="ITM_Sportires" sortOrder="10" parent="itm::base"  resource="ITM_Sportires::main"/>
+        <add id="itm_sportires::sportires_vehicletire" title="Vehicle Tire" module="ITM_Sportires" sortOrder="10" parent="itm_sportires::sportires" action="itm_sportires/vehicletire/" resource="ITM_Sportires::main"/>
+    </menu>
+</config>

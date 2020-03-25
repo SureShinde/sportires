@@ -1,0 +1,383 @@
+<?php
+/**
+ * @var $block \ITM\Sportires\Block\Filterblock
+ *
+ */
+$makes = $block->getMakes();
+$categoryCollection = $block->getAutoCategories();
+?>
+
+<form data-mage-init='{"validation": {}}' class="form " action="<?= $this->getUrl("sportires/product/filterlist")?>" id="vehicle-form" method="get" autocomplete="off">
+    <input type="hidden" name="type" value="vehicle">
+    <fieldset class="fieldset">
+	
+        <div class="field required">
+            <div class="col-md-12 row">
+                
+				<div data-block="dropdown-make" class="col-auto col-md-6">
+                    <input readonly class="custom-select mr-sm-2 action" placeholder="<?= __("Select Make")?>" value="" name="vehicle1"  id="make" data-trigger="trigg1"  data-validate="{required:true}">
+					<input type="hidden" name="make" id="make-input" value data-validate="{required:true}">
+                </div> 
+				
+				<div  class="block block-container-make"  style="display:none"
+					 data-mage-init='{
+						"dropdownDialog": {
+							"appendTo": "[data-block=dropdown-make]", 
+							"triggerTarget":"[data-trigger=trigg1]",
+							"timeout": 2000,
+							"closeOnMouseLeave": false,
+							"closeOnEscape": true,
+							"autoOpen": false, 
+							"triggerClass": "active",
+							"parentClass": "active",
+						
+							"buttons": []
+						}
+					 }' > 
+					<div  id="option-container-make">
+						<span class="tittle"><?=__("Select Make")?></span>
+						<a title="Close" class="fancybox-item fancybox-close close fancybox-newsletter-close"></a>
+						<ul id="altselect-make" class="row altselect" >
+						<?php $i=1; ?>
+						<?php foreach ($makes as $item ):?> 
+						<li>
+							<span data-bind="<?= $item?>"><?= $item?></span>
+						</li>
+						<?php endforeach;?>
+						
+						</ul>
+					</div>  
+				</div> 
+			
+                <div data-block="dropdown-year" class="col-auto col-md-6">
+					<input readonly class="custom-select mr-sm-2 action" value = "" placeholder="<?= __("Select Year")?>"  name="vehicle2" id="year"  data-trigger="trigg2"  data-validate="{required:true}"    disabled>
+					<input type="hidden" id="year-input" name="year" value data-validate="{required:true}">
+
+                </div> 
+				
+				<div  class="block block-container-year"  style="display:none"
+					 data-mage-init='{
+						"dropdownDialog": {
+							"appendTo": "[data-block=dropdown-year]",
+							"triggerTarget":"[data-trigger=trigg2]",
+							"timeout": 2000,
+							"closeOnMouseLeave": false,
+							"closeOnEscape": true,
+							"autoOpen": false, 
+							"triggerClass": "active",
+							"parentClass": "active",
+						
+							"buttons": []
+						}
+					 }' > 
+					<div  id="option-container-year">
+						<span class="tittle"><?=__("Select Year")?></span>
+						<a title="Close" class="fancybox-item fancybox-close close fancybox-newsletter-close"></a>
+						<ul id="altselect-year" class="row altselect" >
+						
+						</ul>
+					</div>
+				</div>				 
+				
+            </div> 
+        </div>
+		
+		
+        <div class="field required">
+            <div class="col-md-12 row">
+               
+			   <div data-block="dropdown-model" class="col-auto col-md-6 select-container">
+					<input readonly class="custom-select mr-sm-2 action" value=""  placeholder="<?= __("Select Model")?>" id="model" name="vehicle3"  data-trigger="trigg3" data-validate="{required:true}" disabled>
+					<input type="hidden"  name="model" id="model-input" value data-validate="{required:true}">
+                </div>
+				
+				<div  class="block block-container-model"  style="display:none"
+					 data-mage-init='{
+						"dropdownDialog": {
+							"appendTo": "[data-block=dropdown-model]",
+							"triggerTarget":"[data-trigger=trigg3]",
+							"timeout": 2000,
+							"closeOnMouseLeave": false,
+							"closeOnEscape": true,
+							"autoOpen": false, 
+							"triggerClass": "active",
+							"parentClass": "active",
+						
+							"buttons": []
+						}
+					 }' > 
+					<div  id="option-container-model">
+						<span class="tittle"><?=__("Select Model")?></span>
+						<a title="Close" class="fancybox-item fancybox-close close fancybox-newsletter-close"></a>
+						<ul id="altselect-model" class="row altselect" >
+			
+						</ul> 
+					</div>
+				</div>				
+				
+                <div class="col-auto col-md-6" data-block="dropdown-trim" >
+					<input readonly class="custom-select mr-sm-2 action"  value="<?= __("Select Trim")?>"   id="trim" style="display: none" name="vehicle4"   data-validate="{required:true}" data-trigger="trigg4"  disabled>
+					<input type="hidden" name="trim" id="trim-input" value data-validate="{required:true}">
+
+                </div>
+				
+				<div  class="block block-container-trim"  style="display:none"
+					 data-mage-init='{
+						"dropdownDialog": {
+							"appendTo": "[data-block=dropdown-trim]",
+							"triggerTarget":"[data-trigger=trigg4]",
+							"timeout": 2000,
+							"closeOnMouseLeave": false,
+							"closeOnEscape": true,
+							"autoOpen": false, 
+							"triggerClass": "active",
+							"parentClass": "active",
+						
+							"buttons": [] 
+						}
+					 }' > 
+					<div  id="option-container-trim">
+						<span class="tittle"><?=__("Select Trim")?></span>
+						<a title="Close" class="fancybox-item fancybox-close close fancybox-newsletter-close"></a>
+						<ul id="altselect-trim" class="row altselect" >
+
+						</ul>
+					</div>
+				</div>				
+				
+            </div>
+        </div>
+
+
+        <div class="field required">
+            <div class="row col-md-12" style="padding-top: 15px;">
+                <div class="col-md-12">
+                    <b><?= __("Select What You're Shopping For")?></b>
+                </div>
+            </div>
+            <div class="row col-md-12" style="padding-top: 10px;">
+                <div class="col-md-12">
+                    <select class="custom-select mr-sm-2"  name="category" id="category" data-validate="{required:true}">
+                        <option value=""><?= __("Select Category")?></option>
+                        <?php foreach ($categoryCollection as $cat_id=>$item ):?>
+                            <option value="<?= $cat_id?>"><?= $item?></option>
+                        <?php endforeach;?>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <div class="row col-md-12">
+        <div class="col-md-12">
+            <button  type="submit" class="action submit primary btn col-md-12" title="<?php  echo __('View Results') ?>"><span><?php echo __('View Results') ?></span></button>
+        </div>
+    </div>
+</form>
+
+<script type="text/javascript">
+    require([
+        'jquery',
+        'mage/mage'
+    ], function($){
+
+
+		var dataForm = $('#vehicle-form');
+
+		dataForm.mage('validation', {});
+		
+	});
+		 
+
+
+</script>
+
+<script>
+require([
+        'jquery',
+            'jquery/ui'
+], function($){
+        jQuery(document).ready( function() {
+			
+
+			$(document).on('click', '#altselect-make span', function(){
+				$("#make-input").val($(this).data().bind);
+				$("#make").val($(this).data().bind);
+				$("#make-input").trigger("change");
+				
+				$("#altselect-make span").removeClass("selected");
+				$(this).addClass("selected");
+				$(".block-container-make").dropdownDialog("close");
+				$(".block-container-year").dropdownDialog("open");
+			});
+			
+			$(document).on('click', '#altselect-year span', function(){
+				$("#year-input").val($(this).data().bind);
+				$("#year").val($(this).data().bind);
+				$("#year-input").trigger("change");
+				
+				$("#altselect-year span").removeClass("selected");
+				$(this).addClass("selected");
+				$(".block-container-year").dropdownDialog("close");
+				$(".block-container-model").dropdownDialog("open");
+			});
+			$(document).on('click', '#altselect-model span', function(){
+				$("#model-input").val($(this).data().bind);
+				$("#model").val($(this).data().bind);
+				$("#model-input").trigger("change");
+				
+				$("#altselect-model span").removeClass("selected");
+				$(this).addClass("selected");
+				$(".block-container-model").dropdownDialog("close");
+				$(".block-container-trim").dropdownDialog("open");
+			
+
+			});
+			$(document).on('click', '#altselect-trim span', function(){
+				$("#trim-input").val($(this).data().bind);
+				$("#trim").val($(this).data().bind);
+			
+				$("#altselect-trim span").removeClass("selected");
+				$(this).addClass("selected");
+				$(".block-container-trim").dropdownDialog("close");
+				
+			});
+
+			$(".close").click(function(){
+				$(".block.ui-dialog-content").dropdownDialog("close");
+			});
+			
+			
+
+						
+			
+			var oldPageState = sessionStorage.getItem('oldState');
+			if (oldPageState) {
+			let make_label = $('#make');
+			let make_input = $('#make-input');
+			make_label.text('<?= __("Select Make")?>');
+			make_input.removeAttr("value");
+			
+			let trim_label= $('#trim');
+			trim_label.css("display", "none");
+			}
+			
+            // onchange make
+            $("#make-input").change(function(){
+				
+                var url= '<?php echo $this->getUrl("sportires/ajax/tireinfo",["type"=>"year","make"=>"_make"]) ?>';
+                var url = url.replace("_make", this.value);
+                
+				let year_label = $('#year');
+				let year_input = $('#year-input');
+                year_label.val('<?= __("Select Year")?>');
+				year_input.removeAttr("value");
+
+				
+                let model_label = $('#model');
+				let model_input = $('#model-input');
+                model_label.val('<?= __("Select Model")?>');
+				model_input.removeAttr("value");
+				model_label.prop('disabled','disabled');
+				
+				
+                let trim_label = $('#trim');
+				let trim_input= $('#trim-input');
+				trim_label.val('<?= __("Select Trim")?>');
+				trim_input.removeAttr("value");
+				
+
+ 
+				let yearoption= $('#altselect-year');
+				yearoption.empty();
+
+                $.getJSON(url, function (data) {
+                    $.each(data, function (key, entry) {
+						yearoption.append($('<li></li>').append($('<span></span>').attr('value', entry).text(entry).attr('data-bind', entry)));
+						year_label.prop('disabled',false);
+                    })
+                }); 
+
+				trim_label.css("display", "none");
+ 
+            });
+            // onchange year
+            $("#year-input").change(function(){
+                var url= '<?php echo $this->getUrl("sportires/ajax/tireinfo",["type"=>"model","make"=>"_make","year"=>"_year"]) ?>';
+
+                var url = url.replace("_year", this.value);
+                var url = url.replace("_make",  $("#make-input").val());
+
+				
+				let model_label = $('#model');
+				let model_input = $('#model-input');
+                model_label.text('<?= __("Select Model")?>');
+				model_input.removeAttr("value");
+				model_label.prop('disabled',false);
+				
+				let trim_label = $('#trim');
+				let trim_input= $('#trim-input');
+				trim_label.text('<?= __("Select Trim")?>');
+				trim_input.removeAttr("value");
+				trim_label.css("display", "none");
+
+
+
+				let modeloption= $('#altselect-model');
+				modeloption.empty();
+
+                $.getJSON(url, function (data) {
+                    $.each(data, function (key, entry) {
+						modeloption.append($('<li></li>').append($('<span></span>').attr('value', entry).text(entry).attr('data-bind', entry)));
+                    })
+                });
+            });
+            // onchange Model
+            $("#model-input").change(function(){
+                var url= '<?php echo $this->getUrl("sportires/ajax/tireinfo",["type"=>"trim","make"=>"_make","year"=>"_year","model"=>"_model"]) ?>';
+                var url = url.replace("_model", this.value);
+                var url = url.replace("_make",  $("#make-input").val());
+                var url = url.replace("_year",  $("#year-input").val());
+
+				
+				let trim_label = $('#trim');
+				let trim_input= $('#trim-input');
+				trim_label.text('<?= __("Select Trim")?>');
+				trim_input.removeAttr("value");
+
+				let trimoption= $('#altselect-trim');
+				trimoption.empty();
+				
+				
+				if($('#model-input').val() && $('#model-input').val() && $('#model-input').val()){
+					$('#vehicle-form button').prop('disabled',false);
+				}else{
+					$('#vehicle-form button').prop('disabled','disabled');
+				}
+				
+				
+                $.getJSON(url, function (data) {
+                    $.each(data, function (key, entry) {
+						trimoption.append($('<li></li>').append($('<span></span>').attr('value', entry).text(entry).attr('data-bind', entry)));
+
+                    })
+					if(data!="")
+					{
+						trim_label.prop("disabled", false);
+						trim_label.css("display", "block");
+					}
+					else{
+						trim_label.prop("disabled", true);
+						trim_label.css("display", "none");
+					}
+                });
+
+            });
+			
+
+			
+		
+			
+
+        });
+    });
+</script>

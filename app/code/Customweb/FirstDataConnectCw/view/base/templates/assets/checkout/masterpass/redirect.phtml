@@ -1,0 +1,12 @@
+<form action="<?php echo $url; ?>" name="process_form" method="post">
+	<p><?php echo $redirectionText; ?></p>
+	<?php echo $formData; ?>
+	<noscript>
+		<input class="button" type="submit" name="continue_button" value="Continue" />
+	</noscript>
+</form>
+<script type="text/javascript"> 
+window.onload = function(){
+	document.process_form.submit(); 
+};
+</script>

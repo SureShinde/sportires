@@ -1,0 +1,225 @@
+<?php
+$sHelper = $this->helper('ITM\Sportires\Helper\Data');
+$tire_width_collection  = $sHelper->getAttributeOptions("tire_width");
+$tire_ratio_collection  = $sHelper->getAttributeOptions("tire_ratio");
+$tire_diameter_collection  = $sHelper->getAttributeOptions("tire_diameter");
+
+?>
+<form data-mage-init='{"validation": {}}' class="form " action="<?= $this->getUrl("sportires/product/filterlist")?>" id="size-form" method="get" autocomplete="off">
+    <input type="hidden" name="type" value="size">
+
+    <fieldset class="fieldset">
+        <div class="field required">
+            <div class="row">
+				<div class="col-12 col-md-4 col-lg-4">
+					<label class="text-333"><?= __("Ancho")?> <span class="indicador">[A]</span>:</label>
+					<div data-block="dropdown-width" class="select-container">
+						<input readonly class="custom-select mr-sm-2 action"  value="" placeholder="<?= __("Elegir")?>"  id="tire_width" name="tire1" data-trigger="trig1"  data-validate="{required:true}" >
+						<input type="hidden" name="tire_width" id="width-input" value >
+					</div>
+					<div  class="block block-container-width"  style="display:none"
+						 data-mage-init='{
+							"dropdownDialog": {
+								"appendTo": "[data-block=dropdown-width]",
+								"triggerTarget":"[data-trigger=trig1]",
+								"timeout": 2000,
+								"closeOnMouseLeave": false,
+								"closeOnEscape": true,
+								"autoOpen": false, 
+								"triggerClass": "active",
+								"parentClass": "active",
+							
+								"buttons": []
+							}
+						 }' > 
+						<div  id="option-container-width">
+							<span class="tittle"><?=__("Ancho")?></span>
+						<a title="Close" class="fancybox-item fancybox-close close fancybox-newsletter-close"></a>
+							<ul id="altselect-width" class="row altselect" >
+									<li>
+										<span data-bind=""><?=__("None")?></span>
+									</li>
+							<?php foreach ($tire_width_collection as $item ):?>
+									<li>
+										<span data-bind="<?= $item["value"]?>"><?= $item["label"]?></span>
+									</li>
+							<?php endforeach;?>
+		
+							</ul>
+						</div>
+					</div> 
+				</div> 
+
+				<div class="col-12 col-md-4 col-lg-4">				
+					<label class="text-333"><?= __("Serie")?> <span class="indicador">[B]</span>:</label>
+					<div data-block="dropdown-ratio" class="select-container">
+						<input readonly class="custom-select mr-sm-2 action"  value="" placeholder="<?= __("Elegir")?>"  id="tire_ratio" name="tire2" data-trigger="trig2"  data-validate="{required:true}" >
+						<input type="hidden" name="tire_ratio" id="ratio-input" value >
+					</div>
+					<div  class="block block-container-ratio"  style="display:none"
+						 data-mage-init='{
+							"dropdownDialog": {
+								"appendTo": "[data-block=dropdown-ratio]",
+								"triggerTarget":"[data-trigger=trig2]",
+								"timeout": 2000,
+								"closeOnMouseLeave": false,
+								"closeOnEscape": true,
+								"autoOpen": false, 
+								"triggerClass": "active",
+								"parentClass": "active",
+							
+								"buttons": []
+							}
+						 }' > 
+						<div  id="option-container-ratio">
+							<span class="tittle"><?=__("Serie")?></span>
+						<a title="Close" class="fancybox-item fancybox-close close fancybox-newsletter-close"></a>
+							<ul id="altselect-ratio" class="row altselect" >
+									<li>
+										<span data-bind=""><?=__("None")?></span>
+									</li>
+							<?php foreach ($tire_ratio_collection as $item ):?>
+									<li>
+										<span data-bind="<?= $item["value"]?>"><?= $item["label"]?></span>
+									</li>
+							<?php endforeach;?>
+							</ul>
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-12 col-md-4 col-lg-4">				
+					<label class="text-333"><?= __("Rin")?> <span class="indicador">[C]</span>:</label>
+					<div data-block="dropdown-diameter" class="select-container">
+						<input readonly class="custom-select mr-sm-2 action" value="" placeholder="<?= __("Elegir")?>"  id="tire_diameter"  name="tire3" data-trigger="trig3"  data-validate="{required:true}" >
+						<input type="hidden" id="diameter-input" name="tire_diameter" value >
+					</div> 
+					<div  class="block block-container-diameter"  style="display:none"
+						 data-mage-init='{
+							"dropdownDialog": {
+								"appendTo": "[data-block=dropdown-diameter]", 
+								"triggerTarget":"[data-trigger=trig3]",
+								"timeout": 2000,
+								"closeOnMouseLeave": false,
+								"closeOnEscape": true,
+								"autoOpen": false, 
+								"triggerClass": "active",
+								"parentClass": "active",
+							
+								"buttons": []
+							}
+						 }' > 
+						<div  id="option-container-diameter">
+							<span class="tittle"><?=__("Rin")?></span>
+						<a title="Close" class="fancybox-item fancybox-close close fancybox-newsletter-close"></a>
+							<ul id="altselect-diameter" class="row altselect" >
+									<li>
+										<span data-bind=""><?=__("None")?></span>
+									</li>
+							<?php foreach ($tire_diameter_collection as $item ):?>
+											<li>
+												<span data-bind="<?= $item["value"]?>"><?= $item["label"]?></span>
+											</li>
+							<?php endforeach;?>
+							</ul> 
+						</div>
+					</div> 
+				</div>
+				
+				
+            </div>
+        </div>
+    </fieldset>
+	<input type="hidden" name="product_list_dir"  value="asc"> 
+	<div class="row mt-20"><div class="col-12 text-center"><img src="/pub/media/sportires/buscador/type_mark.png" alt="type_mark"></div></div>
+
+    <div class="row col-md-12" >
+        <div class="col-md-12">
+            <button type="submit" class="btn-spt-1 action submit primary btn col-md-12" title="<?php  echo __('View Results') ?>"><span><?php echo __('Buscar') ?></span></button>
+        </div>
+    </div>
+	
+	
+
+
+
+
+
+</form>
+<script type="text/javascript">
+    require([
+        'jquery',
+        'mage/mage'
+    ], function($){
+
+        var dataForm = $('#size-form');
+        dataForm.mage('validation', {});
+
+    });
+	
+</script>
+
+<script>
+    require(['jquery', 'jquery/ui'], function($){
+        jQuery(document).ready( function() {
+
+			
+			$(".close").click(function(){
+				$(".block.ui-dialog-content").dropdownDialog("close");
+			});
+			
+			$("#altselect-width span").click(function(){
+				$("#width-input").val($(this).data().bind);
+				$("#tire_width").val($(this).text());
+				$("#altselect-width span").removeClass("selected");
+				$(this).addClass("selected");
+				
+				localStorage.setItem("width",$(this).data().bind);
+				if($('div[data-block="dropdown-width"]  .mage-dropdown-dialog').css('display') == 'block')
+					$(".block-container-width").dropdownDialog("close");
+			});
+
+			$("#altselect-ratio span").click(function(){
+				$("#ratio-input").val($(this).data().bind);
+				$("#tire_ratio").val($(this).text());				
+				$("#altselect-ratio span").removeClass("selected");
+				$(this).addClass("selected");
+				
+				localStorage.setItem("ratio",$(this).data().bind);
+				if($('div[data-block="dropdown-ratio"]  .mage-dropdown-dialog').css('display') == 'block')
+					$(".block-container-ratio").dropdownDialog("close");
+			});
+			
+			$("#altselect-diameter span").click(function(){
+				$("#diameter-input").val($(this).data().bind);
+				$("#tire_diameter").val($(this).text());
+				$("#altselect-diameter span").removeClass("selected");
+				$(this).addClass("selected");
+				
+				localStorage.setItem("diameter",$(this).data().bind);
+				if($('div[data-block="dropdown-diameter"]  .mage-dropdown-dialog').css('display') == 'block')
+				$(".block-container-diameter").dropdownDialog("close"); 
+			});
+			
+        });
+    });
+
+				
+				
+</script>
+<script>
+    require(['jquery', 'jquery/ui'], function($){
+        jQuery(".itm.filterproducts-tab-main .mage-dropdown-dialog").ready( function() {
+			
+			if(localStorage.getItem("width")){
+				$("#altselect-width span[data-bind='"+localStorage.getItem('width')+"']").trigger('click');
+			}
+			if(localStorage.getItem("ratio")){
+				$("#altselect-ratio span[data-bind='"+localStorage.getItem('ratio')+"']").trigger('click');
+			}
+			if(localStorage.getItem("diameter")){
+				$("#altselect-diameter span[data-bind='"+localStorage.getItem('diameter')+"']").trigger('click');
+			}
+		});
+    });
+</script>

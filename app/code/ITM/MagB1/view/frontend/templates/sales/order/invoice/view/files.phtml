@@ -1,0 +1,48 @@
+<?php $_order = $block->getOrder() ?>
+<?php $_magb_helper = $this->helper('ITM\MagB1\Helper\Data'); ?>
+
+<?php $customer_id = $_order->getCustomerId();?>
+<?php foreach ($_order->getInvoiceCollection() as $_invoice): ?>
+<?php 
+$increment_id = $_invoice->getIncrementId();
+$files = $_magb_helper->getInvoiceFiles($customer_id, $increment_id);
+$type ="sales_invoice";
+?>
+<?php if(count($files) == 0) continue ; ?>
+<div class="block block-order-details-view">
+    <div class="block-title">
+        <strong><?php  echo __('Files for Invoice %1',$increment_id) ?></strong>
+    </div>
+    <div class="block-content">
+   	<ul style=" list-style-type: none;">
+	   	<?php foreach ($files as $file): ?>
+   		 <?php 
+   		 $file_info = pathinfo ($file["path"]);
+   		 $ext = "";
+   		 if(isset($file_info['extension'])) {
+   		     $ext =  $file_info['extension'];
+   		 }
+   		 ?>
+   		 <li style="float: left ;  margin:10px;text-align:center">
+   		 <a target="_blank" href="<?php echo $this->getUrl('magb1/download/index',["type"=>$type,"id" =>$file["entity_id"]]); ?>">
+   		 <img width=40 src="<?php echo $block->getViewFileUrl('ITM_MagB1::images/'.$ext.'.png'); ?>" title="<?php echo $file["path"]?> " alt="<?php echo $file["path"]?> " />
+   		 <?php //echo $file["path"]?> 
+   		 </a>
+   		
+   		<?php if(!empty($file["description"])):?>
+   			<div>
+   			<a target="_blank" href="<?php echo $this->getUrl('magb1/download/index',["type"=>$type,"id" =>$file["entity_id"]]); ?>">
+   				<?php echo $file["description"];?>
+   			 </a>
+   			</div>
+   		<?php endif;?>
+   		</li>
+   		
+   		<?php endforeach; ?>
+   	</ul>
+    </div>
+</div>    
+
+
+<?php endforeach; ?>
+

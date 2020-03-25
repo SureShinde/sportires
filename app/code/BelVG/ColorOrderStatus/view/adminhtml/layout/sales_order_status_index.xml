@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!--
+ * BelVG LLC.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
+ *
+ ********************************************************************
+ * @category   BelVG
+ * @package    BelVG_ColorOrderStatus
+ * @copyright  Copyright (c) BelVG LLC. (http://www.belvg.com)
+ * @license    http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
+ -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+
+        <referenceBlock name="sales_order_status.grid.columnSet">
+            <block class="BelVG\ColorOrderStatus\Block\Status\Grid\Column\Color"
+                   name="sales_order_status.grid.columnSet.color" before="unassign" as="color">
+                <arguments>
+                    <argument name="header" xsi:type="string" translate="true">Color</argument>
+                    <argument name="index" xsi:type="string">color</argument>
+                    <argument name="type" xsi:type="string">text</argument>
+                    <argument name="sortable" xsi:type="string">0</argument>
+                    <argument name="filter" xsi:type="string">0</argument>
+                    <argument name="column_css_class" xsi:type="string">col-actions</argument>
+                    <argument name="header_css_class" xsi:type="string">col-actions</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+
+    </body>
+</page>

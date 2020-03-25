@@ -1,0 +1,318 @@
+{
+  "id": 1860209084,
+  "date_created": "2018-11-15T00:23:38.000-04:00",
+  "date_closed": "2018-11-15T00:23:41.000-04:00",
+  "last_updated": "2018-11-15T00:23:41.000-04:00",
+  "manufacturing_ending_date": null,
+  "feedback": {
+    "sale": null,
+    "purchase": null
+  },
+  "mediations": [],
+  "comments": null,
+  "pickup_id": null,
+  "order_request": {
+    "return": null,
+    "change": null
+  },
+  "fulfilled": null,
+  "total_amount": 548,
+  "total_amount_with_shipping": 548,
+  "paid_amount": 548,
+  "taxes": {
+    "amount": null,
+    "currency_id": null
+  },
+  "coupon": {
+    "id": null,
+    "amount": 0
+  },
+  "expiration_date": "2018-12-13T00:23:41.000-04:00",
+  "order_items": [
+    {
+      "item": {
+        "id": "MLM647069245",
+        "title": "Funda Zizo Bolt Iphone Xs Max Negro/negro Cristal Y Clip",
+        "category_id": "MLM167442",
+        "variation_id": null,
+        "seller_custom_field": "02_02516",
+        "variation_attributes": [],
+        "warranty": null,
+        "condition": "new",
+        "seller_sku": null
+      },
+      "quantity": 1,
+      "unit_price": 100.00,
+      "full_unit_price": 100.00,
+      "currency_id": "MXN",
+      "manufacturing_days": null
+    }
+  ],
+  "currency_id": "MXN",
+  "payments": [
+    {
+      "id": 4292713668,
+      "order_id": 1859283509,
+      "payer_id": 27402748,
+      "collector": {
+        "id": 10169526
+      },
+      "card_id": 8566235291,
+      "site_id": "MLM",
+      "reason": "Funda Zizo Bolt Iphone Xs Max Negro/negro Cristal Y Clip",
+      "payment_method_id": "visa",
+      "currency_id": "MXN",
+      "installments": 1,
+      "issuer_id": "158",
+      "atm_transfer_reference": {
+        "company_id": null,
+        "transaction_id": null
+      },
+      "coupon_id": null,
+      "activation_uri": null,
+      "operation_type": "regular_payment",
+      "payment_type": "credit_card",
+      "available_actions": [
+        "refund"
+      ],
+      "status": "approved",
+      "status_code": null,
+      "status_detail": "accredited",
+      "transaction_amount": 548,
+      "taxes_amount": 0,
+      "shipping_cost": 0,
+      "coupon_amount": 0,
+      "overpaid_amount": 0,
+      "total_paid_amount": 548,
+      "installment_amount": 548,
+      "deferred_period": null,
+      "date_approved": "2018-11-15T00:23:41.000-04:00",
+      "authorization_code": "305525",
+      "transaction_order_id": null,
+      "date_created": "2018-11-15T00:23:39.000-04:00",
+      "date_last_modified": "2018-11-15T00:23:41.000-04:00"
+    }
+  ],
+  "shipping": {
+    "id": 27737259548,
+    "mode": "me2",
+    "created_by": "receiver",
+    "order_id": 1859283509,
+    "order_cost": 548,
+    "base_cost": 98,
+    "site_id": "MLM",
+    "status": "ready_to_ship",
+    "substatus": "ready_to_print",
+    "status_history": {
+      "date_cancelled": null,
+      "date_delivered": null,
+      "date_first_visit": null,
+      "date_handling": "2018-11-15T00:23:43.000-04:00",
+      "date_not_delivered": null,
+      "date_ready_to_ship": "2018-11-15T00:23:44.000-04:00",
+      "date_shipped": null,
+      "date_returned": null
+    },
+    "date_created": "2018-11-15T00:23:38.000-04:00",
+    "last_updated": "2018-11-15T00:23:44.000-04:00",
+    "tracking_number": "783786646395",
+    "tracking_method": "FedEx Express Saver",
+    "service_id": 511,
+    "carrier_info": null,
+    "sender_id": 10169526,
+    "sender_address": {
+      "id": 154392260,
+      "address_line": "Calzada del Valle 605",
+      "street_name": "Calzada del Valle",
+      "street_number": "605",
+      "comment": "Referencia Local TODOparaSMARTPHONES Entre Olmos Y Ebanos (local Todoparasmartphones)",
+      "zip_code": "66268",
+      "city": {
+        "id": "TUxNQ1NBTjQ0Mjg",
+        "name": "San Pedro Garza García"
+      },
+      "state": {
+        "id": "MX-NLE",
+        "name": "Nuevo León"
+      },
+      "country": {
+        "id": "MX",
+        "name": "Mexico"
+      },
+      "neighborhood": {
+        "id": null,
+        "name": "Valle de Santa Engracia"
+      },
+      "municipality": {
+        "id": null,
+        "name": "San Pedro Garza García"
+      },
+      "agency": null,
+      "types": [
+        "billing",
+        "default_buying_address",
+        "default_selling_address",
+        "shipping"
+      ],
+      "latitude": 25.659892,
+      "longitude": -100.384591,
+      "geolocation_type": "RANGE_INTERPOLATED"
+    },
+    "receiver_id": 27402748,
+    "receiver_address": {
+      "id": 187156074,
+      "address_line": "TRES NORTE 123",
+      "street_name": "TRES NORTE",
+      "street_number": "123",
+      "comment": "Referencia: Portón Color Chocolate Entre: Martires De Cananea (indeco)",
+      "zip_code": "86017",
+      "city": {
+        "id": "TUxNQ0NFTjAwMDA",
+        "name": "Centro"
+      },
+      "state": {
+        "id": "MX-TAB",
+        "name": "Tabasco"
+      },
+      "country": {
+        "id": "MX",
+        "name": "Mexico"
+      },
+      "neighborhood": {
+        "id": null,
+        "name": "FRACC. SAN ANGEL"
+      },
+      "municipality": {
+        "id": null,
+        "name": "Centro"
+      },
+      "agency": null,
+      "types": [
+        "default_buying_address"
+      ],
+      "latitude": 18.015403,
+      "longitude": -92.897208,
+      "geolocation_type": "ROOFTOP",
+      "receiver_name": "RAUL ALONSO JIMENEZ MOSCOSO",
+      "receiver_phone": "9931261818"
+    },
+    "shipping_items": [
+      {
+        "id": "MLM647069245",
+        "description": "Funda Zizo Bolt Iphone Xs Max Negro/negro Cristal Y Clip",
+        "quantity": 1,
+        "dimensions": "1.0x5.0x10.0,30.0",
+        "dimensions_source": {
+          "id": "MLM167442",
+          "origin": "categories"
+        }
+      }
+    ],
+    "shipping_option": {
+      "id": 535757286,
+      "shipping_method_id": 501245,
+      "name": "Estándar a domicilio",
+      "currency_id": "MXN",
+      "cost": 0,
+      "delivery_type": "estimated",
+      "list_cost": 0,
+      "estimated_delivery_time": {
+        "type": "known_frame",
+        "date": "2018-11-20T00:00:00.000-06:00",
+        "unit": "hour",
+        "offset": {
+          "date": "2018-11-21T00:00:00.000-06:00",
+          "shipping": 24
+        },
+        "time_frame": {
+          "from": null,
+          "to": null
+        },
+        "pay_before": null,
+        "shipping": 48,
+        "handling": 24,
+        "schedule": null
+      },
+      "estimated_schedule_limit": {
+        "date": null
+      },
+      "estimated_handling_limit": {
+        "date": "2018-11-15T00:00:00.000-06:00"
+      },
+      "estimated_delivery_final": {
+        "date": "2018-12-20T00:00:00.000-06:00",
+        "offset": 480
+      },
+      "estimated_delivery_limit": {
+        "date": "2018-12-06T00:00:00.000-06:00",
+        "offset": 264
+      },
+      "estimated_delivery_extended": {
+        "date": "2018-11-27T00:00:00.000-06:00",
+        "offset": 96
+      }
+    },
+    "comments": null,
+    "date_first_printed": null,
+    "market_place": "MELI",
+    "return_details": null,
+    "tags": [],
+    "type": "forward",
+    "application_id": null,
+    "return_tracking_number": null,
+    "cost_components": {
+      "special_discount": 0,
+      "loyal_discount": 1,
+      "compensation": 0
+    },
+    "logistic_type": "drop_off",
+    "substatus_history": [],
+    "delay": []
+  },
+  "status": "paid",
+  "status_detail": null,
+  "tags": [
+    "not_delivered",
+    "paid"
+  ],
+  "buyer": {
+    "id": 27402748,
+    "nickname": "RAUJIMENEZMOSCOSO",
+    "email": "rjimene.lzdltb+2-oge4dkojshaztknbt@mail.mercadolibre.com.mx",
+    "phone": {
+      "area_code": "9933",
+      "extension": "",
+      "number": "591101",
+      "verified": false
+    },
+    "alternative_phone": {
+      "area_code": "",
+      "extension": "",
+      "number": ""
+    },
+    "first_name": "RAUL ALONSO",
+    "last_name": "JIMENEZ MOSCOSO",
+    "billing_info": {
+      "doc_type": null,
+      "doc_number": null
+    }
+  },
+  "seller": {
+    "id": 10169526,
+    "nickname": "TODOPARASMARTPHONES",
+    "email": "lchapa.08dgqhw+2-oge4dkojshaztkmzz@mail.mercadolibre.com.mx",
+    "phone": {
+      "area_code": "81",
+      "extension": "",
+      "number": "11581555",
+      "verified": false
+    },
+    "alternative_phone": {
+      "area_code": "81",
+      "extension": "",
+      "number": "1158 1666"
+    },
+    "first_name": "LEOBARDO",
+    "last_name": "CHAPA"
+  }
+}', true

@@ -1,0 +1,17 @@
+<?php
+$_objectManager = \Magento\Framework\App\ObjectManager::getInstance(); //instance of\Magento\Framework\App\ObjectManager
+$storeManager = $_objectManager->get('Magento\Store\Model\StoreManagerInterface'); 
+$currentStore = $storeManager->getStore();
+$mediaUrl = $currentStore->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+    
+	
+ $attValue = $block->getmarka(); 
+ // add filter 
+ $attValue = str_replace(' ', '', $attValue);
+ $attValue = strtolower($attValue);
+ $attValue = preg_replace('/[^\00-\255]+/u', '', $attValue);
+ $attValue = preg_replace('/[^A-Za-z\-]/', '', $attValue);
+?>
+<?php if($attValue!=null and $attValue!='') :?>
+<img src="<?php echo $mediaUrl .'itm/sportires/product/barnds/'. $attValue . '.png '; ?>" alt="brands">
+ <?php endif ?>

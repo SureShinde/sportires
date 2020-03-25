@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement(EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category  Ced
+ * @package   Ced_Claro
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright Copyright CEDCOMMERCE(http://cedcommerce.com/)
+ * @license   http://cedcommerce.com/license-agreement.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+	<default>
+		<claro>
+			<settings>
+				<enable>1</enable>
+				<currency>USD</currency>
+				<storeid>0</storeid>
+			</settings>
+			<product>
+				<chunk_settings>
+					<product_upload>30</product_upload>
+					<product_description_update>30</product_description_update>
+					<product_delete>30</product_delete>
+				</chunk_settings>
+				<inventory_settings>
+					<zero_inventory_condition>skip</zero_inventory_condition>
+					<advanced_threshold_status>0</advanced_threshold_status>
+				</inventory_settings>
+			</product>
+			<order>
+				<to_be_agreed>1</to_be_agreed>
+				<auto_invoice>0</auto_invoice>
+				<auto_cancellation>0</auto_cancellation>
+				<order_id_prefix>CLARO</order_id_prefix>
+				<order_notify_email_enable>0</order_notify_email_enable>
+				<enable_default_customer>0</enable_default_customer>
+			</order>
+			<developer>
+				<debug_mode>1</debug_mode>
+				<logging_level>200</logging_level>
+			</developer>
+		</claro>
+		<carriers>
+			<shipbyclaro>
+				<active>1</active>
+				<sallowspecific>0</sallowspecific>
+				<name>Claro Shipping Method(Default)</name>
+				<title>Claro Shipping Method</title>
+				<model>Ced\Claro\Model\Carrier\Claro</model>
+			</shipbyclaro>
+		</carriers> 
+		<payment>
+			<paybyclaro>
+				<active>1</active>
+				<model>Ced\Claro\Model\Payment\Claro</model>
+				<order_status>Processing</order_status>
+				<title>Claro Payment Method(Default)</title>
+				<payment_action>sale</payment_action>
+				<allowspecific>0</allowspecific>
+			</paybyclaro>
+    </payment>
+  </default> 
+</config>

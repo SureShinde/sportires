@@ -1,0 +1,31 @@
+/**
+ * Copyright © 2017 x-mage2(Yosto). All rights reserved.
+ * See README.md for details.
+ */
+.yosto-mpa-modal-slide .modal-slide {
+    left: 50%;
+}
+
+.yosto-mpa-modal-slide  select#select-categories,
+.yosto-mpa-modal-slide  select#select-category {
+    width: 100%;
+}
+.yosto-mpa-modal-slide  select#select-categories {
+    min-height: 300px;
+}
+
+.massaction-form-error {
+    display: none;
+    color: red;
+    font-style: italic;
+}
+.category-chooser {
+    margin-left: 10px;
+}
+.replace-category {
+    display: inline-flex;
+    align-items:center;
+}
+.replace-category-error {
+    text-align: right;
+}

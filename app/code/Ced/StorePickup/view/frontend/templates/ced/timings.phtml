@@ -1,0 +1,42 @@
+<?php 
+/**
+* CedCommerce
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the End User License Agreement (EULA)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* https://cedcommerce.com/license-agreement.txt
+*
+* @category    Ced
+* @package     Ced_StorePickup
+* @author      CedCommerce Core Team <connect@cedcommerce.com >
+* @copyright   Copyright CEDCOMMERCE (https://cedcommerce.com/)
+* @license      https://cedcommerce.com/license-agreement.txt
+*/
+
+	$timings = $block->getTimings();
+if(isset($timings)){
+?>
+
+	<div id="storetime">
+		<span>
+			<h3><?php echo __('Store Opening Time :'); ?></h3>
+		</span>
+		<span id="s_name"><?php echo $timings['opening']; ?></span>
+		<span>
+			<h3><?php echo __('Store Closing Time :'); ?></h3>
+		</span>
+		<span id="s_name"><?php echo $timings['closing']; ?></span>
+		<span>
+			<h3><?php echo __('Interval :'); ?></h3>
+		</span>
+		<span id="s_name"><?php echo $timings['interval']; ?><?php echo __(' min.'); ?></span>
+	</div>
+<?php }else{ ?>
+		<span>
+			<h3><?php echo __('Store is closed on this day.'); ?></h3>
+		</span>
+<?php } ?>		
+<?php die; ?>

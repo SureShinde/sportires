@@ -1,0 +1,194 @@
+<div class='firstdata'>
+<?php
+    $requestArray = $this->getFormFields();
+    $gatewayUrl = $requestArray['url'];
+    $redirectUrl = $requestArray['rurl'];
+    $oid = $requestArray['oid'];
+    $auth_ux = $requestArray['auth_ux'];
+    $skip_card = $requestArray['skip_card'];
+
+    $post_vars = $block->getRequest()->getParams();
+
+    // Validate Hidden Auth
+    $errorMsg = "";
+    if (!empty($post_vars) && isset($post_vars['cc_submit'])) {
+        if (!preg_match("/^([0-9]{14,19})$/", $post_vars['ipg_cc_number'])
+                || !preg_match("/^([0-9]{2})$/", $post_vars['ipg_cc_exp_month'])
+                || !preg_match("/^([0-9]{4})$/", $post_vars['ipg_cc_exp_year'])
+                || !preg_match("/^([0-9]{2,4})$/", $post_vars['ipg_cc_cid'])
+        ) {
+            $errorMsg .= __("Invalid card detail.") . "<br/>";
+        }
+
+        if (($post_vars['ipg_cc_exp_month'] < date("m") && $post_vars['ipg_cc_exp_year'] < date("Y")) || $post_vars['ipg_cc_exp_year'] < date("Y")) {
+            $errorMsg .= __("Invalid expiry month & year detail.") . "<br/>";
+        }
+    }   
+    $html   = '<link rel="stylesheet" type="text/css" href="'.$block->getViewFileUrl('Firstdata_Gateway::css/ipg.css').'">';
+    $html  .= '<div id="payment_form_ipgcheckout_shared">';
+    // Gateway form post
+    if (
+            (!empty($post_vars) && isset($post_vars['cc_submit']) && $errorMsg == "")
+            || $requestArray['pay_type'] != "newpayment"
+            || ($auth_ux == 'hosted' || ($auth_ux == 'hidden' && !$skip_card))
+    ) {
+        // add spin image            
+        $html .= '<div style="width: 500px; margin: auto; margin-top: 20px; text-align: center;">                    
+                    <center><img src="'.$block->getViewFileUrl('Firstdata_Gateway::images/spinner.gif').'"><br/>'.__('You will be redirected to FirstData Gateway in a few seconds...').'</center>
+                </div>';
+              
+        $html .= '<form action="' . "" . $gatewayUrl . '" method="post" name="vm_ipg_form" id="ipgcheckout_shared_checkout" >';
+        $html .= '<input type="hidden" name="timezone" value="' . $requestArray['timezone'] . '">';
+        $html .= '<input type="hidden" name="oid" value="' . $oid . '" />';
+        $html .= '<input type="hidden" name="txntype" value="' . $requestArray['txntype'] . '">';
+        $html .= '<input type="hidden" name="txndatetime" value="' . $requestArray['datetime'] . '" />';
+        $html .= '<input type="hidden" name="hash" value="' . $requestArray['hash'] . '" />';
+        $html .= '<input type="hidden" name="language" value="' . $requestArray['language'] . '" />';
+        $html .= '<input type="hidden" name="bcompany" value="' . $requestArray['bill_company'] . '" />';
+        $html .= '<input type="hidden" name="bname" value="' . $requestArray['bill_name'] . '" />';
+        $html .= '<input type="hidden" name="baddr1" value="' . $requestArray['bill_address1'] . '" />';
+        $html .= '<input type="hidden" name="baddr2" value="' . $requestArray['bill_address2'] . '" />';
+        $html .= '<input type="hidden" name="bcity" value="' . $requestArray['bill_city'] . '" />';
+        $html .= '<input type="hidden" name="bstate" value="' . $requestArray['bill_state'] . '" />';
+        $html .= '<input type="hidden" name="bcountry" value="' . $requestArray['bill_country'] . '" />';
+        $html .= '<input type="hidden" name="bzip" value="' . $requestArray['bill_zipcode'] . '" />';
+        $html .= '<input type="hidden" name="phone" value="' . $requestArray['bill_phone'] . '" />';
+        $html .= '<input type="hidden" name="fax" value="' . $requestArray['bill_fax'] . '" />';
+        $html .= '<input type="hidden" name="email" value="' . $requestArray['email'] . '" />';
+
+        //if($requestArray['mode'] == 'fullpay'){
+        $html .= '<input type="hidden" name="sname" value="' . $requestArray['ship_name'] . '" />';
+        $html .= '<input type="hidden" name="saddr1" value="' . $requestArray['ship_address1'] . '" />';
+        $html .= '<input type="hidden" name="saddr2" value="' . $requestArray['ship_address2'] . '" />';
+        $html .= '<input type="hidden" name="scity" value="' . $requestArray['ship_city'] . '" />';
+        $html .= '<input type="hidden" name="sstate" value="' . $requestArray['ship_state'] . '" />';
+        $html .= '<input type="hidden" name="scountry" value="' . $requestArray['ship_country'] . '" />';
+        $html .= '<input type="hidden" name="szip" value="' . $requestArray['ship_zipcode'] . '" />';
+        //}
+  
+        $html .= '<input type="hidden" name="authenticateTransaction" value="' . $requestArray['authenticateTransaction'] . '">';
+        $html .= '<input type="hidden" name="currency" value="' . $requestArray['currency'] . '">';
+        $html .= '<input type="hidden" name="storename" value="' . $requestArray['storeid'] . '">';
+        $html .= '<input type="hidden" name="chargetotal" value="' . $requestArray['amount'] . '">';
+        $html .= '<input type="hidden" name="responseSuccessURL" value="' . $requestArray['surl'] . '"/>';
+        $html .= '<input type="hidden" name="transactionNotificationURL" value="' . $requestArray['nurl'] . '"/>';
+        $html .= '<input type="hidden" name="responseFailURL" value="' . $requestArray['furl'] . '"/>';
+        $html .= '<input type="hidden" name="checkoutoption" value="' . $requestArray['checkoutoption'] . '"/>';
+
+        if ($requestArray['checkoutoption'] == "classic") {
+            $html .='<input type="hidden" name="mode" value="' . $requestArray['mode'] . '"/>';
+        }
+
+        if (!empty($requestArray['dynamicMerchantName'])) {
+            $html .='<input type="hidden" name="dynamicMerchantName" value="' . $requestArray['dynamicMerchantName'] . '"/>';
+        }
+        $html .='<input type="hidden" name="dccSkipOffer" value="' . $requestArray['dccSkipOffer'] . '"/>';
+
+        // Tokenisation
+        if ($requestArray['assignToken'] == 1) {
+            if ($requestArray['pay_type'] == "newpayment") {
+                $html .='<input type="hidden" name="assignToken" value="true">';
+            } else {
+                $html .='<input type="hidden" name="hosteddataid" value="' . $requestArray['pay_type'] . '">';
+                $html .='<input type="hidden" name="hostedstoreid" value="' . $requestArray['storeid'] . '">';
+            }
+        }
+
+        // EMI
+        if ($requestArray['pay_mode'] == "installment") {
+            $html .='<input type="hidden" name="numberOfInstallments" value="' . $requestArray['numberOfInstallments'] . '">';
+
+            //Sending delaymonths(period) and interst for fdmexico reseller
+            if ($requestArray['ipg_country'] == "mex" && $requestArray['ipg_reseller'] == "firstdatamexico") {
+                if ($requestArray['installmentDelayMonths'] != "") {
+                    $html .='<input type="hidden" name="installmentDelayMonths" value="' . $requestArray['installmentDelayMonths'] . '">';
+                }
+
+                if ($requestArray['installmentsInterest'] == 1) {
+                    $html .='<input type="hidden" name="installmentsInterest" value="true">';
+                } else {
+                    $html .='<input type="hidden" name="installmentsInterest" value="false">';
+                }
+            }
+        }
+
+        // Auth UX
+        if (!empty($post_vars) && $requestArray['pay_type'] == "newpayment" && $auth_ux == "hidden" && $skip_card) {
+            $html .='<input type="hidden" name="full_bypass" value="true">';
+            $html .='<input type="hidden" name="cardnumber" value="' . $post_vars['ipg_cc_number'] . '">';
+            $html .='<input type="hidden" name="expmonth" value="' . $post_vars['ipg_cc_exp_month'] . '">';
+            $html .='<input type="hidden" name="expyear" value="' . $post_vars['ipg_cc_exp_year'] . '">';
+            $html .='<input type="hidden" name="cvm" value="' . $post_vars['ipg_cc_cid'] . '">';
+            if (isset($post_vars['ipg_cc_type']) && $post_vars['ipg_cc_type'] != "") {
+                $html .='<input type="hidden" name="cardFunction" value="' . $post_vars['ipg_cc_type'] . '"/>';
+            }
+        }
+
+        //  Local / Alternative
+        if ($requestArray['payment_method'] != "") {
+            $html .='<input type="hidden" name="paymentMethod" value="' . $requestArray['payment_method'] . '">';
+
+            // Sending semail to IPG for indian merchants with netbanking enabled
+            if ($requestArray['semail'] != '') {
+                $html .='<input type="hidden" name="semail" value="' . $requestArray['semail'] . '">';
+            }
+        }
+
+        $html .= '</form>';
+        $html.= '<script type="text/javascript">document.getElementById("ipgcheckout_shared_checkout").submit();</script>';
+            
+    } else {
+        
+        $html .= '<p class="ipg_card_title">'.__('Pay with Card').'</p>';
+        $html .= '<span class="ipg_error_msg">' . $errorMsg .'</span>';
+        $html .= '<form action="'. $redirectUrl . '" method="post" name="vm_ipg_form" id="ipgcheckout_shared_checkout" >';
+        $html .= '<ul id="ipg_cc_form">';
+
+        if($requestArray['card_function'] == true){
+            $html .= '<li>                            
+                        <label for="ipg_cc_type" class="required">' . __('Credit/Debit') . '</label>
+                        <div class="input-box">
+                            <select id="ipg_cc_type" name="ipg_cc_type" class="ipgctype">
+                                <option value="credit">' . __('Credit') . '</option>
+                                <option value="debit">' . __('Debit') . '</option>
+                            </select>
+                        </div>
+                    </li>';
+        }
+
+        $html .= '<li>                            
+                    <label for="ipg_cc_number" class="required">' . __('Card Number') . '</label>
+                    <div class="input-box">
+                        <input type="text" placeholder="' . __('Credit Card Number') . '" id="ipg_cc_number" name="ipg_cc_number" title="' . __('Card Number') . '" class="input-text ipgccard" value="" />
+                    </div>
+                </li>
+                <li id="ipg_cc_type_exp_div">
+                    <label for="ipg_expiration" class="required">' . __('Expiration Date') . '</label>
+                    <div class="input-box">
+                        <div class="v-fix">                
+                            <input type="text" placeholder="MM" maxlength="2"  id="ipg_expiration_month" name="ipg_cc_exp_month" title="' . __('Expiration Date') . '" class="input-text ipgmonth" value="" />
+                        </div>
+                        <div class="v-fix">                              
+                            <input type="text" placeholder="YYYY" maxlength="4" id="ipg_expiration_year" name="ipg_cc_exp_year" title="' . __('Expiration Month') . '" class="input-text ipgyear" value="" />
+                        </div>
+                    </div>
+                </li>        
+                <li id="ipg_cc_type_cvv_div">
+                    <label for="ipg_cc_cid" class="required">' . __('Card Verification Number') . '</label>
+                    <div class="input-box">
+                        <div class="v-fix">
+                            <input type="password" placeholder="CVV" maxlength="4" id="ipg_cc_cid" name="ipg_cc_cid" title="' . __('Card Verification Number') . '" class="input-text ipgcvv" value="" />
+                        </div>            
+                    </div>
+                </li>
+                <li id="ipg_button_div">
+                    <div class="actions">                                
+                        <input type="submit" name="cc_submit" class="action primary" value="' . __('Continue') . '">
+                    </div>                      
+                </li>';
+        $html .= '</ul></form>';
+    } 
+    // Disply form, dont remove or comment
+    echo $html;
+    ?>
+</div>

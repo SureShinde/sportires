@@ -1,0 +1,136 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_StorePickup
+ * @author      CedCommerce Core Team <connect@cedcommerce.com >
+ * @copyright   Copyright CEDCOMMERCE (https://cedcommerce.com/)
+ * @license      https://cedcommerce.com/license-agreement.txt
+ */
+$storecity = $block->getStoreCity();
+$storestate = $block->getStoreState();
+$storeCountry = $block->getStoreCountryName();
+$storeZipcode = $block->getStorePincode();
+$offDays = $block->getStoreOffDays();
+
+?>
+
+<div id="mapView">
+    <div id="storedetails">
+        <p>
+		<span>
+			<strong><?php echo __('Store Name :'); ?></strong>
+		</span>
+            <span id="s_name" value="<?php echo $block->getStoreName(); ?>"><?php echo $block->getStoreName(); ?></span>
+            <input type="hidden" name="store_name" value="<?php echo $block->getStoreName(); ?>">
+        </p>
+        <?php if (!empty($block->getStoreManagerName())) { ?>
+            <p>
+			<span>
+				<strong><?php echo __('Store Manager Name :'); ?></strong>
+			</span>
+                <span id="s_name"
+                      value="<?php echo $block->getStoreManagerName(); ?>"><?php echo $block->getStoreManagerName(); ?></span>
+                <input type="hidden" name="store_mgr_name" value="<?php echo $block->getStoreManagerName(); ?>">
+            </p>
+        <?php } ?>
+        <p>
+		<span>
+			<strong><?php echo __('Store Address :'); ?></strong>
+		</span>
+            <span id="address_name"
+                  value="<?php echo $block->getStoreAddress(); ?>"><?php echo $block->getStoreAddress(); ?></span>
+            <input type="hidden" name="store_address" value="<?php echo $block->getStoreAddress(); ?>">
+        </p>
+        <p>
+            <span id="city_name"
+                  value="<?php echo $block->getStoreCity(); ?>"><?php echo $block->getStoreCity(); ?></span>
+            <input type="hidden" name="store_city" value="<?php echo $block->getStoreCity(); ?>">
+            <?php if (isset($storestate)) { ?>
+                <span id="state_name" value="<?php echo $storestate; ?>">,<?php echo $storestate; ?></span>
+                <input type="hidden" name="store_state" value="<?php echo $storestate; ?>">
+            <?php } ?>
+            <span id="s_zipcd" value="<?php echo $storeZipcode; ?>">-<?php echo $storeZipcode; ?></span>
+            <input type="hidden" name="store_zipcode" value="<?php echo $storeZipcode; ?>">
+        </p>
+        <p>
+            <span id="s_country" value="<?php echo $storeCountry; ?>"><?php echo $storeCountry; ?></span>
+            <input type="hidden" name="store_country" value="<?php echo $storeCountry; ?>">
+        </p>
+        <p>
+		<span>
+			<strong><?php echo __('Store Contact :'); ?></strong>
+		</span>
+            <span id="address_name"
+                  value="<?php echo $block->getContactNumber(); ?>"><?php echo $block->getContactNumber(); ?></span>
+            <input type="hidden" name="store_address" value="<?php echo $block->getContactNumber(); ?>">
+        </p>
+    </div>
+
+    <!--<div>
+		<span>
+			<strong><?php /*echo __('Select Date'); */ ?></strong>
+		</span>
+		<input type="text" class="input-text" id="calendar_inputField" style="width: 40%" name="store_pckp_date" readonly />
+	</div>
+	<div id="storeTime">-->
+
+</div>
+</div>
+<script>
+    require([
+        "jquery",
+        "mage/calendar",
+    ], function ($) {
+        var offdays = new Array();
+        <?php foreach($offDays as $val){ ?>
+        offdays.push('<?php echo $val; ?>');
+        <?php } ?>
+
+        $("#calendar_inputField").datepicker({
+            buttonText: "<?php echo __('Select Date') ?>",
+            dateFormat: 'dd-mm-yy',
+            minDate: 0
+        });
+
+
+    });
+</script>
+<script type="text/javascript">
+    require([
+        "jquery",
+        "mage/url",
+        "mage/calendar",
+    ], function ($, url) {
+        $("#calendar_inputField").change(function () {
+            $(':input[type="submit"]').prop('disabled', true);
+            var storepcpdate = $('#calendar_inputField').val();
+            var newUrl = url.build('storepick/getday/days/storepkp_date/') + storepcpdate;
+            $.ajax({
+                method: 'GET',
+                dataType: 'html',
+                url: newUrl,
+            }).success(function (result) {
+                if ($('#storeTime').length) {
+                    $('#storeTime').empty();
+                }
+                if (result.indexOf('closed') != -1) {
+                    $(':input[type="submit"]').prop('disabled', true);
+                } else {
+                    $(':input[type="submit"]').prop('disabled', false);
+                }
+                $('#storeTime').append(result);
+
+            });
+        })
+    });
+</script>
+<?php die; ?>

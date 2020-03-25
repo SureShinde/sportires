@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!--
+/**
+  * CedCommerce
+  *
+  * NOTICE OF LICENSE
+  *
+  * This source file is subject to the End User License Agreement (EULA)
+  * that is bundled with this package in the file LICENSE.txt.
+  * It is also available through the world-wide-web at this URL:
+  * http://cedcommerce.com/license-agreement.txt
+  *
+  * @category    Ced
+  * @package     Ced_Claro
+  * @author      CedCommerce Core Team <connect@cedcommerce.com>
+  * @copyright   Copyright CEDCOMMERCE (http://cedcommerce.com/)
+  * @license     http://cedcommerce.com/license-agreement.txt
+  */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!--TODO: check usability-->
+    <type name="Ced\Claro\Ui\DataProvider\Profile\Products">
+        <arguments>
+            <argument name="addFieldStrategies" xsi:type="array">
+                <item name="websites" xsi:type="object">Magento\Catalog\Ui\DataProvider\Product\AddWebsitesFieldToCollection</item>
+            </argument>
+            <argument name="addFilterStrategies" xsi:type="array">
+                <item name="store_id" xsi:type="object">Magento\Catalog\Ui\DataProvider\Product\AddStoreFieldToCollection</item>
+                <item name="category" xsi:type="object">Ced\Claro\Ui\DataProvider\Product\AddCategoryToCollection</item>
+            </argument>
+            <argument name="collectionFactory" xsi:type="object">\Magento\Catalog\Ui\DataProvider\Product\ProductCollectionFactory</argument>
+        </arguments>
+    </type>
+    <virtualType name="Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\Pool" type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="ced_claro" xsi:type="array">
+                    <item name="class" xsi:type="string">Ced\Claro\Ui\DataProvider\Product\Form\Modifier\Claro</item>
+                    <item name="sortOrder" xsi:type="number">10000</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <!--Proxies-->
+    <preference for="Ced\Claro\Api\ProfileRepositoryInterface"
+                type="Ced\Claro\Repository\Profile" />
+    <preference for="Ced\Claro\Api\Data\ProfileInterface"
+                type="Ced\Claro\Model\Profile" />
+    <preference for="Ced\Claro\Api\Data\ProfileSearchResultsInterface"
+                type="Ced\Claro\Repository\Profile\SearchResults" />
+</config>

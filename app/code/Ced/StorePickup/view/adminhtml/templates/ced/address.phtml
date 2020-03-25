@@ -1,0 +1,116 @@
+<?php
+/**
+* CedCommerce
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the End User License Agreement (EULA)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* https://cedcommerce.com/license-agreement.txt
+*
+* @category    Ced
+* @package     Ced_StorePickup
+* @author      CedCommerce Core Team <connect@cedcommerce.com >
+* @copyright   Copyright CEDCOMMERCE (https://cedcommerce.com/)
+* @license      https://cedcommerce.com/license-agreement.txt
+*/
+
+$key = $block->getMapKey();
+?>
+<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=<?php echo $key ?>" type="text/javascript"></script>
+
+<script>
+require([
+         'jquery',
+         'mage/mage'
+     ], function($){
+        $('#page_store_address').after($('<div class="maplocation" id ="loactaiononmap"><span><?php echo __('If Not found location')?></span><a id="location" onclick="showMap()" href="#"> Click Here </a><span><?php echo __('to get it on map')?></span></div>'))
+        });
+</script>
+<script type="text/javascript">
+    function initialize() {
+        var input = document.getElementById('page_store_address');
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        google.maps.event.addListener(autocomplete, 'place_changed', function () {
+            var place = autocomplete.getPlace();
+            document.getElementById('page_latitude').value = place.geometry.location.lat();
+            document.getElementById('page_longitude').value = place.geometry.location.lng();
+        });
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+
+
+     function initializeMap() {
+        var mapOptions = {
+            center: new google.maps.LatLng(18.9300, 72.8200),
+            zoom: 3,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var infoWindow = new google.maps.InfoWindow();
+        var latlngbounds = new google.maps.LatLngBounds();
+        var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
+        map.setOptions({ minZoom: 2 });
+        google.maps.event.addListener(map, 'click', function (e) {
+             document.getElementById('page_latitude').value = e.latLng.lat();
+             document.getElementById('page_longitude').value = e.latLng.lng();
+             jQuery('.search_form').hide();
+             jQuery('.search_form_overlay').hide();
+        });
+    }
+    function showMap(){
+            jQuery(".search_form").show();
+            initializeMap();
+            jQuery('.search_form_overlay').show();
+        } 
+    function closeSearch(){
+        jQuery(".search_form").hide();
+        jQuery('.search_form_overlay').hide();
+    }
+</script>
+ <div class = "search_form" style="display:none;">
+    <div id="dvMap" style="width: 1000px; height: 500px;"></div>
+    <span class="close_search" onclick="closeSearch()" style="cursor:pointer;">X</span>
+</div>
+<div class="search_form_overlay" style="display:none"></div>   
+<style>
+.search_form_overlay {
+    background-color: #000;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 9;
+} 
+ .search_form {
+    clear: both;
+    left: 16%;
+    position: fixed;
+    top: 9%;
+    width: 65%;
+    z-index: 99;
+
+} 
+ #dvMap {
+    background: #fff none repeat scroll 0 0;
+    padding: 10px 15px;
+} 
+.close_search {
+    font-weight: bold;
+    position: absolute;
+    right: -118px;
+    top: 4px; 
+}
+.close_search {
+    background: #000;
+    color: #fff;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    text-align: center;
+    display: inline-block;
+    font-size: 11px;
+    line-height: 30px;
+}
+    </style>
