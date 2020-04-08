@@ -10,3 +10,11 @@ app/bootstrap.php
 composer.json
 composer.lock
 index.php
+
+.github/
+.htaccess
+.htaccess.sample
+.php_cs.dist
+.travis.yml
+.user.ini
+app/code/Openpay/
