@@ -6741,7 +6741,7 @@
 "Integration '%1' has been sent for activation.","Integración '%1' ha sido enviado para la activación.",module,Magento_Integration
 "A consumer with ""%1"" ID doesn't exist. Verify the ID and try again.","A consumer with ""%1"" ID doesn't exist. Verify the ID and try again.",module,Magento_Integration
 "title","título",module,Magento_Integration
-"The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later.","The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later.",module,Magento_Integration
+"The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later.","El acceso de tu cuenta es incorrecto o ha sido temporalmente deshabitado. Por favor espera y prueba de nuevo más tarde.",module,Magento_Integration
 "This user has no tokens.","Este usuario no tiene tokens.",module,Magento_Integration
 "The tokens couldn't be revoked.","The tokens couldn't be revoked.",module,Magento_Integration
 "An error occurred during the attempt to grant permissions. For details, see the exceptions log.","An error occurred during the attempt to grant permissions. For details, see the exceptions log.",module,Magento_Integration
@@ -13461,7 +13461,7 @@ Ahora puede seleccionar la fecha de caducidad que desee.",module,Magento_Negotia
 "email","correo electrónico",module,Magento_User
 "password","contraseña",module,Magento_User
 "username","usuario",module,Magento_User
-"The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later.","The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later.",module,Magento_User
+"The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later.","El acceso de tu cuenta es incorrecto o ha sido temporalmente deshabitado. Por favor espera y prueba de nuevo más tarde.",module,Magento_User
 "More permissions are needed to access this.","More permissions are needed to access this.",module,Magento_User
 "Your account is temporarily disabled. Please try again later.","Your account is temporarily disabled. Please try again later.",module,Magento_User
 """User Name"" is required. Enter and try again.","""User Name"" is required. Enter and try again.",module,Magento_User
@@ -14356,3 +14356,18 @@ Ahora puede seleccionar la fecha de caducidad que desee.",module,Magento_Negotia
 "View and edit cart","Ver el carrito"
 "Tires Search","Búsqueda de llantas"
 "The requested qty is not available","La cantidad solicitada no se encuentra disponible, favor de verificar el stock disponible"
+Register,Registrate
+"You have successfully logged in.","Has iniciado sesión correctamente."
+"You have successfully logged out.","Has terminado sesión correctamente."
+"Click here to view","Clic para ver mapa."
+"_________________________________________________________________","____________TRADUCCIONES BLOG"
+"Search The Blog","Buscar en el Blog"
+"Find some...","Buscar algo"
+"Recent Posts","Entradas recientes"
+"No comments","Sin comentarios"
+"Your name","Tu Nombre"
+"Your e-mail","Tu e-mail"
+"Text your comment...","Deja tu comentario..."
+"Post comment","Comentar"
+"Related Posts","Entradas relacionadas"
+"Did you like this post?","Dale like a nuestro POST"

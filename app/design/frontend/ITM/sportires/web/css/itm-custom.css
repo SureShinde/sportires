@@ -2674,7 +2674,7 @@ max-width: 100% !important;
 	} 
 }
 em.michelin{
-    background-image: url(/pub/media/wysiwyg/marca/michelin.png);
+    background-image: url(../images/marca/michelin.png);
     height: 80px;
     display: block;
     background-size: contain;
@@ -2682,7 +2682,7 @@ em.michelin{
 	background-position: center;
 }
 em.bfg{
-    background-image: url(/pub/media/wysiwyg/marca/bfg.png);
+    background-image: url(../images/marca/bfg.png);
     height: 80px;
     display: block;
     background-size: contain;
@@ -2698,7 +2698,7 @@ em.bridgestone{
 	background-position: center;
 }
 em.continental{
-    background-image: url(/pub/media/wysiwyg/marca/continental.png);
+    background-image: url(../images/marca/continental.png);
     height: 80px;
     display: block;
     background-size: contain;
@@ -2706,7 +2706,7 @@ em.continental{
 	background-position: center;
 }
 em.pirelli{
-    background-image: url(/pub/media/wysiwyg/marca/pirelli.png);
+    background-image: url(../images/marca/pirelli.png);
     height: 80px;
     display: block;
     background-size: contain;
@@ -2714,7 +2714,7 @@ em.pirelli{
 	background-position: center;
 }
 em.winda{
-    background-image: url(/pub/media/wysiwyg/marca/winda.png);
+    background-image: url(../images/marca/winda.png);
     height: 80px;
     display: block;
     background-size: contain;
@@ -2722,7 +2722,7 @@ em.winda{
 	background-position: center;
 }
 em.dunlop{
-    background-image: url(/pub/media/wysiwyg/marca/dunlop.png);
+    background-image: url(../images/marca/dunlop.png);
     height: 80px;
     display: block;
     background-size: contain;
@@ -2730,7 +2730,7 @@ em.dunlop{
 	background-position: center;
 }
 em.uniroyal{
-    background-image: url(/pub/media/wysiwyg/marca/uniroyal.png);
+    background-image: url(../images/marca/uniroyal.png);
     height: 80px;
     display: block;
     background-size: contain;
@@ -2738,7 +2738,7 @@ em.uniroyal{
 	background-position: center;
 }
 em.firestone{
-    background-image: url(/pub/media/wysiwyg/marca/firestone.png);
+    background-image: url(../images/marca/firestone.png);
     height: 80px;
     display: block;
     background-size: contain;
@@ -3094,7 +3094,7 @@ span.wtsap {
 	padding-right: 5px;
 }
 .runflat-filter{
-	margin-right: 20%;
+	margin-right: 30%;
 	display: block;
 	text-align: right;
 	margin-bottom: -61px;

@@ -98,7 +98,7 @@ $blockObj= $block->getLayout()->createBlock('Magento\Catalog\Block\Product\View\
         <div class="actions">
             <button type="submit"
                     title="<?php /* @escapeNotVerified */ echo $buttonTitle ?>"
-                    class="action primary tocart"
+                    class="action primary tocart addToCartInDetail"
                     id="product-addtocart-button"
 					> 
                 <span><?php /* @escapeNotVerified */ echo $buttonTitle ?></span>
@@ -128,6 +128,25 @@ $blockObj= $block->getLayout()->createBlock('Magento\Catalog\Block\Product\View\
     ], function ($) {
         'use strict';
 
+        /*$('#product_addtocart_form').on('click',function(){
+
+
+            gtag("event",  "addToCart",  {
+              "currency": "MXN",
+              "value": 92,
+              "items": [{
+                "id": "<?= $_product->getId(); ?>",
+                "name": "<?= $_product->getName(); ?>",
+                "price": "<?= number_format($_product->getFinalPrice(),2,'.',''); ?>",
+                "brand": "<?= $_product->getAttributeText('autos_marcas'); ?>",
+                "category": "<?= $_product->getAttributeText('autos_marcas'); ?>",
+                "list_position": 0
+              }]
+            });
+
+
+
+        });*/
         $('#product_addtocart_form').mage('validation', {
             radioCheckboxClosest: '.nested',
             submitHandler: function (form) {
@@ -217,5 +236,25 @@ require([
         var currentdatetime=date.getFullYear()+"-"+(month+1)+"-"+date.getDate()+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
         showRemaining(currentdatetime);
     }, 1000);
+});
+</script>
+<script>
+// Add Producto al carrito
+dataLayer.push({
+  'event': 'addToCart',
+  'ecommerce': {
+    'currencyCode': 'MXN',
+    'add': {
+      'products': [{
+        'name': '<?= $_product->getName(); ?>',
+        'id': '<?= $_product->getId(); ?>',
+        'price': '<?= number_format($_product->getFinalPrice(),2,'.',''); ?>',
+        'brand': '<?= $_product->getAttributeText('autos_marcas'); ?>',
+        'category': '<?= $_product->getAttributeText('autos_marcas'); ?>',
+        'sku': '<?= $_product->getSku(); ?>',
+        'quantity': 1
+       }]
+    }
+  }
 });
 </script>

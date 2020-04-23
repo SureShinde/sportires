@@ -4,7 +4,7 @@ require([
 function($) {
   "use strict";
 
-    const store = '/pub/media/sportires/map/stores.json';
+    const store = 'pub/media/sportires/map/stores.json';
 
     jQuery(document).ready(function($){
 

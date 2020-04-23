@@ -155,18 +155,18 @@ $lazy_owl = $this->getData("lazy_owl");
                                              </div>       
 											<!-- ITM adding the quantity -->
                                             <?php if(isset($_category_config['qty_field']) && $_category_config['qty_field']):?>
-                                                <div class="qty-box">
+                                                <!--div class="qty-box">
                                                     <a href="javascript:void(0)" class="qtyminus"><i class="porto-icon-minus"></i></a>
                                                     <input type="text" name="qty" id="qty" maxlength="12" value="<?php /* @escapeNotVerified */ echo $block->getProductDefaultQty() * 1 ?>" title="<?php /* @escapeNotVerified */ echo __('Qty') ?>" class="input-text qty" data-validate="<?php echo $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"/>
                                                     <a href="javascript:void(0)" class="qtyplus"><i class="porto-icon-plus"></i></a>
-                                                </div>
+                                                </div-->
                                             <?php endif;?>
                                             <?php echo $block->getBlockHtml('formkey')?>
-                                            <button type="submit"
+                                            <!--button type="submit"
                                                     title="<?php echo $block->escapeHtml(__('Add to Cart')); ?>"
                                                     class="action tocart primary" > 
                                                 <span><?php echo __('Add to Cart') ?></span>
-                                            </button>
+                                            </button-->
                                         </form> 
                                     <?php else: ?>
                                         <?php if ($_product->getIsSalable()): ?>
@@ -216,8 +216,8 @@ $lazy_owl = $this->getData("lazy_owl");
                         <strong class="product name product-item-name">
                             <a class="product-item-link"
                                href="<?php echo $_product->getProductUrl() ?>">
-                                <?php echo $_helper->productAttribute($_product, $_product->getName(), 'name'); ?>
-                            </a>
+                               <strong><?php echo $_product->getAttributeText('manufacturer').'<br>'.$_product->getAttributeText('modelos').'<br>'.$_product->getAttributeText('tire_size');//echo $_helper->productAttribute($_product, $_product->getName(), 'name'); ?>
+                            </strong></a>
                         </strong>
                         <?php endif;?>
                         <?php //$_category_config['rating_star'] = "";  //disabled at the moment ?>
@@ -243,8 +243,8 @@ $lazy_owl = $this->getData("lazy_owl");
                             <strong class="product name product-item-name">
                                 <a class="product-item-link"
                                    href="<?php echo $_product->getProductUrl() ?>">
-                                    <?php echo $_helper->productAttribute($_product, $_product->getName(), 'name'); ?>
-                                </a>
+                                   <strong><?php echo $_product->getAttributeText('manufacturer').'<br>'.$_product->getAttributeText('modelos').'<br>'.$_product->getAttributeText('tire_size');//echo $_helper->productAttribute($_product, $_product->getName(), 'name'); ?>
+                                </strong></a>
                             </strong>
                         <?php endif;?>
                         <?php if ($showDescription):?>
@@ -295,25 +295,26 @@ $lazy_owl = $this->getData("lazy_owl");
 														<?php 
 															$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
 															$StockState = $objectManager->get('\Magento\CatalogInventory\Api\StockStateInterface');
-															echo $StockState->getStockQty($_product->getId(), $_product->getStore()->getWebsiteId());
+															$stockNumber = $StockState->getStockQty($_product->getId(), $_product->getStore()->getWebsiteId());
+                                                            echo ((integer)$stockNumber >= 8)?8:$stockNumber;
 														?>
 													</span>
                                              </div>       
 											<!-- ITM adding the quantity -->
                                             <?php if(isset($_category_config['qty_field']) && $_category_config['qty_field']):?>
-                                                <div class="qty-box">
+                                                <!--div class="qty-box">
                                                     <a href="javascript:void(0)" class="qtyminus"><i class="porto-icon-minus"></i></a>
                                                     <input type="text" name="qty" id="qty" maxlength="12" value="<?php /* @escapeNotVerified */ echo $block->getProductDefaultQty() * 1 ?>" title="<?php /* @escapeNotVerified */ echo __('Qty') ?>" class="input-text qty" data-validate="<?php echo $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"/>
                                                     <a href="javascript:void(0)" class="qtyplus"><i class="porto-icon-plus"></i></a>
-                                                </div>
+                                                </div-->
                                             <?php endif;?>
                                             <?php echo $block->getBlockHtml('formkey')?>
 	
-                                            <button type="submit"
+                                            <!--button type="submit"
                                                     title="<?php echo $block->escapeHtml(__('Add to Cart')); ?>"
                                                     class="action tocart primary" >
                                                 <span><?php echo __('Add to Cart') ?></span>
-                                            </button>
+                                            </button-->
                                         </form>
                                     <?php else: ?>
                                         <?php if ($_product->getIsSalable()): ?>

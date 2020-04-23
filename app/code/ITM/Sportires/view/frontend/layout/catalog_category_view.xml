@@ -4,8 +4,8 @@
 		<referenceContainer name="page.top">
 			<block as="newsearch" class="ITM\Sportires\Block\Newsearch" name="newsearch" template="ITM_Sportires::newsearch.phtml" before="breadcrumbs" />
 		</referenceContainer>
-		<referenceContainer name="content">
+		<!--referenceContainer name="content">
 			<block as="runflatfilter" class="ITM\Sportires\Block\Runflatfilter" name="runflatfilter" template="ITM_Sportires::runflatfilter.phtml" />
-		</referenceContainer>
+		</referenceContainer-->
 	</body>
 </page>

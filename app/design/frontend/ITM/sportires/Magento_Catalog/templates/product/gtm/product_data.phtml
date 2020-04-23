@@ -1,0 +1,53 @@
+<?php
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+
+/** @var $block \Magento\Catalog\Block\Product\View */
+
+//$_product = $block->getProduct(); 
+
+?>
+<script>
+// Add Producto al carrito
+/*dataLayer.push({
+  'event': 'addToCart',
+  'ecommerce': {
+    'currencyCode': 'MXN',
+    'add': {
+      'products': [{
+        'name': '<?= $_product->getName(); ?>',
+        'id': '<?= $_product->getId(); ?>',
+        'price': '<?= number_format($_product->getFinalPrice(),2,'.',''); ?>',
+        'brand': '<?= $_product->getAttributeText('autos_marcas'); ?>',
+        'category': '<?= $_product->getAttributeText('autos_marcas'); ?>',
+        'sku': '<?= $_product->getSku(); ?>',
+        'quantity': 1
+       }]
+    }
+  }
+});
+</script>
+<script>
+/*dataLayer.push({
+  'ecommerce': {
+    'detail': {
+      'actionField': {'detail': 'Detalle del Producto'},   
+      'products': [{
+        'name': '<?= $_product->getName(); ?>',
+    	'id': '<?= $_product->getId(); ?>',
+    	'price': '<?= number_format($_product->getFinalPrice(),2,'.',''); ?>',
+    	'brand': '<?= $_product->getAttributeText('autos_marcas'); ?>',
+    	'category': '<?= $_product->getAttributeText('autos_marcas'); ?>',
+    	'sku': '<?= $_product->getSku(); ?>',
+       }]
+     }
+   }
+});
+</script>
+
+
