@@ -326,7 +326,8 @@
 		</div>
 		<div class="search_header  col-xs-3 col-sm-5 col-md-3">
 		 <?php echo $this->getChildHtml("top.search"); ?>
-		 <div class="mobile_only_minicart">
+         <?php //echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Amasty_SocialLogin::social.phtml")->toHtml(); ?>
+ 		 <div class="mobile_only_minicart">
 			<?php echo $this->getChildHtml("minicart"); ?> 
 		</div>
 		</div>

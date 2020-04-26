@@ -22,12 +22,12 @@
         </referenceContainer>
     	<referenceBlock name="header.links">
             <block class="Magento\Framework\View\Element\Html\Link" name="custom-link" cacheable="false">
-            <arguments>
+            <!--arguments>
                 <argument name="label" xsi:type="string" translate="true">Whatsapp: (55) 36-55-84-44</argument>
                 <argument name="path" xsi:type="string" translate="true">https://api.whatsapp.com/send?phone=5215536558444</argument>
                 <argument name="target" xsi:type="string">_blank</argument>
                 <argument name="css_class" xsi:type="string">icon_spt_whats</argument>
-            </arguments>
+            </arguments-->
             </block>
         </referenceBlock>
 
