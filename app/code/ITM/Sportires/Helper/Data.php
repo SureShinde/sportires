@@ -43,6 +43,10 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     }
     public function getSizes($make, $year, $model, $trim)
     {
+	$writer = new \Zend\Log\Writer\Stream(BP . '/var/log/filter-search.log');
+	$logger = new \Zend\Log\Logger();
+	$logger->addWriter($writer);
+
         $collection = $this->_collectionFactory->create();
         $poductReource = $this->productFactory->create();
 
@@ -56,6 +60,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         $collection->addFieldtoSelect("front_ratio");
         $collection->addFieldtoSelect("rear_diameter");
         $collection->addFieldtoSelect("front_diameter");
+	$logger->info('QUERY');
         $options = [];
 
         $attribute = $poductReource->getAttribute("tire_size");
@@ -78,7 +83,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
                 "size_option_id" =>  $attribute->getSource()->getOptionId($rear_tire_size)
             ];
         }
-
+	$logger->info('ARRAY'.print_r($options,true));
         return $options;
     }
 }
