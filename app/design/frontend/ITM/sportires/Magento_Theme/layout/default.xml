@@ -2,13 +2,13 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd"> 
     <body>    
         <!-- GTM -->
-        <referenceBlock name="head.additional">
+        <!--referenceBlock name="head.additional">
             <block class="Magento\Framework\View\Element\Template" name="gtm.head" before="-" template="Magento_Theme::html/gtm_head.phtml" />
         </referenceBlock>
 
         <referenceContainer name="after.body.start">
             <block class="Magento\Framework\View\Element\Template" name="gtm.body" before="-" template="Magento_Theme::html/gtm_body.phtml" />
-        </referenceContainer>
+        </referenceContainer-->
 
 		<referenceContainer name="top.search">
             <container name="customer.login.am-social-below_login" htmlTag="div" htmlClass="am-sl-login-page" before="-">

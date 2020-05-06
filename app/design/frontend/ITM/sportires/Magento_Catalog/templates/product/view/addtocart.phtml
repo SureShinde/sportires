@@ -128,34 +128,6 @@ $blockObj= $block->getLayout()->createBlock('Magento\Catalog\Block\Product\View\
     ], function ($) {
         'use strict';
 
-$('#product_addtocart_form').on('click',function(){
-
-    ga('ec:addProduct',{
-        'id': '<?= $_product->getId(); ?>', // Product ID/SKU - Type: string
-        'name': '<?= $_product->getName(); ?>', // Product name - Type: string
-        'category': '<?= $_product->getAttributeText('autos_marcas'); ?>', // Product category - Type: string
-        'brand': '<?= $_product->getAttributeText('autos_marcas'); ?>', // Product brand - Type: string
-        'price': <?= number_format($_product->getFinalPrice(),2,'.',''); ?>, // Product price - Type: numeric
-        'quantity': 1 // Product quantity - Type: numeric
-    });
-
-ga('ec:setAction', 'add'); // measure product add to cart
-ga('send', 'event', 'eCommerce', 'addProduct', '<?= $_product->getName(); ?>'); // Send 'add to cart' using an event.
-
-            /*gtag("event",  "addToCart",  {
-              "currency": "MXN",
-              "value": 92,
-              "items": [{
-                "id": "<?= $_product->getId(); ?>",
-                "name": "<?= $_product->getName(); ?>",
-                "price": "<?= number_format($_product->getFinalPrice(),2,'.',''); ?>",
-                "brand": "<?= $_product->getAttributeText('autos_marcas'); ?>",
-                "category": "<?= $_product->getAttributeText('autos_marcas'); ?>",
-                "list_position": 0
-              }]
-            });*/
-});
-
         $('#product_addtocart_form').mage('validation', {
             radioCheckboxClosest: '.nested',
             submitHandler: function (form) {
@@ -246,24 +218,4 @@ require([
         showRemaining(currentdatetime);
     }, 1000);
 });
-</script>
-<script>
-// Add Producto al carrito
-/*dataLayer.push({
-  'event': 'addToCart',
-  'ecommerce': {
-    'currencyCode': 'MXN',
-    'add': {
-      'products': [{
-        'name': '<?= $_product->getName(); ?>',
-        'id': '<?= $_product->getId(); ?>',
-        'price': '<?= number_format($_product->getFinalPrice(),2,'.',''); ?>',
-        'brand': '<?= $_product->getAttributeText('autos_marcas'); ?>',
-        'category': '<?= $_product->getAttributeText('autos_marcas'); ?>',
-        'sku': '<?= $_product->getSku(); ?>',
-        'quantity': 1
-       }]
-    }
-  }
-});*/
 </script>
