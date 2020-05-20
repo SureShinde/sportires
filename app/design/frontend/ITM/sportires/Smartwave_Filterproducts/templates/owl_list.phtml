@@ -216,7 +216,8 @@ $lazy_owl = $this->getData("lazy_owl");
                         <strong class="product name product-item-name">
                             <a class="product-item-link"
                                href="<?php echo $_product->getProductUrl() ?>">
-                               <strong><?php echo $_product->getAttributeText('manufacturer').'<br>'.$_product->getAttributeText('modelos').'<br>'.$_product->getAttributeText('tire_size');//echo $_helper->productAttribute($_product, $_product->getName(), 'name'); ?>
+                               <strong><?php echo substr($_product->getAttributeText('manufacturer'),4,80).'<br>'.$_product->getAttributeText('modelos').'<br>'.$_product->getAttributeText('tire_size');//echo $_helper->productAttribute($_product, $_product->getName(), 'name'); ?>
+                               <?= $_product->getAttributeText('carga_s').$_product->getAttributeText('velocidad_s') ?>
                             </strong></a>
                         </strong>
                         <?php endif;?>
@@ -243,7 +244,8 @@ $lazy_owl = $this->getData("lazy_owl");
                             <strong class="product name product-item-name">
                                 <a class="product-item-link"
                                    href="<?php echo $_product->getProductUrl() ?>">
-                                   <strong><?php echo $_product->getAttributeText('manufacturer').'<br>'.$_product->getAttributeText('modelos').'<br>'.$_product->getAttributeText('tire_size');//echo $_helper->productAttribute($_product, $_product->getName(), 'name'); ?>
+                                   <strong><?php echo substr($_product->getAttributeText('manufacturer'),4,80).'<br>'.$_product->getAttributeText('modelos').'<br>'.$_product->getAttributeText('tire_size');//echo $_helper->productAttribute($_product, $_product->getName(), 'name'); ?>
+                                   <?= $_product->getAttributeText('carga_s').$_product->getAttributeText('velocidad_s') ?>
                                 </strong></a>
                             </strong>
                         <?php endif;?>

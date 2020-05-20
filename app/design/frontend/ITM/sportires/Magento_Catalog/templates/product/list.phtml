@@ -270,7 +270,8 @@ $baseUrl = $storeManager->getStore()->getBaseUrl();
                         <strong class="product name product-item-name">
                             <a class="product-item-link"
                                href="<?php echo $_product->getProductUrl() ?>">
-                                <?php echo $_product->getAttributeText('manufacturer').' '.$_product->getAttributeText('modelos').' '.$_product->getAttributeText('tire_size');//$_helper->productAttribute($_product, $_product->getName(), 'name'); ?>
+                                <?php echo substr($_product->getAttributeText('manufacturer'),4,80).' '.$_product->getAttributeText('modelos').' '.$_product->getAttributeText('tire_size');//$_helper->productAttribute($_product, $_product->getName(), 'name'); ?>
+                                <?= $_product->getAttributeText('carga_s').$_product->getAttributeText('velocidad_s') ?>
 
                             </a>
                         </strong>
@@ -314,6 +315,7 @@ $baseUrl = $storeManager->getStore()->getBaseUrl();
                                 <?php echo $_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description') ?>
                                 <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped ?>"
                                    class="action more"><?php echo __('Learn More') ?></a>
+
                             </div>
                         <?php endif; ?>
                         <?php if($_category_config['product_price']): ?>
@@ -358,8 +360,10 @@ $baseUrl = $storeManager->getStore()->getBaseUrl();
 															$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
 															$StockState = $objectManager->get('\Magento\CatalogInventory\Api\StockStateInterface');
 															$stockNumber = $StockState->getStockQty($_product->getId(), $_product->getStore()->getWebsiteId());
+                                                            
                                                             echo ((integer)$stockNumber >= 8)?8:$stockNumber;
-														?></strong>
+														?></strong><br>
+                                                        <p style="color:#FFF;"><?php echo $_product->getResource()->getAttribute('rank')->getFrontend()->getValue($_product); ?></p>
 													</span>
                                             </div>   
 											<!-- ITM adding the quantity -->

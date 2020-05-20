@@ -603,6 +603,13 @@ require([
              }, 100);
         });
 
-     }); 
+     });
+    $('a').on('click',function(){
+
+        if($(this).attr('href').indexOf('phone=5215536558444') > 0){
+            console.log('Esto es Whatsapp');
+                fbq('track', 'Contact');
+        }
+    });
 });
 </script>
