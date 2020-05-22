@@ -6,10 +6,14 @@ var/
 #Archivos para no subir al repo nunca
 app/etc/config.php
 app/etc/env.php
-app/bootstrap.php
+#app/bootstrap.php
 composer.json
 composer.lock
-index.php
+#index.php
+asignRank.php
+importPackages.php
+importPackagesAditionalImages.php
+verificImages.php
 
 .github/
 .htaccess
