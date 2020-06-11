@@ -6,7 +6,19 @@
         $class = 'header-newskin';
     if(isset($header_new_skin) && $header_new_skin && $header_type == 10)
         $class = 'header-new-skin';
+
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $request = $objectManager->get('Magento\Framework\App\Action\Context')->getRequest();
+    $storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+    $baseUrl = $storeManager->getStore()->getBaseUrl();
+
+    if($request->getFullActionName() != 'checkout_index_index'){
+
 ?>
+<script>
+    
+    var mageplazaSearchProducts = '';
+</script>
 <div class="head_wrap_custom">
 <header class="page-header type<?php echo $header_type; ?> <?php echo $class;?>" >
 <?php echo $this->getChildHtml("header_customer_form_login"); ?>
@@ -314,7 +326,8 @@
 		</div>
 		<div class="search_header  col-xs-3 col-sm-5 col-md-3">
 		 <?php echo $this->getChildHtml("top.search"); ?>
-		 <div class="mobile_only_minicart">
+         <?php //echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Amasty_SocialLogin::social.phtml")->toHtml(); ?>
+ 		 <div class="mobile_only_minicart">
 			<?php echo $this->getChildHtml("minicart"); ?> 
 		</div>
 		</div>
@@ -431,115 +444,172 @@
 <?php endif; ?>
 </header>
 </div>
+
+
+<?php }else{ ?>
+<script>
+    require([
+    'jquery'
+], function ($) {
+
+    $('.minicart-wrapper').remove();
+
+    $('.row').css({ 'width' : '102%', 'opacity' : '' });
+});
+
+</script>
+
+    <div class="main-panel-top">
+        <div class="container">
+            <div class="main-panel-inner">
+                <div class="panel wrapper">
+                    <div class="panel header">  
+                <?php
+                    echo $this->getLayout()
+                    ->createBlock('Magento\Cms\Block\Block')
+                    ->setBlockId('new_header_bar_top_checkout')
+                    ->toHtml();
+                    ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header content header-menus">
+        <div class="wrap_header_new col-xs-12 col-sm-12 col-md-12">
+        <div class="menu_new_header col-xs-9 col-sm-7 col-md-9">
+            <?php echo $this->getChildHtml("logo"); ?>
+
+                <div class="col-sm-6 col-md-3 col-lg-3 d-none d-sm-block phoneicon"><img src="<?= $baseUrl; ?>pub/media/wysiwyg/headertop/whatsapp-icon.png" alt=""><div class="custom-block"> <span style="margin-top:4px;display:block;font-weight:600;">
+                <a href="tel:5556366099"><span class="llamanos"> Llámanos</span><br>
+                <span style="color:rgb(30,33,147)!important;font-size:14px;display:block;line-height:27px;"></span></a><a class="phno" href="tel:5556366099"> 55 5636 6099</a> </span>
+                </div></div>
+
+                <div class="col-sm-6 col-md-3 col-lg-3 d-none d-sm-block whatsapp-greenicon"><img src="<?= $baseUrl; ?>pub/media/wysiwyg/headertop/whatsapp-green.png" alt="">
+                <a href="https://api.whatsapp.com/send?phone=5215536558444" target="_blank"><span class="wtsap">Whatsapp</span><br> <span class="wtsno">55 3655 8444</span></a></div>
+
+        </div>
+         </div>
+    </div>
+<?php } ?>
+
+
 <script>
 require([
     'jquery'
 ], function ($) {
-	$(function(){
-		var intFrameWidth = window.innerWidth;
-		if(intFrameWidth <768){
-		 var shrinkHeader = 2;
-		  $(window).scroll(function() {
-			var scroll = getCurrentScroll();
-			  if ( scroll >= shrinkHeader ) {
-				   $('header').addClass('shrink');
-				}
-				else {
-					$('header').removeClass('shrink');
-				}
-		  });
-		function getCurrentScroll() {
-			return window.pageYOffset || document.documentElement.scrollTop;
-			}
-		}
-	});
+    $(function(){
+        var intFrameWidth = window.innerWidth;
+        if(intFrameWidth <768){
+         var shrinkHeader = 2;
+          $(window).scroll(function() {
+            var scroll = getCurrentScroll();
+              if ( scroll >= shrinkHeader ) {
+                   $('header').addClass('shrink');
+                }
+                else {
+                    $('header').removeClass('shrink');
+                }
+          });
+        function getCurrentScroll() {
+            return window.pageYOffset || document.documentElement.scrollTop;
+            }
+        }
+    });
 
-	$(function(){
-		var intFrameWidth = window.innerWidth;
-		if(intFrameWidth > 767){
-		 var shrinkHeader = 2;
-		  $(window).scroll(function() {
-			var scroll = getCurrentScroll();
-			  if ( scroll >= shrinkHeader ) {
-				   $('header').addClass('sticky-small');
-				}
-				else {
-					$('header').removeClass('sticky-small');
-				}
-		  });
-		function getCurrentScroll() {
-			return window.pageYOffset || document.documentElement.scrollTop;
-			}
-		}
-	}); 
-	$(function(){
-		
-		
-		function fn60sec() {
-			var options = {
-				timeZone: 'America/Mexico_City',
-				year: 'numeric', month: 'numeric', day: 'numeric',
-				hour: 'numeric', minute: 'numeric', second: 'numeric',
-			},
-				formatter = new Intl.DateTimeFormat([], options)
-				// var  time = formatter.format(new Date())
-				// var  time = (new Date()).toLocaleString([], options);
-				var date = new Date();
-				var  time = date.toLocaleString('en-US', {hour: '2-digit',   hour12: false, timeZone: 'America/Mexico_City' });
-				var day = date.getDay('en-US', {timeZone: 'America/Mexico_City' });
-				console.log(day);
-			// var today = new Date();
-			// runs every 60 sec and runs on init.
-			// var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-			console.log(time);
-			// console.log(time.getHours());
-			
-			// var current_hrs = today.getHours();
-			// var current_min = today.getMinutes();
-			// var current_sec = today.getSeconds();
-			 if(day == 6 || day == 0){
-				if(parseInt(time) > 8 && parseInt(time) < 14 ){
-				  // if(current_min > 0 ){
-					   $('.msgopen p').text('9 a 14 hrs.');
-					   $('.msg_tab_only .msgopen p').text('Atención Telefónica de 9 a 18 hrs Lunes a Sábado');
-					   $('.msgopen').css('display','block');
-					   $('.msgclose').css('display','none');
-				  // }
-				}else{
-					$('.msgopen').css('display','none');
-					$('.msgclose').css('display','block');
-				}
-			 }else{
-			 if(parseInt(time) > 8 && parseInt(time) < 18 && day != 7){
-				  // if(current_min > 0 ){
-					   $('.msgopen').css('display','block');
-					   $('.msgclose').css('display','none');
-				  // }
-			 }else{
-				$('.msgopen').css('display','none');
-				$('.msgclose').css('display','block');
-			 }
-			}
-		}
-		fn60sec();
-		setInterval(fn60sec, 60*1000);
-		
-	}); 
-	$(function(){
-	
-		$("body").on("touchstart","ul.header.links li.authorization-link",function(){
-			var cls = $('html').attr('class');
-			setTimeout(function(){
-				$('html').removeClass(cls);
-			 }, 100);
-		});
-		$("body").on("touchstart","ul.header.links li:last-child",function(){
-			var cls = $('html').attr('class');
-			setTimeout(function(){
-				$('html').removeClass(cls);
-			 }, 100);
-		});
+    $(function(){
+        var intFrameWidth = window.innerWidth;
+        if(intFrameWidth > 767){
+         var shrinkHeader = 2;
+          $(window).scroll(function() {
+            var scroll = getCurrentScroll();
+              if ( scroll >= shrinkHeader ) {
+                   $('header').addClass('sticky-small');
+                }
+                else {
+                    $('header').removeClass('sticky-small');
+                }
+          });
+        function getCurrentScroll() {
+            return window.pageYOffset || document.documentElement.scrollTop;
+            }
+        }
+    }); 
+    $(function(){
+        
+        
+        function fn60sec() {
+            var options = {
+                timeZone: 'America/Mexico_City',
+                year: 'numeric', month: 'numeric', day: 'numeric',
+                hour: 'numeric', minute: 'numeric', second: 'numeric',
+            },
+                formatter = new Intl.DateTimeFormat([], options)
+                // var  time = formatter.format(new Date())
+                // var  time = (new Date()).toLocaleString([], options);
+                var date = new Date();
+                var  time = date.toLocaleString('en-US', {hour: '2-digit',   hour12: false, timeZone: 'America/Mexico_City' });
+                var day = date.getDay('en-US', {timeZone: 'America/Mexico_City' });
+                //console.log(day);
+            // var today = new Date();
+            // runs every 60 sec and runs on init.
+            // var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+            //console.log(time);
+            // console.log(time.getHours());
+            
+            // var current_hrs = today.getHours();
+            // var current_min = today.getMinutes();
+            // var current_sec = today.getSeconds();
+             if(day == 6 || day == 0){
+                if(parseInt(time) > 8 && parseInt(time) < 14 ){
+                  // if(current_min > 0 ){
+                       $('.msgopen p').text('9 a 14 hrs.');
+                       $('.msg_tab_only .msgopen p').text('Atención Telefónica de 9 a 18 hrs Lunes a Sábado');
+                       $('.msgopen').css('display','block');
+                       $('.msgclose').css('display','none');
+                  // }
+                }else{
+                    $('.msgopen').css('display','none');
+                    $('.msgclose').css('display','block');
+                }
+             }else{
+             if(parseInt(time) > 8 && parseInt(time) < 18 && day != 7){
+                  // if(current_min > 0 ){
+                       $('.msgopen').css('display','block');
+                       $('.msgclose').css('display','none');
+                  // }
+             }else{
+                $('.msgopen').css('display','none');
+                $('.msgclose').css('display','block');
+             }
+            }
+        }
+        fn60sec();
+        setInterval(fn60sec, 60*1000);
+        
+    }); 
+    $(function(){
+    
+        $("body").on("touchstart","ul.header.links li.authorization-link",function(){
+            var cls = $('html').attr('class');
+            setTimeout(function(){
+                $('html').removeClass(cls);
+             }, 100);
+        });
+        $("body").on("touchstart","ul.header.links li:last-child",function(){
+            var cls = $('html').attr('class');
+            setTimeout(function(){
+                $('html').removeClass(cls);
+             }, 100);
+        });
 
-	 }); 
+     });
+    $('a').on('click',function(){
+
+        if($(this).attr('href').indexOf('phone=5215536558444') > 0){
+            console.log('Esto es Whatsapp');
+                fbq('track', 'Contact');
+        }
+    });
 });
 </script>

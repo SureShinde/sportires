@@ -5,7 +5,7 @@
 			<block as="newsearch" class="ITM\Sportires\Block\Newsearch" name="newsearch" template="ITM_Sportires::newsearch.phtml" before="breadcrumbs" />
 		</referenceContainer>
 		<referenceContainer name="content">
-            <block as="runflatfilter" class="ITM\Sportires\Block\Runflatfilter" name="runflatfilter" template="ITM_Sportires::runflatfilter.phtml" before="-"/>
+            <!--block as="runflatfilter" class="ITM\Sportires\Block\Runflatfilter" name="runflatfilter" template="ITM_Sportires::runflatfilter.phtml" before="-"/-->
             <block class="Magento\Catalog\Block\Category\View" name="category.products" template="Magento_Catalog::category/products.phtml">
                 <block class="ITM\Sportires\Block\Product\ListProduct" name="category.products.list" as="product_list" template="Magento_Catalog::product/list.phtml">
                     <container name="category.product.list.additional" as="additional" />

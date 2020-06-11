@@ -35,6 +35,10 @@ $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
 $priceHelper = $objectManager->create('Magento\Framework\Pricing\PriceCurrencyInterface');
 
 
+$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+$baseUrl = $storeManager->getStore()->getBaseUrl();
+
+
 ?>
 
 <?php $iterator = 1; ?>
@@ -74,6 +78,9 @@ $priceHelper = $objectManager->create('Magento\Framework\Pricing\PriceCurrencyIn
         <?php $iterator = 1; ?>
         <ol class="products list items product-items <?php if(isset($_category_config['qty_field']) && $_category_config['qty_field']):?>has-qty<?php endif;?>">
             <?php /** @var $_product \Magento\Catalog\Model\Product */ ?>
+            <?php 
+            $outDataLayer = array();
+            $j = 0; ?>
             <?php foreach ($_productCollection as $_product): ?>
                 <?php echo($iterator++ == 1) ? '<li class="item product product-item">' : '</li><li class="item product product-item">' ?>
                 <div class="product-item-info" data-container="product-grid">
@@ -202,18 +209,18 @@ $priceHelper = $objectManager->create('Magento\Framework\Pricing\PriceCurrencyIn
                                              </div>       
 											<!-- ITM adding the quantity -->											 
 										   <?php if(isset($_category_config['qty_field']) && $_category_config['qty_field']):?>
-                                                <div class="qty-box">
+                                                <!--div class="qty-box">
                                                     <a href="javascript:void(0)" class="qtyminus"><i class="porto-icon-minus"></i></a>
                                                     <input type="text" name="qty" id="qty" maxlength="12" value="<?php /* @escapeNotVerified */ echo $block->getProductDefaultQty() * 1 ?>" title="<?php /* @escapeNotVerified */ echo __('Qty') ?>" class="input-text qty" data-validate="<?php echo $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"/>
                                                     <a href="javascript:void(0)" class="qtyplus"><i class="porto-icon-plus"></i></a>
-                                                </div>
+                                                </div-->
                                             <?php endif;?>
                                             <?php echo $block->getBlockHtml('formkey')?>
-                                            <button type="submit"
+                                            <!--button type="submit"
                                                     title="<?php echo $block->escapeHtml(__('Add to Cart')); ?>" 
-                                                    class="action tocart primary" > 
+                                                    class="action tocart primary action-to-gtm">
                                                 <span><?php echo __('Add to Cart') ?></span> 
-                                            </button>
+                                            </button-->
                                         </form>
                                     <?php else: ?>
                                         <?php if ($_product->getIsSalable()): ?>
@@ -263,7 +270,8 @@ $priceHelper = $objectManager->create('Magento\Framework\Pricing\PriceCurrencyIn
                         <strong class="product name product-item-name">
                             <a class="product-item-link"
                                href="<?php echo $_product->getProductUrl() ?>">
-                                <?php echo $_helper->productAttribute($_product, $_product->getName(), 'name'); ?>
+                                <?php echo substr($_product->getAttributeText('manufacturer'),4,80).' '.$_product->getAttributeText('modelos').' '.$_product->getAttributeText('tire_size');//$_helper->productAttribute($_product, $_product->getName(), 'name'); ?>
+                                <?= $_product->getAttributeText('carga_s').$_product->getAttributeText('velocidad_s') ?>
 
                             </a>
                         </strong>
@@ -271,7 +279,7 @@ $priceHelper = $objectManager->create('Magento\Framework\Pricing\PriceCurrencyIn
 						if($_product->getResource()->getAttribute('run_flat')->getFrontend()->getValue($_product) == 'Si') 
 						echo '<!-- ITM adding the Run Flat Icon -->
 							<div class="flat">
-								<img src="/pub/media/wysiwyg/runflat.png" alt="runflat">
+								<img src="'.$baseUrl.'pub/media/wysiwyg/runflat.png" alt="runflat">
 							</div>
 							<!-- ITM adding the Run Flat Icon -->';
 							/* ITM Run flat */ ?>
@@ -307,6 +315,7 @@ $priceHelper = $objectManager->create('Magento\Framework\Pricing\PriceCurrencyIn
                                 <?php echo $_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description') ?>
                                 <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped ?>"
                                    class="action more"><?php echo __('Learn More') ?></a>
+
                             </div>
                         <?php endif; ?>
                         <?php if($_category_config['product_price']): ?>
@@ -347,27 +356,30 @@ $priceHelper = $objectManager->create('Magento\Framework\Pricing\PriceCurrencyIn
 											<div class="qty-box">
                                                     <span name="qty"><?php echo __('In stock')?></span> 
 													<span>
-														<?php 
+														<strong><?php 
 															$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
 															$StockState = $objectManager->get('\Magento\CatalogInventory\Api\StockStateInterface');
-															echo $StockState->getStockQty($_product->getId(), $_product->getStore()->getWebsiteId());
-														?>
+															$stockNumber = $StockState->getStockQty($_product->getId(), $_product->getStore()->getWebsiteId());
+                                                            
+                                                            echo ((integer)$stockNumber >= 8)?8:$stockNumber;
+														?></strong><br>
+                                                        <p style="color:#FFF;"><?php echo $_product->getResource()->getAttribute('rank')->getFrontend()->getValue($_product); ?></p>
 													</span>
                                             </div>   
 											<!-- ITM adding the quantity -->
 										    <?php if(isset($_category_config['qty_field']) && $_category_config['qty_field']):?>
-                                            <div class="qty-box">
+                                            <!--div class="qty-box">
                                                 <a href="javascript:void(0)" class="qtyminus"><i class="porto-icon-minus"></i></a>
                                                 <input type="text" name="qty" id="qty" maxlength="12" value="<?php /* @escapeNotVerified */ echo $block->getProductDefaultQty() * 1 ?>" title="<?php /* @escapeNotVerified */ echo __('Qty') ?>" class="input-text qty" data-validate="<?php echo $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"/>
                                                 <a href="javascript:void(0)" class="qtyplus"><i class="porto-icon-plus"></i></a>
-                                            </div> 
+                                            </div--> 
                                             <?php endif;?> 
                                             <?php echo $block->getBlockHtml('formkey')?>
-                                            <button type="submit"
+                                            <!--button type="submit"
                                                     title="<?php echo $block->escapeHtml(__('Add to Cart')); ?>"
                                                     class="action tocart primary" > 
                                                 <span><?php echo __('Add to Cart') ?></span>
-                                            </button> 
+                                            </button--> 
                                         </form> 
                                     <?php else: ?>
                                         <?php if ($_product->getIsSalable()): ?>
@@ -410,10 +422,12 @@ $priceHelper = $objectManager->create('Magento\Framework\Pricing\PriceCurrencyIn
                         <?php endif; ?>
                     </div>
                 </div>
+
                 <?php echo($iterator == count($_productCollection)+1) ? '</li>' : '' ?>
             <?php endforeach; ?>
         </ol>
     </div>
+
     <?php if(isset($_category_grid_config['infinite_scroller']) && $_category_grid_config['infinite_scroller']):?>
     <div class="infinite-loader"><div class="loading"><?php echo __("Loading ..."); ?></div><a href="javascript:void(0)" class="btn-load-more"><?php echo __("Load More ..."); ?></a></div>
     <?php endif;?>
@@ -432,6 +446,9 @@ $priceHelper = $objectManager->create('Magento\Framework\Pricing\PriceCurrencyIn
             require([
                 'jquery'        
             ], function ($) {
+
+            	//var i = 0; $('.runflat-filter').each(function(){ ++i; console.log('entrendo '+i); if(i == 2){ console.log('se va este'); $(this).remove(); }});
+
                 $('.main .products.grid .product-items li.product-item:nth-child(2n)').addClass('nth-child-2n');
                 $('.main .products.grid .product-items li.product-item:nth-child(2n+1)').addClass('nth-child-2np1');
                 $('.main .products.grid .product-items li.product-item:nth-child(3n)').addClass('nth-child-3n');

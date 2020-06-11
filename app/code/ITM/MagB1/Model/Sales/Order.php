@@ -496,6 +496,23 @@ class Order implements OrderInterface
             $parent_product = $objectManager->create('\Magento\Catalog\Model\Product')->load($parent_product_id);
 
             $items_array[$i]["original_sku"] = $parent_product->getSku();
+            // AJUSTE PARA LOS PAQUETES, IRMB 08052020
+            if(substr($item->getSku(),-1) == 'P'){
+                $items_array[$i]['product_options']['info_buyRequest']['qty'] = ($item->getQtyOrdered()*2);
+                $items_array[$i]['sku'] = substr($item->getSku(),0,-1);
+
+                $price = $item->getPrice()/2;
+
+                $items_array[$i]['price'] = (string)$price;
+                $items_array[$i]['base_price'] = (string)$price;
+                $items_array[$i]['price_incl_tax'] = (string)$price;
+                $items_array[$i]['base_price_incl_tax'] = (string)$price;
+                $items_array[$i]['base_price_incl_tax'] = (string)$price;
+                $items_array[$i]['qty_invoiced'] = (string)($item->getQtyOrdered()*2);
+                $items_array[$i]['qty_ordered'] = (string)($item->getQtyOrdered()*2);
+                
+            }
+            //FIN DE AJUSTE
             $i++;
         }
 

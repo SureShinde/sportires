@@ -6,10 +6,13 @@
  */
 -->
 <page layout="2columns-right" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
-    <body>
+    <body>       
         <referenceContainer name="content">
             <block class="ITM\Sportires\Block\Template" name="product_view_add_marka" template="Magento_Catalog::product/view/addmarka.phtml"/>
         </referenceContainer>
+        <referenceContainer name="content">
+            <block class="ITM\Sportires\Block\Template" name="gtm_datalayer_by_product" template="Magento_Catalog::product/gtm/product_data.phtml"/>
+        </referenceContainer> 
 		<referenceContainer name="product.info.stock.sku">
             <block class="ITM\Sportires\Block\Template" name="product_view_add_flat" template="Magento_Catalog::product/view/addflate.phtml"/>
         </referenceContainer>

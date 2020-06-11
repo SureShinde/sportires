@@ -1,0 +1,24 @@
+#No trackear nada de vendor
+vendor/
+generated/
+pub/
+var/
+#Archivos para no subir al repo nunca
+app/etc/config.php
+app/etc/env.php
+#app/bootstrap.php
+composer.json
+composer.lock
+#index.php
+asignRank.php
+importPackages.php
+importPackagesAditionalImages.php
+verificImages.php
+
+.github/
+.htaccess
+.htaccess.sample
+.php_cs.dist
+.travis.yml
+.user.ini
+app/code/Openpay/

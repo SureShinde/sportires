@@ -5,12 +5,13 @@
 ?>
 
 <?php
-    $runflate = $block->getRunFlat();
+
+    $runflate = $this->getRequest()->getParam('run_flat');
     if($runflate == null || $runflate == 770) {
-        $yesno = false;
+        $yesno = 0;
         $datapost="769";
     }else{
-        $yesno = true ;
+        $yesno = 1;
         $datapost="770";
     }
 
@@ -21,7 +22,7 @@
 <div class="runflat-filter">
     <span class='custom-tittle'><?=__('RunFlat')?></span>
     <div class="center">
-        <input type="checkbox" <?php if($yesno) echo 'checked="checked"'; ?> id="cbx" style="display:none"/>
+        <input type="checkbox" <?php if($yesno == 1){ echo 'checked="checked"'; }  ?> class="cbx-runflat" id="cbx" style="display:none"/>
         <label for="cbx" class="toggle"><span></span></label>
     </div>
 </div>
@@ -29,7 +30,7 @@
 <script>
     require(['jquery'], function($) {
         jQuery(document).ready(function () {
-            $("#cbx").click(function(){
+            $(".cbx-runflat").click(function(){
                 window.location.href = '<?= $current_url ?>';
             });
 

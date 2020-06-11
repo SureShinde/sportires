@@ -49,7 +49,7 @@
 <script>
 window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
 ga('create', 'UA-86399002-1', 'auto');
-ga('send', 'pageview');
+ga('require', 'ec');
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 <!-- End Google Analytics -->
@@ -59,28 +59,6 @@ require([
     'jquery'
 ], function ($) {
     $(document).ready(function(){
-        
-        $("button.tocart").click(function(){
-            ga('send', 'event', 'Carrito', 'Ir a pagar', 'Agregar');
-        });
-
-        $("button.continue").click(function(){
-            ga('send', 'event', 'Checkout', 'Ir a pagar', 'Continuar');
-        });
-
-        $("button.continue").click(function(){
-            ga('send', 'event', 'Checkout', 'Ir a pagar', 'Continuar');
-        });
-
-
-        $("#continueButton").click(function(){
-            ga('send', 'event', 'Checkout', 'Pagar', 'Paypal plus');
-        });
-
-        $("#mp-custom-save-payment").click(function(){
-            ga('send', 'event', 'Checkout', 'Pagar', 'Mercadopago');
-        });     
-
 
         $("body").addClass("<?php echo $page_layout; ?>");
         $("body").addClass("<?php echo $boxed; ?>");
@@ -182,3 +160,16 @@ require([
 <?php if($this->getConfig('porto_settings/general/smartlayers')): ?>
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-58378513496862c5"></script>
 <?php endif; ?>
+<style>
+    header.page-header.type2.header-newskin.sticky-small{
+        z-index: 9000 !important;
+    }
+
+    .sidebar.sidebar-main{
+        position:fixed !important;
+        display:block !important;
+        max-width: 13%;
+        min-width: 13%;
+    }
+
+</style>

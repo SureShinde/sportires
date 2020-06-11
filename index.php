@@ -1,10 +1,4 @@
 <?php
-if(isset($_GET["pp"])) {
-    if($_SERVER["HTTP_X_REAL_IP"] == "74.12.122.169") {
-        echo "TEST";
-        exit;
-    }
-}
 /**
  * Application entry point
  *
