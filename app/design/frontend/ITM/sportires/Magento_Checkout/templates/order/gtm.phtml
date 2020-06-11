@@ -1,0 +1,25 @@
+<?php /** @var $block \Vendor\Module\Block\Success */ ?>
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$incrId = $block->getOrderId();
+$collection = $objectManager->create('Magento\Sales\Model\Order'); 
+$orderInfo = $collection->loadByIncrementId($incrId);
+
+
+?>
+ <script>
+    // Send transaction data with a pageview if available
+    // when the page loads. Otherwise, use an event when the transaction
+    // data becomes available.
+dataLayer.push({
+'ecommerce': {
+	'purchase': {
+  		'actionField': {
+	            'id': '<?= $block->getOrderId(); ?>',               
+	            'affiliation': 'sportires.com.mx',
+	            'shipping': '<?= number_format($orderInfo->getGrandTotal(),2,'.',''); ?>'
+			}
+		}
+	}
+});
+</script>

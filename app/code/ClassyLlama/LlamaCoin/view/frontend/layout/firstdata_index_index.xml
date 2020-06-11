@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<body>
+
+    <referenceContainer name="header.container" remove="true"/>
+    <referenceContainer name="head_wrap_custom" remove="true"/>
+    <referenceBlock name="catalog.topnav" remove="true"/>
+    <referenceContainer name="footer-container" remove="true"/>
+    
+
+    <referenceContainer name="head.wrap.custom" remove="true"/>
+    <referenceContainer name="header" remove="true"/>
+    <referenceContainer name="menu" remove="true"/>
+    <referenceContainer name="notifications" remove="true"/>
+    <referenceContainer name="page.footer" remove="true"/>
+    <referenceContainer name="footer" remove="true"/>
+    
+		<referenceContainer name="content">
+			<block class="ClassyLlama\LlamaCoin\Block\Index\Index" name="index.index"
+				template="ClassyLlama_LlamaCoin::index.phtml" cacheable="false"/>
+		</referenceContainer>
+	</body>
+</page>

@@ -1,0 +1,10 @@
+
+<script>
+    window.isActivesMSI = <?php /* @escapeNotVerified */ echo $this->getMsiIsActive(); ?>;
+</script>
+
+
+<?php $myphtml = $block->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("ClassyLlama_LlamaCoin::html/msi.phtml")->toHtml(); ?>
+<script type="text/javascript">
+    var my_phtml = <?php echo json_encode($myphtml); ?>;
+</script>

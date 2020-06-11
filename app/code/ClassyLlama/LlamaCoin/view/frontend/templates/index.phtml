@@ -1,0 +1,57 @@
+<?php
+date_default_timezone_set('America/Mexico_City');
+$dateTime = date("Y:m:d-H:i:s");
+
+$total = number_format($this->getTotalToPay(),2,'.','');
+
+$msi = ($this->getRequest()->getParam('ccMsi') != 'undefined')?$this->getRequest()->getParam('ccMsi'):'0';
+
+?>
+<form method="post" action="<?= $this->getUrlFirstData(); ?>" name="firstDataForm" id="firstDataForm" style="display:block">
+	<input type="text" name="txntype" value="sale">
+	<input type="text" name="timezone" value="America/Mexico_City"/>
+	<input type="text" name="txndatetime" value="<?= $dateTime; ?>"/>
+	<input type=text name="hash_algorithm" value="SHA256"/>
+	<input type="text" name="hash" value="<?= createHash($total, "484", $dateTime, $this->getStoreIdFirstData(), $this->getSharedFirstData()); ?>"/>
+	<input type="text" name="storename" value="3910030" />
+	<input type="text" name="mode" value="payonly"/>
+	<input type="text" name="paymentMethod" value="<?= substr($this->getRequest()->getParam('ccType'),0,1); ?>"/>
+	<input type="text" name="chargetotal" value="<?= $total; ?>" />
+	<input type="text" name="currency" value="484"/>
+	<!--input type="hidden" name="authenticateTransaction" value="false"/-->
+	<input type="text" name="oid" value="<?= $this->getReservedId(); ?>"/>
+	<input type="text" name="cardnumber" value="<?= $this->getRequest()->getParam('ccNumber'); ?>"/>
+	<input type="text" name="expmonth" value="<?= str_pad($this->getRequest()->getParam('ccExpitation'), 2, "0", STR_PAD_LEFT); ?>"/>
+	<input type="text" name="expyear" value="<?= $this->getRequest()->getParam('ccExpitationyr'); ?>"/>
+	<input type="text" name="cvm" value="<?= $this->getRequest()->getParam('ccCid'); ?>"/>
+	<input type="text" name="responseSuccessURL" value="<?= $this->getUrlSuccess().'&form_key='.$block->getKeytoForm(); ?>"/>
+	<input type="text" name="responseFailURL" value="<?= $this->getUrlFail().'&form_key='.$block->getKeytoForm(); ?>"/>
+	<input type="text" name="numberOfInstallments" value="<?= $msi; ?>"/>
+	<input type="submit" value="Procesar" style="display:block">
+</form>
+
+<?php
+
+
+function createHash($chargetotal, $currency, $dateTime, $storeId, $shared) {
+
+$storeId = $storeId;
+$sharedSecret =  $shared;
+$stringToHash = $storeId . $dateTime . $chargetotal. $currency. $sharedSecret;
+$ascii = bin2hex($stringToHash);
+
+return hash("sha256", $ascii);
+}
+?>
+
+<script type="text/javascript">
+    require(
+        ['jquery'],
+        function($){
+          $('.head_wrap_custom').hide();
+          //document.getElementById("firstDataForm").submit();
+          console.log('submit pay method');
+        }
+    );
+</script>
+

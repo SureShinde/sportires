@@ -24,7 +24,16 @@
   font-size: 0;
   cursor: pointer;
 }
-
+.cedcommerce.actions.downarrow:before {
+  display: inline-block;
+  content: url('@{baseDir}Ced_Integrator/images/actions/downarrow.svg');
+  height:16px;
+}
+.cedcommerce.actions.uparrow:before {
+  display: inline-block;
+  content: url('@{baseDir}Ced_Integrator/images/actions/uparrow.svg');
+  height:16px;
+}
 .cedcommerce.actions.view:before {
   display: inline-block;
   content: url('@{baseDir}Ced_Integrator/images/actions/view.svg');
@@ -91,6 +100,12 @@
   height:16px;
 }
 
+.cedcommerce.actions.preview:before {
+  display: inline-block;
+  content: url('@{baseDir}Ced_Integrator/images/actions/preview.svg');
+  height:16px;
+}
+
 .cedcommerce.actions.tick-grey:before {
   display: inline-block;
   content: url('@{baseDir}Ced_Integrator/images/actions/tick-grey.svg');
@@ -98,6 +113,9 @@
 }
 
 .cedcommerce.actions.view.disable,
+.cedcommerce.actions.uparrow.disable,
+.cedcommerce.actions.downarrow.disable,
+.cedcommerce.actions.preview.disable,
 .cedcommerce.actions.error.disable,
 .cedcommerce.actions.delete.disable,
 .cedcommerce.actions.edit.disable,

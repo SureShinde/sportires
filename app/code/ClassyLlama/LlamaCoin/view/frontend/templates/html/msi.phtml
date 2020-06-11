@@ -1,0 +1,126 @@
+<?php
+$blockObj= $block->getLayout()->createBlock('ClassyLlama\LlamaCoin\Block\Index\index');
+
+$msi = explode(',',$blockObj->getMsi());
+
+$out = '';
+$i = 0;
+while($i <= count($msi)-1){
+	$out .= '<option value="'.$msi[$i].'">'.$msi[$i].' Meses</option>';
+	++$i;
+}
+
+?>
+
+
+<div class="field data" data-bind="attr: {id: getCode() + '_cc_msi_div'}" id="classyllama_llamacoin_cc_msi_div">
+        <label data-bind="attr: {for: getCode() + '_expiration'}" class="label" for="classyllama_llamacoin_expiration">
+            <span><!-- ko i18n: 'Expiration Date'--><span>Compra a Meses</span><!-- /ko --></span>
+        </label>
+        <div class="control" style="max-width: 50%;">
+            <div class="fields group group-2">
+                <div class="field no-label msi">
+                    <div class="control">
+                        <select name="payment[cc_msi]" class="select select-installments" data-bind="attr: {id: getCode() + '_msi', 'data-container': getCode() + '-cc-msi', 'data-validate': JSON.stringify({required:false, 'validate-cc-msi':'#' + getCode() + '_msi'})},
+                                            enable: isActive($parents),
+                                            optionsValue: 'value',
+                                            optionsText: 'Compra a Meses',
+                                            optionsCaption: $t('Msi'),
+                                            value: msi" id="classyllama_llamacoin_msi" data-container="classyllama_llamacoin-cc-msi" style="max-width: 80%;">
+                                            <option value="0">Seleccione</option>
+                                            <?= $out; ?>
+                        </select>
+                        <div class="tooltip"> ? <span class="tooltiptext">Compra a Meses<br>El pago sera diferido y el costo del producto incrementa un poco.</span></div>
+                    </div>
+                </div>
+                <div class="field no-label xxx">
+                    <div class="control">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    require(
+        ['jquery',
+        'Magento_Checkout/js/action/get-totals',
+        'Magento_Customer/js/customer-data'
+        ],
+        function($, getTotalsAction, customerData){
+          $('#classyllama_llamacoin_msi').on('change',function(){
+            var meses = $(this).val();
+            //console.log(meses);
+            if(meses >= 0){
+                $.ajax({
+                    url: '<?=  $blockObj->urlBaseCC('firstdata/index/recalculate/',NULL); ?>',
+                    dataType: 'json',
+                    type : 'post',
+                    showLoader: true,
+                    async: true,
+                    data: {
+                        meses:meses
+                    },
+                    success: function(data){
+                        //console.log('Cambiamos los montos');
+                        var deferred = $.Deferred();
+                        getTotalsAction([], deferred);
+                    }
+                });
+            }
+          });
+
+          $('.radio').on('click',function(){
+                    $.ajax({
+                    url: '<?=  $blockObj->urlBaseCC('firstdata/index/recalculate/',NULL); ?>',
+                    dataType: 'json',
+                    type : 'post',
+                    showLoader: true,
+                    async: true,
+                    data: {
+                        meses:0
+                    },
+                    success: function(data){
+                        document.getElementById('classyllama_llamacoin_msi').selectedIndex = 0;
+                        var deferred = $.Deferred();
+                        getTotalsAction([], deferred);
+                    }
+                });
+          });
+        }
+    );
+</script>
+
+<style>
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+  border-radius: 10px;
+  background-color: black;
+  color: #fff;  
+  width: 20px;
+  height: 20px;
+  margin-left: 5px;
+  text-align: center;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 220px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 5px 5px 5px;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+</style>

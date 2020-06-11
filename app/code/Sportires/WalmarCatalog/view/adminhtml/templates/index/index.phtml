@@ -1,0 +1,68 @@
+<?php
+$marcas = $block->getAutosMarcas();
+
+?>
+<form action="<?=  $block->getBaseUrl().'generadorCatalogos.php'; ?>" method="post" target="reporte">
+<div class="page-actions _fixed" data-ui-id="page-actions-toolbar-content-header"><div class="page-actions-inner" data-title="Generador de Catalogo"><div class="page-actions-buttons">
+        
+<div title="Save" class="actions-split save primary">
+   
+            <button title="Generar Catalogo" class="primary primary"  data-ui-id="generated-button-dropdown" id="generar-catalogo">
+            <span>Generar Catalogo</span>
+        </button>
+</div></div></div>
+
+<h1>Generador de catalogo para Walmart</h1>
+<div class="admin__field">Seleccione la marca para generar el catalogo o deje en TODAS para generar el catalogo de todas
+	<select class="admin__control-select" id="marca-generar" name="marca">
+<?php 
+	echo '<option value="todas">TODAS</option>';
+foreach($marcas as $marca){
+	if(trim($marca['label']) != ''){
+		echo '<option value="'.$marca['value'].'">'.$marca['label'].'</option>';
+	}
+}
+?>
+ </select>
+ <input type="hidden" name="key_form" value="<?= $block->getKeyForm(); ?>">
+
+</div>
+</form>
+ <iframe name="reporte" id="reporte" style="display:none;"></iframe>
+<script>
+ /*   require([
+            'jquery',
+            'jquery/ui',
+            'accordion',
+            'lineProgressbar'
+        ],
+        function ($) {
+            $('#generar-catalogo').on('click',function(){
+                var marca = $('#marca-generar option:selected').val();
+                //alert('Generamos el catalogo '+marca);
+                $.ajax({
+                    url: '<?=  $block->urlBase('catalogwalmart/index/generated/',NULL); ?>',
+                    dataType: 'json',
+                    type : 'post',
+                    showLoader: true,
+                    async: true,
+                    data: {
+                        marca:marca
+                    },
+                    success: function(data){
+
+                      if(data.ok == 'ok'){
+                        $('#pannel-merchant-alerts').append('<div class="message-success success message">Productos añadidos correctamente en breve recibiras un email, para poder iniciar el proceso de activación.</div>');
+                        $('#Info-proccess-img').hide();
+                      }else{
+                        $('#pannel-merchant-alerts').append('<div class="message-error error message">Error, favor de intentar nuevamente.</div>');
+                      }
+
+                    }
+                  });
+
+            });
+        }
+    );
+*/
+</script>

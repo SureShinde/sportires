@@ -1,0 +1,47 @@
+<div class="checkout-success">
+            <div class="success-messages">
+                            <p>
+                    Tu numero de orden es: <a href="#" class="order-number"><strong><?= $this->getRequest()->getParam('oid'); ?></strong></a>.</p>
+                        <p>
+                Te enviaremos un email de confirmación con los detalles y información del envío.</p>
+        </div>
+            
+    <script>
+	require([
+		'Magento_Customer/js/customer-data'
+	], function (customerData) {
+		var sections = ['cart'];
+		customerData.invalidate(sections);
+	});
+</script>
+
+           
+<!-- Custom PPPlus additional info -->
+
+<!-- End of Custom PPPlus additional info --> 
+
+ <script>
+    // Send transaction data with a pageview if available
+    // when the page loads. Otherwise, use an event when the transaction
+    // data becomes available.
+dataLayer.push({
+'ecommerce': {
+	'purchase': {
+  		'actionField': {
+	            'id': '<?= $this->getRequest()->getParam('oid'); ?>',               
+	            'affiliation': 'sportires.com.mx',
+	            'shipping': '<?= $this->getRequest()->getParam('chargetotal'); ?>'
+			}
+		}
+	}
+});
+</script>
+    
+    <div class="actions-toolbar">
+        <div class="primary">
+            <a class="action primary continue" href="<?= $this->getBaseUrlBlock(); ?>">
+                <span>Continuar comprando</span>
+            </a>
+        </div>
+    </div>
+</div>

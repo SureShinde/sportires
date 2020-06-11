@@ -40,13 +40,17 @@ class Base extends \Symfony\Component\Console\Command\Command
         $this->om = $objectManager;
         $this->state = $state;
 
-        parent::__construct(self::CLI_PREFIX."integrator");
+        parent::__construct(self::CLI_PREFIX . "integrator");
     }
 
     protected function execute(
         \Symfony\Component\Console\Input\InputInterface $input,
         \Symfony\Component\Console\Output\OutputInterface $output
     ) {
-        $this->state->setAreaCode(\Magento\Framework\App\Area::AREA_CRONTAB);
+        try {
+            $this->state->setAreaCode(\Magento\Framework\App\Area::AREA_CRONTAB);
+        } catch (\Exception $e) {
+            // Silence
+        }
     }
 }

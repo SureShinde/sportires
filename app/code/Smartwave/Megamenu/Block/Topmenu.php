@@ -249,7 +249,11 @@ class Topmenu extends \Magento\Framework\View\Element\Template
                     $html .= '<img class="menu-thumb-icon" src="' . $this->_helper->getBaseUrl().'catalog/category/' . $sw_menu_icon_img . '" alt="'.$category->getName().'"/>';
                 elseif($sw_menu_font_icon)
                     $html .= '<em class="menu-thumb-icon '.$sw_menu_font_icon.'"></em>';
-                $html .= '<span>'.$category->getName().'</span>';
+		                    $html .= '<em class="menu-thumb-icon '.$sw_menu_font_icon.'"></em>';
+                $nombre =($category->getName() == 'Autos')?'Categoría':$category->getName();
+
+                $html .= '<span>'.$nombre.'</span>';
+                //$html .= '<span>'.$category->getName().'</span>';
                 if($sw_menu_cat_label)
                     $html .= '<span class="cat-label cat-label-'.$sw_menu_cat_label.'">'.$this->_megamenuConfig['cat_labels'][$sw_menu_cat_label].'</span>';
                 $html .= '</a>';

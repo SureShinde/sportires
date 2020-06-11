@@ -23,11 +23,7 @@
     <preference for="Ced\Integrator\Api\GeocodeRepositoryInterface" type="Ced\Integrator\Repository\Geocode" />
     <preference for="Ced\Integrator\Api\Data\Geocode\StateInterface" type="Ced\Integrator\Model\Geocode\State" />
 
-    <type name="Magento\Framework\View\Asset\Minification">
-        <plugin name="ced-integrator-js-exclude" type="Ced\Integrator\Plugin\Js\ExcludeMinify" />
-    </type>
-
-    <!--File Logger-->
+   <!--File Logger-->
     <type name="Ced\Integrator\Helper\File\Handler">
         <arguments>
             <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>

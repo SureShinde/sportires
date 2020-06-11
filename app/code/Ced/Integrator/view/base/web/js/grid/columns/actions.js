@@ -228,7 +228,6 @@ define(
                             var result = this.tryParseJSON(data.message);
                             if (result && Object.keys(result).length > 0) {
                                 result = j2t.convert(result);
-                                console.log(result);
                             }
                             content = '<div style="max-height: 450px; overflow: auto;">' + result + '</div>';
                         }

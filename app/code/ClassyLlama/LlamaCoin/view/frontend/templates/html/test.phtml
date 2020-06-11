@@ -1,0 +1,13 @@
+<?php
+$blockObj= $block->getLayout()->createBlock('ClassyLlama\LlamaCoin\Block\Index\index');
+if(strlen($blockObj->getIpsTest()) > 11){
+//echo $_SERVER['REMOTE_ADDR'].'-'.$blockObj->getIpsTest();
+$pos = strpos($blockObj->getIpsTest(), $_SERVER['REMOTE_ADDR']);
+	if ($pos === false) {
+	    echo "<style>
+				#payment-firstData{
+					display:none;
+				}
+			</style>";
+	}
+}

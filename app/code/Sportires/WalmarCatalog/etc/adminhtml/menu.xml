@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+	<menu>
+		<add id="Sportires::top_level" module="Sportires_WalmarCatalog" resource="Magento_Backend::content" sortOrder="900" title="Sportires"/>
+		<add action="catalogwalmart/index/index" id="Sportires_WalmarCatalog::index_index" module="Sportires_WalmarCatalog" parent="Sportires::top_level" resource="Sportires_WalmarCatalog::index_index" sortOrder="900" title="Generador de Catalogo Walmart"/>
+	</menu>
+</config>

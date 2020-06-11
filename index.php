@@ -17,6 +17,14 @@
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
+/**
+ *Banned IP despues modificar para hacer un modulo mejor
+ */
+$banned = array('201.166.190.156','201.102.66.53','172.69.35.53');
+//echo $_SERVER['REMOTE_ADDR'];
+if(in_array($_SERVER['REMOTE_ADDR'], $banned)){
+ 	exit();
+}
 
 try {
     require __DIR__ . '/app/bootstrap.php';
