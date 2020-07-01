@@ -112,35 +112,54 @@ class Index extends \Magento\Framework\View\Element\Template
         $urlsecret = $urlBuinterf->getUrl($url,$params);// this will give you admin secret key
 
         return $urlsecret;
-    }    
+    }   
+
+    public function getMarcasParaMSI(){
+      return array('Michelin','Bfgoodrich');
+    }
 
     public function showPriceInstallments($productId,$qty = null){
   
+    
     $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
     $product = $objectManager->get('Magento\Catalog\Model\Product')->load($productId);
-    $price = $product->getfinalPrice();
-    $installments = explode(',',$this->getMsi());
+    $request = $objectManager->get('Magento\Framework\App\Action\Context')->getRequest();
 
+    $price = $product->getfinalPrice();
+    $marca = $product->getAttributeText('autos_marcas');
+    $type = '';
+    $installments = explode(',',$this->getMsi());
       $priceTemp = 0;
       if($this->getIsActive() == 1){
         if($this->getMsiIsActive() == 1){
           if($qty == null){
             $qty = 1;
           }
-          echo '<strong>Compra a meses</strong><br>';
+
             $commision = explode(',',$this->getMsiComission());
             $i = 0;
             while($i <= count($commision)-1){
-              $priceTemp += ($price * $commision[$i] / 100);
-              $priceTemp += $priceTemp*0.16;
-              
-              $price = $price+$priceTemp;
-              echo '<strong>'.$installments[$i].'</strong> pagos de <strong>$'.number_format(($price/$installments[$i])*$qty,2,'.','').'</strong><br/>';
+
+              if(!in_array($marca,$this->getMarcasParaMSI())){
+                echo '<strong style="color:#243774">COMPRA A MESES<br>CON INTERESES</strong><br>';
+                $priceTemp += ($price * $commision[$i] / 100);
+                $priceTemp += $priceTemp*0.16;
+                $price = $price+$priceTemp;
+                $type = 'MCI';
+              }else{
+                echo '<strong style="color:#E27C7C">COMPRA A MESES<br>SIN INTERESES</strong><br>';
+                $type = 'MSI';
+              }
+            
+              if($request->getFullActionName() == 'catalog_product_view'){
+              echo '<strong>'.$installments[$i].'</strong> pagos de <strong>$'.number_format(($price/$installments[$i])*$qty,2,'.','').'</strong><br/><br/>'.$this->getConditions($type);
+              }
               ++$i;
             }
         }
 
       }
+
     }
 
     public function recalculateCostInQuote($productId,$installment){
@@ -155,11 +174,15 @@ class Index extends \Magento\Framework\View\Element\Template
     $commision = explode(',',$this->getMsiComission());
     $priceTemp = 0;
     $comisionPosition = array_search($installment,$installments);
+    $marca = $product->getAttributeText('autos_marcas');
  
+        if(!in_array($marca,$this->getMarcasParaMSI())){
+
               $priceTemp += ($price * $commision[$comisionPosition] / 100);
               $priceTemp += $priceTemp*0.16;
               
               $price = $price+$priceTemp;
+        }
         
         return $price;     
       }
@@ -170,4 +193,27 @@ class Index extends \Magento\Framework\View\Element\Template
       $storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORE;
         return $this->scopeConfig->getValue('payment/classyllama_llamacoin/ips', $storeScope);     
     } 
+
+    public function getConditions($type){
+      if($type == 'MSI'){
+
+        $out = '<small style="color:#E27C7C; position: absolute; margin-top: 150px; margin-left:-30px;">
+              <ol>
+              <li>MSI Promoción válida únicamente para compras en nuestro sitio web.</li>
+              <li>Está no aplica para ventas en mostrador.</li>
+              <li>Promoción aplica únicamente en llantas de la marca <a href="'.$this->getBaseUrlBlock().'marca/michelin.html">Michelin</a> y <a href="'.$this->getBaseUrlBlock().'marca/bfgoodrich.html">BfGoodrich.</a></li>
+              </ol></small>';
+
+      }else{
+
+        $out = '<small style="color:#E27C7C; position: absolute; margin-top: 180px; margin-left:-30px;">
+              <ol>
+              <li>MCI Promoción válida únicamente para compras en nuestro sitio web.</li>
+              <li>Está no aplica para ventas en mostrador.</li>
+              </ol></small>';
+
+      }
+
+      echo $out;
+    }
 }

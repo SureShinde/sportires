@@ -83,11 +83,14 @@ $baseUrl = $store->getBaseUrl();
 										<span data-bind=""><?=__("None")?></span>
 									</li>
 							<?php foreach ($tire_ratio_collection as $item ):?>
-							<?php if((int)$item["label"] % 5 !== 0){ continue; }?>
+							<?php //if((int)$item["label"] % 5 !== 0){ continue; }?>
 									<li>
 										<span data-bind="<?= $item["value"]?>"><?= $item["label"]?></span>
 									</li>
 							<?php endforeach;?>
+									<li>
+										<span data-bind="Ninguna">R</span>
+									</li>
 							</ul>
 						</div>
 					</div>

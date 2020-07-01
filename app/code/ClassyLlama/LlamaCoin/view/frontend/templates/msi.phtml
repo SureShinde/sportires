@@ -8,3 +8,7 @@
 <script type="text/javascript">
     var my_phtml = <?php echo json_encode($myphtml); ?>;
 </script>
+<?php $test = $block->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("ClassyLlama_LlamaCoin::html/test.phtml")->toHtml(); ?>
+<script type="text/javascript">
+    var my_test = <?php echo json_encode($test); ?>;
+</script>

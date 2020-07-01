@@ -2,7 +2,19 @@
 /**
  * @var $block \ITM\Sportires\Block\Newsearch
  */
+
+
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $request = $objectManager->get('Magento\Framework\App\Action\Context')->getRequest();
+    $noMostrar = array('sportires_product_filterlist','catalog_category_view','checkout_index_index');
+
+    if(!in_array($request->getFullActionName(),$noMostrar)){
 ?>
+<div style="min-height: 125px;"></div>
+<?php
+}
+?>
+
 <div class="new-search">
 	<div class="container">
 		<div class="search-row">
@@ -16,7 +28,7 @@
 					{
 						$blockObj= $block->getLayout()->createBlock('Magento\Catalog\Block\Product\View');
 						$_product = $blockObj->getProduct();
-						echo $_product->getName();
+						//echo $_product->getName();
 					}
 				?>
 			</div>

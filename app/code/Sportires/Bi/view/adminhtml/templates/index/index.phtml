@@ -1,0 +1,335 @@
+<?php
+$hoy = date('Y-m-d');
+
+$selectDays = '<select id="days">
+<option>Seleccione días</option>
+<option>10</option>
+<option>20</option>
+<option>30</option>
+<option>40</option>
+<option>50</option>
+<option>60</option>
+<select>';
+?>
+
+<h1>BI Sportires</h1>
+
+
+<div class="admin__data-grid-header" >
+
+<div class="messages"></div>
+  
+ 
+</div>
+
+
+<div class="admin__content">
+	
+	<ul>
+		
+		<li class="show">
+			<div><h2><strong>Últimas Ordenes</strong></h2>
+				<table class="data-grid">
+					<thead>
+				        <tr>
+							<th class="data-grid-th">
+							    <span class="data-grid-cell-content">Canal de Venta</span>
+							</th>
+							<th class="data-grid-th">
+							    <span class="data-grid-cell-content">Ordenes</span>
+							</th>	
+							<th class="data-grid-th">
+							    <span class="data-grid-cell-content">Fecha</span>
+							</th>
+							<th class="data-grid-th">
+							    <span class="data-grid-cell-content">Forma Pago</span>
+							</th>																				
+						</tr>
+				    </thead>
+				<?php 
+
+					$out = '';
+					$i = 0;
+					foreach($block->getLastOrders() as $order){
+					$action = '';
+					$bgcolor = '';
+					if($hoy == $order['created_at']){
+						$bgcolor = '#00A97A';
+					}
+
+					$out .= '<tr style="background-color:'.$bgcolor.';"><td style="background-color:'.$bgcolor.';">'.$order['canal_compra'].'</td><td style="background-color:'.$bgcolor.';">'.$order['totales'].'</td><td style="background-color:'.$bgcolor.';">'.$order['created_at'].'</td><td style="background-color:'.$bgcolor.';">'.$order['forma_pago'].'</td></tr>';
+
+
+					++$i;
+					}
+
+					echo $out;
+
+				?>
+				</table>
+			</div>
+		</li>
+		<li class="show">
+			<div><h2><strong>TOP 10 Productos más vendidos</strong> <?= $selectDays ?></h2>
+				<table class="data-grid">
+					<thead>
+				        <tr>
+							<th class="data-grid-th">
+							    <span class="data-grid-cell-content">Producto</span>
+							</th>
+							<th class="data-grid-th">
+							    <span class="data-grid-cell-content">Qty</span>
+							</th>	
+							<th class="data-grid-th">
+							    <span class="data-grid-cell-content">Detalle</span>
+							</th>																		
+						</tr>
+				    </thead>
+				    <tbody id='productos-mas-vendidos'>
+				<?php 
+
+					$out = '';
+					$i = 0;
+					foreach($block->getProductsMostSales(10) as $product){
+					$action = '';
+					$bgcolor = '';
+
+					$out .= '<tr style="background-color:'.$bgcolor.';"><td style="background-color:'.$bgcolor.';"><small>'.$product['name'].'<br>'.$product['sku'].'</small></td><td style="background-color:'.$bgcolor.';">'.(int)$product['qty'].'</td><td style="background-color:'.$bgcolor.';"><a href="javascript:void(0);" class="view-detail-pms" data-sku="'.$product['sku'].'">Ver Detalle</a></td></tr>';
+
+
+					++$i;
+					}
+
+					echo $out;
+
+				?>
+					<tbody>
+				</table>
+			</div>
+		</li>
+		<li id="show-details" class="noshow">
+			<h2><strong>Detalles</strong></h2>
+				<table class="data-grid">
+					<thead>
+				        <tr>
+							<th class="data-grid-th">
+							    <span class="data-grid-cell-content">Canal de Venta</span>
+							</th>
+							<th class="data-grid-th">
+							    <span class="data-grid-cell-content">Ordenes</span>
+							</th>	
+							<th class="data-grid-th">
+							    <span class="data-grid-cell-content">Fecha</span>
+							</th>
+							<th class="data-grid-th">
+							    <span class="data-grid-cell-content">Producto</span>
+							</th>	
+							<th class="data-grid-th">
+							    <span class="data-grid-cell-content">Ordenados</span>
+							</th>	
+							<th class="data-grid-th">
+							    <span class="data-grid-cell-content"></span>
+							</th>																																	
+						</tr>
+				    </thead>
+				    <tbody id='productos-details'>
+				   	</tbody>
+				</table>
+							
+		</li>
+		<li class="noshow"><h2><strong>Detalles</strong></h2><ul id="list-orders"></ul></li>
+	</ul>
+</div>
+
+<style>
+	.OrdenesDashBoard2 span{
+		float: left;
+		border: 2px solid #373330;
+  		border-radius: 12px;
+		-webkit-box-shadow: 0px 10px 37px 0px rgba(0,0,0,0.75);
+		-moz-box-shadow: 0px 10px 37px 0px rgba(0,0,0,0.75);
+		box-shadow: 0px 10px 37px 0px rgba(0,0,0,0.75);  	
+		max-width: 30%;		
+		min-width: 30%;
+		margin-left: 2%;
+		margin-top: 20px;
+		max-height: 210px;
+		min-height: 210px;
+		padding-left: 10px;
+		padding-top: 10px;
+	}
+ 
+
+	.OrdenesDashBoard span{
+		float: left;
+		border: 2px solid #373330;
+  		border-radius: 12px;
+		-webkit-box-shadow: 0px 10px 37px 0px rgba(0,0,0,0.75);
+		-moz-box-shadow: 0px 10px 37px 0px rgba(0,0,0,0.75);
+		box-shadow: 0px 10px 37px 0px rgba(0,0,0,0.75);  	
+		max-width: 30%;		
+		min-width: 30%;
+		margin-left: 2%;
+		max-height: 500px;
+		min-height: 500px;
+		padding-left: 10px;
+		padding-top: 10px;
+	}
+
+	.mark{
+		font-size: 80px;
+		text-align: center;
+	}
+
+	.admin__content{
+		max-width: 100%;
+		min-width: 100%;
+	}
+	.admin__content ul{
+		list-style: none;
+	}
+	.admin__content ul li{
+		float: left;
+		max-width: 48%;
+		min-width: 48%;
+	}
+	.admin__content ul li div{
+		max-width: 95%;
+		min-width: 95%;
+		max-height: 690px;
+		min-height: 690px;
+		border: 2px solid #373330;
+  		border-radius: 12px;
+  		margin-top: 35px;
+  		padding-left: 30px;
+  		padding-right: 30px;
+  		padding-top: 30px;
+  	}
+
+  	.noshow{
+  		display:none;
+  	}
+
+  	#list-orders{
+  		margin-left: 30%;
+  		float: none;
+  	}
+
+</style>
+
+
+
+<script>
+    require([
+            'jquery',
+        ],
+        function ($) {
+            $('#days').on('change',function(){
+            	var  days = $(this).val();
+            	if(days == 'Seleccione días'){
+            		days = 10;
+            	}
+                var urlGo = 'bi/index/regenerated';
+                $.ajax({
+                    url: '<?= $block->urlBase('bi/index/regenerated/',NULL); ?>',
+                    dataType: 'json',
+                    type : 'get',
+                    showLoader: true,
+                    async: true,
+                    data: {
+                    	data:'t10ms',
+                        days:days
+                    },
+                    success: function(datas){
+                    	$('#productos-mas-vendidos').html('');
+                    	/*$('.messages').html('');
+                    	$('.messages').append('<div class="message-success success message">El proceso concluyo.</div>');*/
+                    	for(x in datas){
+                    		$('#productos-mas-vendidos').append('<tr><td><small>'+datas[x]['name']+'<br>'+datas[x]['sku']+'</small></td><td>'+parseInt(datas[x]['qty'])+'</td><td><a href="javascript:void(0);" class="view-detail-pms" data-sku="'+datas[x]['sku']+'">Ver Detalle</a></td></tr>');
+                    	}
+
+			            $('.view-detail-pms').on('click',function(){
+			               	$('.noshow').fadeIn();
+			   				$('.show').fadeOut();
+			   				getData($,$(this).data('sku'));
+			            });
+
+                    }
+                });
+            });
+
+
+            $('.view-detail-pms').on('click',function(){
+               	$('.noshow').show().fadeIn();
+   				$('.show').fadeOut();
+   				getData($,$(this).data('sku'));
+            });
+
+        }
+    );
+
+    function getData($,sku){
+
+        var  days = $('#days').val();
+    	if(days == 'Seleccione días'){
+    		days = 10;
+    	}    	
+		$.ajax({
+            url: '<?= $block->urlBase('bi/index/regenerated/',NULL); ?>',
+            dataType: 'json',
+            type : 'get',
+            showLoader: true,
+            async: true,
+            data: {
+            	data:'sdp',
+                sku:sku,
+                days:days
+            },
+            success: function(datas){
+     			$('#productos-details').html('');
+     			var pay = '';
+            	for(x in datas){
+
+            		if(datas[x]['canal_compra'] == 'SPORTIRES'){
+            			pay = '000';
+            		}else if(datas[x]['canal_compra'] == 'MERCADO LIBRE'){
+            			pay = 'MLIB';
+            		}else if(datas[x]['canal_compra'] == 'AMAZON'){
+            			pay = 'AMZN';
+            		}else if(datas[x]['canal_compra'] == 'WALMART'){
+            			pay = 'WALM';
+            		}
+
+
+            		$('#productos-details').append('<tr><td><small>'+datas[x]['canal_compra']+'</small></td><td>'+parseInt(datas[x]['totales'])+'</td><td><small>'+datas[x]['created_at']+'</small></td><td><small>'+datas[x]['name']+'<br>'+sku+'</small></td><td><small>'+parseInt(datas[x]['productos'])+'</small></td><td><a href="javascript:void(0);" class="view-detail-ord" data-sku="'+sku+'" data-date="'+datas[x]['created_at']+'" data-pay="'+pay+'">Ver Ordenes</a></td></tr>');
+            	}
+
+            	$('.view-detail-ord').on('click',function(){
+            			$('#list-orders').html('');
+						$.ajax({
+				            url: '<?= $block->urlBase('bi/index/regenerated/',NULL); ?>',
+				            dataType: 'json',
+				            type : 'get',
+				            showLoader: true,
+				            async: true,
+				            data: {
+				            	data:'do',
+				                sku:$(this).data('sku'),
+				                date:$(this).data('date'),
+				                pay:$(this).data('pay')
+				            },
+				            success: function(datas){
+				            	//for(x in datas){
+				            		//sales/order/view/order_id/7064/key/55195f2dfbc9ea567475be250cf5b3190aa850bb19a3ee4fe426f420f326cff1/
+				            		$('#list-orders').append(datas['li']);
+				            	//}
+				            }
+				        });
+
+            	});
+
+            }
+        });    	
+    }
+
+</script>

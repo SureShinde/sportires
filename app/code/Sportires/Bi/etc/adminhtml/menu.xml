@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+<menu>
+   <add id="Sportires_Bi::parent"
+   title="BI Sportires" 
+   module="Sportires_Bi" sortOrder="100"
+   resource="Magento_Sales::sales" parent="Magento_Sales::sales" />
+
+    <add id="Sportires_Bi::index_index" 
+     title="BI Sportires" 
+     module="Sportires_Bi" sortOrder="10" 
+     action="bi/index/index"
+     resource="Magento_Sales::manage" 
+     parent="Sportires_Bi::parent"/>
+
+</menu>
+</config>
+

@@ -41,12 +41,12 @@ while($i <= count($msi)-1){
             </div>
         </div>
     </div>
-
     <script type="text/javascript">
     require(
         ['jquery',
         'Magento_Checkout/js/action/get-totals',
-        'Magento_Customer/js/customer-data'
+        'Magento_Customer/js/customer-data',
+        'Magestat_FacebookPixel/js/pixel-code'
         ],
         function($, getTotalsAction, customerData){
           $('#classyllama_llamacoin_msi').on('change',function(){
@@ -72,6 +72,7 @@ while($i <= count($msi)-1){
           });
 
           $('.radio').on('click',function(){
+
                     $.ajax({
                     url: '<?=  $blockObj->urlBaseCC('firstdata/index/recalculate/',NULL); ?>',
                     dataType: 'json',

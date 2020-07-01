@@ -59,7 +59,7 @@ require([
     'jquery'
 ], function ($) {
     $(document).ready(function(){
-
+        $(document).scrollTop(2);
         $("body").addClass("<?php echo $page_layout; ?>");
         $("body").addClass("<?php echo $boxed; ?>");
     <?php if ($this->getConfig('porto_settings/header/mobile_sticky_header')): ?>
@@ -78,6 +78,7 @@ require([
 <?php if ($this->getConfig('porto_settings/header/sticky_header')): ?>
     var scrolled = false;
     $(window).scroll(function(){
+        //console.log('scrolleando '+window.scrollY);
         if(!$('.page-header').hasClass('type10') && !$('.page-header').hasClass('type22')) {
             if($(window).width()>=768){
                 if(140<$(window).scrollTop() && !scrolled){
@@ -155,6 +156,15 @@ require([
         }
     });
 <?php endif; ?>
+        $(window).scroll(function(){
+            //console.log('scrolleando '+window.scrollY);
+            if(window.scrollY >= 1000){
+                $('#top-calificaciones').fadeOut(1000);
+            }else if(window.scrollY <= 999){
+                $('#top-calificaciones').fadeIn(1000);
+            }
+        });
+
 });
 </script>
 <?php if($this->getConfig('porto_settings/general/smartlayers')): ?>
@@ -166,7 +176,7 @@ require([
     }
 
     .sidebar.sidebar-main{
-        position:fixed !important;
+        /*position:fixed !important;*/
         display:block !important;
         border:0px;
         max-width: 13%;
@@ -174,7 +184,16 @@ require([
         background-color: rgba(255, 255, 255, 0.7);
         z-index: 0;
         font-size: 12px !important;
+        top: 10px;
     }
+
+    .sidebar-main{
+       position:absolute !important;
+       max-width: 20% !important;
+       min-width: 20% !important;
+       top: 10px;
+    }
+
     .sidebar.sidebar-main div div div {
         font-size: 12px !important;
     }
@@ -182,5 +201,64 @@ require([
         background-color: #fff;
         z-index: 5;   
     }
+
+    .level0:hover {
+        border: 0px solid #fff !important;
+        background-color: #fff !important;
+    }
+
+    .itm.filter_tire_tab_main{
+        -webkit-box-shadow: 2px 3px 17px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 2px 3px 17px 0px rgba(0,0,0,0.75);
+        box-shadow: 2px 3px 17px 0px rgba(0,0,0,0.75);
+        margin-top: -40px;
+    }
+
+    .add-to-cart-popup{
+        top: 20% !important;
+    }
+    #top-calificaciones{
+        display:none;
+    }
+    #top-calificaciones img{
+        display:none;
+    }
+
+@media (min-width: 768px){
+    .left-img img {
+        top: -10px !important;
+        left: 0px !important;
+        min-width: 100%;
+        max-height: 540px;
+    }
+    .showonmobile{
+        display:none;
+    }
+    /*#top-calificaciones{
+        position: fixed;
+        bottom:0;
+        z-index:2000;
+        margin-left: 85%;
+    }
+    #top-calificaciones img{
+        max-width: 100px;
+        background-color: #fff;
+        -webkit-box-shadow: 2px 3px 17px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 2px 3px 17px 0px rgba(0,0,0,0.75);
+        box-shadow: 2px 3px 17px 0px rgba(0,0,0,0.75);        
+    }    */
+}
+@media (max-width: 767px){
+    .left-img img {
+        top: 10px !important;
+        left: 0px !important;
+        min-width: 100%;
+        max-height: 540px;
+    }
+    .showondescktop{
+        display:none;
+    }
+
+}
 
 </style>

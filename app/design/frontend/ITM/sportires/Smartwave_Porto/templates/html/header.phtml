@@ -1,3 +1,4 @@
+
 <?php
     $header_type = $this->getConfig('porto_settings/header/header_type');
     $header_new_skin = $this->getConfig('porto_settings/header/new_skin');
@@ -16,11 +17,11 @@
 
 ?>
 <script>
-    
     var mageplazaSearchProducts = '';
 </script>
 <div class="head_wrap_custom">
-<header class="page-header type<?php echo $header_type; ?> <?php echo $class;?>" >
+
+<header class="page-header type<?php echo $header_type; ?> <?php echo $class;?> sticky-small" >
 <?php echo $this->getChildHtml("header_customer_form_login"); ?>
 <?php if($header_type == 3 || $header_type == 4 || $header_type == 9): ?>
     <div class="header content">
@@ -294,7 +295,7 @@
         </div>
     </div>
 <?php elseif($header_type == 2 && isset($header_new_skin) && $header_new_skin): ?>
-
+    
     <div class="main-panel-top">
         <div class="container">
             <div class="main-panel-inner">
@@ -326,7 +327,6 @@
 		</div>
 		<div class="search_header  col-xs-3 col-sm-5 col-md-3">
 		 <?php echo $this->getChildHtml("top.search"); ?>
-         <?php //echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Amasty_SocialLogin::social.phtml")->toHtml(); ?>
  		 <div class="mobile_only_minicart">
 			<?php echo $this->getChildHtml("minicart"); ?> 
 		</div>
@@ -442,7 +442,11 @@
     </div>
     <?php echo $this->getChildHtml("navigation.sections"); ?>
 <?php endif; ?>
+
+
+
 </header>
+
 </div>
 
 
@@ -520,14 +524,14 @@ require([
     $(function(){
         var intFrameWidth = window.innerWidth;
         if(intFrameWidth > 767){
-         var shrinkHeader = 2;
+         var shrinkHeader = 6;
           $(window).scroll(function() {
             var scroll = getCurrentScroll();
               if ( scroll >= shrinkHeader ) {
                    $('header').addClass('sticky-small');
                 }
                 else {
-                    $('header').removeClass('sticky-small');
+                    //$('header').removeClass('sticky-small');
                 }
           });
         function getCurrentScroll() {
@@ -603,7 +607,8 @@ require([
              }, 100);
         });
 
-     });
+     }); 
+
     $('a').on('click',function(){
 
         if($(this).attr('href').indexOf('phone=5215536558444') > 0){
@@ -613,3 +618,7 @@ require([
     });
 });
 </script>
+<div id="top-calificaciones">
+<img src="<?= $baseUrl; ?>pub/media/wysiwyg/headertop/google.png" alt="" title="Nuestro ranking en Google."/>
+<img src="<?= $baseUrl; ?>pub/media/wysiwyg/headertop/amazon.png" alt="" title="Nuestro ranking en como vendedor en Amazon." />   
+</div>

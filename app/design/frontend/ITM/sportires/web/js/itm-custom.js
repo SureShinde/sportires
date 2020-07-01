@@ -1,7 +1,8 @@
 require([
-  "jquery"
+  "jquery",
+  "mage/url",
 ], 
-function($) {
+function($, url) {
   "use strict";
 
     const store = 'pub/media/sportires/map/stores.json';
@@ -77,10 +78,11 @@ function($) {
             var codigo = $(this).val();
 
             if(codigo.toString().length >= 5){
-               $.get("https://api-codigos-postales.herokuapp.com/v2/codigo_postal/" + codigo.toString(), function(data, status){
+               $.get(url.build('sepomex/index/index/') + '?zip=' + codigo.toString(), function(data, status){
                    $("input[name='city']").val(data.municipio);
                    $("input[name='region']").val(data.estado);
                    $("div[name='shippingAddress.region_id'] select.select").val(states[data.estado]).change();
+                   $("input[name='street[1]']").val(data.colonia);
                    $("input[name='city']").keyup();
                    $("input[name='region']").keyup();
                  });  
@@ -105,6 +107,7 @@ function($) {
       };
   
           $.getJSON(store, function(data) {
+            var i = 0;
            $.each(data.features, function(key, val){
              const id = 'sucursal' + key;
              const category = val.properties.category;
@@ -112,16 +115,33 @@ function($) {
              const description = val.properties.description;
              const hours = val.properties.hours;
              const phone = val.properties.phone;
+             const ci = val.properties.ci;
+             console.log('CI +++ '+ci);
+            
+             if(ci == '1'){
+              if(i == 0){
+                $("#sucursales").append('<h3 class="card bg-info mb-3" style="background-color:#6a71f7; color:#FFF; text-align:center;">CENTROS DE INSTALACIÓN ASOCIADO</h3>');
+              }
+              ++i;
+            $("#sucursales").append('<div id="' + id  +'" class="card bg-info mb-3" style="background-color:#fcbaba;">\
+              <div class="card-header">' + name + '</div><div class="card-body">\
+              <h5 class="card-title">' + hours  + '</h5><p class="card-text">\
+              ' + description + '</p></div></div>');
+             }else{
             $("#sucursales").append('<div id="' + id  +'" class="card bg-info mb-3">\
               <div class="card-header">' + name + '</div><div class="card-body">\
               <h5 class="card-title">' + hours  + '</h5><p class="card-text">\
               ' + description + '</p></div></div>');
+             }
                $("#" + id ).click(function(){
-                 map.setZoom(15);
-                 map.setCenter({
-                   lat : val.geometry.coordinates[1],
-                   lng : val.geometry.coordinates[0]
-                 });
+
+                if(val.geometry.coordinates[1] != ''){
+                  map.setZoom(15);
+                  map.setCenter({
+                    lat : val.geometry.coordinates[1],
+                    lng : val.geometry.coordinates[0]
+                  });
+                }
                });
            });
           });   

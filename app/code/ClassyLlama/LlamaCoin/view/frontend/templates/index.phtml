@@ -6,28 +6,66 @@ $total = number_format($this->getTotalToPay(),2,'.','');
 
 $msi = ($this->getRequest()->getParam('ccMsi') != 'undefined')?$this->getRequest()->getParam('ccMsi'):'0';
 
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$cart = $objectManager->get('\Magento\Checkout\Model\Cart');
+
+$quote = $cart->getQuote();
+$customerName = $quote->getShippingAddress()->getFirstname().' '.$quote->getShippingAddress()->getLastname();
+$customerEmail = $quote->getShippingAddress()->getEmail();
+$customerTelephone = $quote->getShippingAddress()->getTelephone();
+$customerAddress = $quote->getShippingAddress()->getStreet();
+$customerCity = $quote->getShippingAddress()->getCity();
+$customerState = $quote->getShippingAddress()->getRegion();
+$customerZip = $quote->getShippingAddress()->getPostcode();
+$address1 = '';
+if(!empty($customerAddress[0])){
+	$address1 = $customerAddress[0];
+}
+$address2 = '';
+if(!empty($customerAddress[1])){
+	$address2 = $customerAddress[1];
+}
 ?>
-<form method="post" action="<?= $this->getUrlFirstData(); ?>" name="firstDataForm" id="firstDataForm" style="display:block">
-	<input type="text" name="txntype" value="sale">
-	<input type="text" name="timezone" value="America/Mexico_City"/>
-	<input type="text" name="txndatetime" value="<?= $dateTime; ?>"/>
-	<input type=text name="hash_algorithm" value="SHA256"/>
-	<input type="text" name="hash" value="<?= createHash($total, "484", $dateTime, $this->getStoreIdFirstData(), $this->getSharedFirstData()); ?>"/>
-	<input type="text" name="storename" value="3910030" />
-	<input type="text" name="mode" value="payonly"/>
-	<input type="text" name="paymentMethod" value="<?= substr($this->getRequest()->getParam('ccType'),0,1); ?>"/>
-	<input type="text" name="chargetotal" value="<?= $total; ?>" />
-	<input type="text" name="currency" value="484"/>
+<form method="post" action="<?= $this->getUrlFirstData(); ?>" name="firstDataForm" id="firstDataForm" style="display:none">
+	<input type="hidden" name="txntype" value="sale">
+	<input type="hidden" name="timezone" value="America/Mexico_City"/>
+	<input type="hidden" name="txndatetime" value="<?= $dateTime; ?>"/>
+	<input type=hidden name="hash_algorithm" value="SHA256"/>
+	<input type="hidden" name="hash" value="<?= createHash($total, "484", $dateTime, $this->getStoreIdFirstData(), $this->getSharedFirstData()); ?>"/>
+	<input type="hidden" name="storename" value="6200027" />
+	<input type="hidden" name="mode" value="payonly"/>
+	<input type="hidden" name="paymentMethod" value="<?= substr($this->getRequest()->getParam('ccType'),0,1); ?>"/>
+	<input type="hidden" name="chargetotal" value="<?= $total; ?>" />
+	<input type="hidden" name="currency" value="484"/>
 	<!--input type="hidden" name="authenticateTransaction" value="false"/-->
-	<input type="text" name="oid" value="<?= $this->getReservedId(); ?>"/>
-	<input type="text" name="cardnumber" value="<?= $this->getRequest()->getParam('ccNumber'); ?>"/>
-	<input type="text" name="expmonth" value="<?= str_pad($this->getRequest()->getParam('ccExpitation'), 2, "0", STR_PAD_LEFT); ?>"/>
-	<input type="text" name="expyear" value="<?= $this->getRequest()->getParam('ccExpitationyr'); ?>"/>
-	<input type="text" name="cvm" value="<?= $this->getRequest()->getParam('ccCid'); ?>"/>
-	<input type="text" name="responseSuccessURL" value="<?= $this->getUrlSuccess().'&form_key='.$block->getKeytoForm(); ?>"/>
-	<input type="text" name="responseFailURL" value="<?= $this->getUrlFail().'&form_key='.$block->getKeytoForm(); ?>"/>
-	<input type="text" name="numberOfInstallments" value="<?= $msi; ?>"/>
-	<input type="submit" value="Procesar" style="display:block">
+	<input type="hidden" name="oid" value="<?= $this->getReservedId(); ?>"/>
+	<input type="hidden" name="cardnumber" value="<?= $this->getRequest()->getParam('ccNumber'); ?>"/>
+	<input type="hidden" name="expmonth" value="<?= str_pad($this->getRequest()->getParam('ccExpitation'), 2, "0", STR_PAD_LEFT); ?>"/>
+	<input type="hidden" name="expyear" value="<?= $this->getRequest()->getParam('ccExpitationyr'); ?>"/>
+	<input type="hidden" name="cvm" value="<?= $this->getRequest()->getParam('ccCid'); ?>"/>
+	<input type="hidden" name="responseSuccessURL" value="<?= $this->getUrlSuccess().'&form_key='.$block->getKeytoForm(); ?>"/>
+	<input type="hidden" name="responseFailURL" value="<?= $this->getUrlFail().'&form_key='.$block->getKeytoForm(); ?>"/>
+	<input type="hidden" name="numberOfInstallments" value="<?= $msi; ?>"/>
+
+	<!--input type="hidden" name="bname" value="<?= $customerName; ?>"/-->
+	<input type="hidden" name="email" value="<?= $customerEmail; ?>"/>
+	<input type="hidden" name="phone" value="<?= $customerTelephone; ?>"/>
+	<!--input type="hidden" name="baddr1" value="<?= $address1; ?>"/-->
+	<!--input type="hidden" name="baddr2" value="<?= $address2; ?>"/-->
+	<!--input type="hidden" name="bcity" value="<?= $customerCity; ?>"/-->
+	<!--input type="hidden" name="bstate" value="<?= $customerState; ?>"/-->
+	<!--input type="hidden" name="bcountry" value="MX"/-->
+	<!--input type="hidden" name="bzip" value="<?= $customerZip; ?>"/-->
+
+	<input type="hidden" name="sname" value="<?= $customerName; ?>"/>
+	<input type="hidden" name="saddr1" value="<?= $address1; ?>"/>
+	<input type="hidden" name="saddr2" value="<?= $address2; ?>"/>
+	<input type="hidden" name="scity" value="<?= $customerCity; ?>"/>
+	<input type="hidden" name="sstate" value="<?= $customerState; ?>"/>
+	<input type="hidden" name="scountry" value="MX"/>
+	<input type="hidden" name="szip" value="<?= $customerZip; ?>"/>
+
+	<input type="submit" value="Procesar" style="display:none">
 </form>
 
 <?php
@@ -49,8 +87,8 @@ return hash("sha256", $ascii);
         ['jquery'],
         function($){
           $('.head_wrap_custom').hide();
-          //document.getElementById("firstDataForm").submit();
-          console.log('submit pay method');
+          document.getElementById("firstDataForm").submit();
+          //console.log('submit pay method');
         }
     );
 </script>

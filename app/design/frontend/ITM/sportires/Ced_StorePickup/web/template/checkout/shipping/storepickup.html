@@ -1,0 +1,19 @@
+<div id="carrier-stores-list-wrapper" data-bind="visible: selectedMethod() == 'storepickupshipping_storepickupshipping'">
+	<div data-bind="visible: getStores().length>0">
+		<span data-bind="i18n: 'Seleccione tienda :'"></span>
+		<select style="width: 40%" id="carrier-store-list" data-bind="options: getStores(),
+	                                        optionsValue: 'id',
+	                                        optionsText: 'title',
+	                                        optionsCaption: $t('--Seleccione una tienda--'),
+	                                        value: 'stores',
+	                                        event:{ change: getStoreOffDays}" >
+		</select>
+		<a href="#" data-bind="event:{ click: showMap}">Clic para ver mapa</a>
+
+		<div id="oneValue">
+		</div>
+		<div id="mapValue">
+		</div>
+	</div>
+</div>
+	

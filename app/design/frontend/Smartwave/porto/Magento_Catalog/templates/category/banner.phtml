@@ -1,8 +1,10 @@
-<?php
-    $_category_desc = $this->helper('Smartwave\Porto\Helper\Data')->getConfig('porto_settings/category/category_description');
-?>
-<?php if ($_category_desc == "full_width" && $_description = $block->getCurrentCategory()->getDescription()): ?>
+<?php if (!empty($block->getCurrentCategory()->getLandingPage())): ?>
     <div class="category-description no-margin">
-        <?php echo $this->helper('Magento\Catalog\Helper\Output')->categoryAttribute($block->getCurrentCategory(), $_description, 'description') ?>
+    	<?php
+    	echo $this->getLayout()
+->createBlock('Magento\Cms\Block\Block')
+->setBlockId($block->getCurrentCategory()->getLandingPage())
+->toHtml();
+		?>
     </div>
 <?php endif; ?>
