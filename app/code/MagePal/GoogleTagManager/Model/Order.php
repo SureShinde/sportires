@@ -216,6 +216,11 @@ class Order extends DataObject
         /* @var Item $item */
         $products = [];
         foreach ($order->getAllVisibleItems() as $item) {
+
+            $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+            $product = $objectManager->create('Magento\Catalog\Model\Product')->load($item->getProductId());
+
+
             $product = [
                 'sku' => $item->getSku(),
                 'id' => $item->getSku(),
@@ -232,6 +237,15 @@ class Order extends DataObject
                 'discount_percent' => $this->gtmHelper->formatPrice($item->getDiscountPercent()),
                 'tax_amount' => $this->gtmHelper->formatPrice($item->getTaxAmount()),
                 'is_virtual' => $item->getIsVirtual() ? true : false,
+                'marca' => $product->getAttributeText('autos_marcas'),
+                'modelo' => $product->getAttributeText('modelos'),
+                'modelo_ancho' => $product->getAttributeText('tire_width'),
+                'perfil_serie' => $product->getAttributeText('tire_ratio'),
+                'rin' => $product->getAttributeText('tire_diameter'),
+                'treadwear' => $product->getAttributeText('treadwear'),
+                'rango_carga' => $product->getAttributeText('carga_s'),
+                'velocidad' => $product->getAttributeText('velocidad_s'),
+                'run_flat' => $product->getAttributeText('run_flat')                     
             ];
 
             if ($variant = $this->dataLayerItemHelper->getItemVariant($item)) {

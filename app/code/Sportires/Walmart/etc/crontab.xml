@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+	<group id="default">
+		<job instance="Sportires\Walmart\Cron\Sportireswalmartorder" method="execute" name="sportires_walmart_sportireswalmartorder">
+			<schedule>*/10 * * * *</schedule>
+		</job>
+		<!--job instance="Sportires\Walmart\Cron\Sportireswalmartprice" method="execute" name="sportires_walmart_sportireswalmartprice">
+			<schedule>*/10 * * * *</schedule>
+		</job-->
+		<job instance="Sportires\Walmart\Cron\Sportireswalmartstock" method="execute" name="sportires_walmart_sportireswalmartstock">
+			<schedule>*/10 * * * *</schedule>
+		</job>
+		<!--job instance="Sportires\Walmart\Cron\Sportireswalmartproducts" method="execute" name="sportires_walmart_sportireswalmartproducts">
+			<schedule>*/10 * * * *</schedule>
+		</job-->
+		<job instance="Sportires\Walmart\Cron\Sportireswalmartfeeds" method="execute" name="sportires_walmart_sportireswalmartfeeds">
+			<schedule>*/10 * * * *</schedule>
+		</job>		
+	</group>
+</config>

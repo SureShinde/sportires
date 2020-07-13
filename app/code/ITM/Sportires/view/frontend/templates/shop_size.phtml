@@ -44,6 +44,9 @@ $baseUrl = $store->getBaseUrl();
 										<span data-bind=""><?=__("None")?></span>
 									</li>
 							<?php foreach ($tire_width_collection as $item ):?>
+								<?php
+								$noShow = array('160','180','190');
+								 if(in_array($item["label"],$noShow)){ continue; } ?>
 									<li>
 										<span data-bind="<?= $item["value"]?>"><?= $item["label"]?></span>
 									</li>
@@ -83,7 +86,9 @@ $baseUrl = $store->getBaseUrl();
 										<span data-bind=""><?=__("None")?></span>
 									</li>
 							<?php foreach ($tire_ratio_collection as $item ):?>
-							<?php //if((int)$item["label"] % 5 !== 0){ continue; }?>
+								<?php
+								$noShow = array('54','82','R');
+								 if(in_array($item["label"],$noShow)){ continue; } ?>
 									<li>
 										<span data-bind="<?= $item["value"]?>"><?= $item["label"]?></span>
 									</li>

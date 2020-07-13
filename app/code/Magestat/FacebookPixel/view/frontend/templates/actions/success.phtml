@@ -8,7 +8,8 @@
             "currency": "<?= /* @noEscape */ $block->getCurrencyCode() ?>",
             "contents": <?= /* @noEscape */ $block->getCartContent() ?>,
             "contentIds": <?= /* @noEscape */ $block->getSkuList() ?>,
-            "total": "<?= /* @noEscape */ $block->getCheckoutTotal() ?>"
+            "total": "<?= /* @noEscape */ $block->getCheckoutTotal() ?>",
+            "qty": <?= /* @noEscape */ $block->getCheckoutQty() ?>
         }
     }
 }

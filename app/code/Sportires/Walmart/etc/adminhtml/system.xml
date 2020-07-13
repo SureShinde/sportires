@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<tab id="sportires" sortOrder="999" translate="label">
+			<label>sportires</label>
+		</tab>
+		<section id="marketplaces" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+			<label>Marketplaces</label>
+			<tab>sportires</tab>
+			<resource>Sportires_Walmart::config_sportires_walmart</resource>
+			<group id="walmart" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+				<label>Walmart</label>
+				<field id="is_active" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="select">
+					<label>activo</label>
+					<comment/>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="url_service" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="text">
+					<label>URL de servicio</label>
+					<comment/>
+				</field>
+				<field id="client_id" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="text">
+					<label>Cliente ID</label>
+					<comment/>
+				</field>
+				<field id="client_secret" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="text">
+					<label>Client Secret</label>
+					<comment/>
+				</field>
+				<!--field id="token" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="text">
+					<label>token</label>
+					<comment/>
+				</field>
+				<field id="other" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="text">
+					<label>other</label>
+					<comment/>
+				</field-->
+			</group>
+		</section>
+	</system>
+</config>

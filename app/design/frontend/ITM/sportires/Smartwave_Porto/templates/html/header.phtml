@@ -512,7 +512,7 @@ require([
                    $('header').addClass('shrink');
                 }
                 else {
-                    $('header').removeClass('shrink');
+                    //$('header').removeClass('shrink');
                 }
           });
         function getCurrentScroll() {
@@ -525,15 +525,16 @@ require([
         var intFrameWidth = window.innerWidth;
         if(intFrameWidth > 767){
          var shrinkHeader = 6;
-          $(window).scroll(function() {
+         $('header').addClass('sticky-small');
+          /*$(window).scroll(function() {
             var scroll = getCurrentScroll();
               if ( scroll >= shrinkHeader ) {
                    $('header').addClass('sticky-small');
                 }
                 else {
-                    //$('header').removeClass('sticky-small');
+                    $('header').removeClass('sticky-small');
                 }
-          });
+          });*/
         function getCurrentScroll() {
             return window.pageYOffset || document.documentElement.scrollTop;
             }
@@ -609,13 +610,13 @@ require([
 
      }); 
 
-    $('a').on('click',function(){
+    /*$('a').on('click',function(){
 
         if($(this).attr('href').indexOf('phone=5215536558444') > 0){
             console.log('Esto es Whatsapp');
                 fbq('track', 'Contact');
         }
-    });
+    });*/
 });
 </script>
 <div id="top-calificaciones">

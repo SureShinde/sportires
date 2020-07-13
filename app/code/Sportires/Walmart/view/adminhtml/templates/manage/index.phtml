@@ -1,0 +1,229 @@
+<h1>Administrador de Walmart</h1>
+
+
+<div class="admin__data-grid-header" >
+
+<div class="messages"></div>
+  
+ 
+</div>
+
+
+<div class="admin__content">
+	
+	<ul>
+		
+		<li>
+			<div><h2><strong>Crones</strong></h2>
+				<table class="data-grid">
+					<thead>
+				        <tr data-bind="foreach: {data: getVisible(), as: '$col'}">
+							<th class="data-grid-th">
+							    <span class="data-grid-cell-content" data-bind="i18n: label">Cron</span>
+							</th>
+							<th class="data-grid-th">
+							    <span class="data-grid-cell-content" data-bind="i18n: label">Estatus</span>
+							</th>	
+							<th class="data-grid-th">
+							    <span class="data-grid-cell-content" data-bind="i18n: label">Acción</span>
+							</th>													
+						</tr>
+				    </thead>
+				<?php 
+
+					$out = '';
+					$i = 0;
+					$conUrl = '';
+					foreach($block->getStatusCronsWalmart() as $cron){
+					$action = '';
+					$bgcolor = '';
+						$status = $cron['status'];
+						$code = $cron['job_code'];
+
+					switch($cron['job_code']){
+						case 'sportires_walmart_sportireswalmartorder':
+							$cron_name = 'Sincronizar Ordenes';
+							$cronUrl = $block->urlBase('walmart/manage/orders/',NULL);
+						break;
+						case 'sportires_walmart_sportireswalmartprice':
+							$cron_name = 'Sincronizar Precios';
+							$cronUrl = $block->urlBase('walmart/manage/prices/',NULL);
+						break;
+						case 'sportires_walmart_sportireswalmartproducts':
+							$cron_name = 'Sincronizar Productos';
+							$cronUrl = $block->urlBase('walmart/manage/products/',NULL);
+						break;
+						case 'sportires_walmart_sportireswalmartstock':
+							$cron_name = 'Sincronizar Inventario';
+							$cronUrl = $block->urlBase('walmart/manage/stock/',NULL);
+						break;						
+					}
+
+						if($status === 'pending'){
+							$action = '<button id="add-'.$i.'" title="Correr Cron" type="button" class="action- primary proccess-cron" data-url="'.$cronUrl.'" data-ui-id="'.$code.'">
+										    <span>Procesar</span>
+										</button>';
+						}
+						if($status === 'running'){
+							$bgcolor = '#00A97A';
+						}
+					$out .= '<tr style="background-color:'.$bgcolor.';"><td style="background-color:'.$bgcolor.';">'.$cron_name.'</td><td style="background-color:'.$bgcolor.';">'.$status.'<br><small>'.$cron['scheduled_at'].'</small></td><td style="background-color:'.$bgcolor.';">'.$action.'</td></tr>';
+
+
+					++$i;
+					}
+
+					echo $out;
+				?>
+				</table>
+			</div>
+		</li>
+		<li>
+			<div class="OrdenesDashBoard"><h2><strong>Ordenes</strong></h2>
+			<?php 
+			$orders = $block->getDetailCronOrders();
+			?>
+					<span><h3>Ordenes Procesadas</h3><p class="mark"><?= $orders['items'];?></p></span>
+					<span><h3>Ordenes con Error</h3><p class="mark"><?= $orders['items_error'];?></p></span>
+					<span><h3>Ordenes Correctas</h3><p class="mark"><?= $orders['items_success'];?></p></span>
+
+			</div>
+		</li>
+		<li>
+			<div class="OrdenesDashBoard"><h2><strong>Productos</strong></h2>
+			<?php 
+			$products = $block->getDetailCronProducts();
+			?>
+					<span><h3>Productos Procesados</h3><p class="mark"><?= $products['items'];?></p></span>
+					<span><h3>Productos con Error</h3><p class="mark"><?= $products['items_error'];?></p></span>
+					<span><h3>Productos Correctos</h3><p class="mark"><?= $products['items_success'];?></p></span>
+
+			</div>
+		</li>
+		<li>
+			<div class="OrdenesDashBoard2"><h2><strong>Inventario/Precios</strong></h2>
+			<?php 
+			$stock = $block->getDetailCronStock();
+			$price = $block->getDetailCronPrice();
+			?>
+					<span><h3>Stock Procesado</h3><p class="mark"><?= $stock['items'];?></p></span>
+					<span><h3>Stock con Error</h3><p class="mark"><?= $stock['items_error'];?></p></span>
+					<span><h3>Stock Correctos</h3><p class="mark"><?= $stock['items_success'];?></p></span>
+					<span><h3>Precio Procesado</h3><p class="mark"><?= $price['items'];?></p></span>
+					<span><h3>Precio con Error</h3><p class="mark"><?= $price['items_error'];?></p></span>
+					<span><h3>Precio Correctos</h3><p class="mark"><?= $price['items_success'];?></p></span>
+			</div>
+		</li>
+	</ul>
+</div>
+
+<style>
+	.OrdenesDashBoard2 span{
+		float: left;
+		border: 2px solid #373330;
+  		border-radius: 12px;
+		-webkit-box-shadow: 0px 10px 37px 0px rgba(0,0,0,0.75);
+		-moz-box-shadow: 0px 10px 37px 0px rgba(0,0,0,0.75);
+		box-shadow: 0px 10px 37px 0px rgba(0,0,0,0.75);  	
+		max-width: 30%;		
+		min-width: 30%;
+		margin-left: 2%;
+		margin-top: 20px;
+		max-height: 210px;
+		min-height: 210px;
+		padding-left: 10px;
+		padding-top: 10px;
+	}
+ 
+
+	.OrdenesDashBoard span{
+		float: left;
+		border: 2px solid #373330;
+  		border-radius: 12px;
+		-webkit-box-shadow: 0px 10px 37px 0px rgba(0,0,0,0.75);
+		-moz-box-shadow: 0px 10px 37px 0px rgba(0,0,0,0.75);
+		box-shadow: 0px 10px 37px 0px rgba(0,0,0,0.75);  	
+		max-width: 30%;		
+		min-width: 30%;
+		margin-left: 2%;
+		max-height: 500px;
+		min-height: 500px;
+		padding-left: 10px;
+		padding-top: 10px;
+	}
+
+	.mark{
+		font-size: 80px;
+		text-align: center;
+	}
+
+	.admin__content{
+		max-width: 100%;
+		min-width: 100%;
+	}
+	.admin__content ul{
+		list-style: none;
+	}
+	.admin__content ul li{
+		float: left;
+		max-width: 48%;
+		min-width: 48%;
+	}
+	.admin__content ul li div{
+		max-width: 95%;
+		min-width: 95%;
+		max-height: 600px;
+		min-height: 600px;
+		border: 2px solid #373330;
+  		border-radius: 12px;
+  		margin-top: 35px;
+  		padding-left: 30px;
+  		padding-right: 30px;
+  		padding-top: 30px;
+  	}
+
+</style>
+
+
+
+<script>
+    require([
+            'jquery',
+        ],
+        function ($) {
+            $('.proccess-cron').on('click',function(){
+
+            	$('.messages').append('<div class="message-success success message">iniciando manualmente proceso.</div>');
+
+                var urlGo = $(this).attr('data-url');
+                var cron = $(this).attr('data-ui-id');
+                $.ajax({
+                    url: urlGo,
+                    dataType: 'json',
+                    type : 'get',
+                    showLoader: true,
+                    async: true,
+                    data: {
+                        cron:cron
+                    },
+                    success: function(data){
+
+                    	$('.messages').html('');
+                    	$('.messages').append('<div class="message-success success message">El proceso concluyo.</div>');
+                     /* if(data.ok == 'OK'){
+                        $('#pannel-merchant-alerts').append('<div class="message-error error message">La orden ya fue facturada previamente, no es posible generar nuevamente una factura esta es la informacion de la misma SERIE '+data.message+'</div>');
+                        $('#form-invoice').hide();
+                      }else{
+                        $('#pannel-merchant-alerts').append('<div class="message-success success message">Esta orden puede ser facturada.</div>');
+                        $('.form-invoice').show();
+                      }*/
+
+                    }
+                  });
+
+            });
+
+        }
+    );
+
+</script>
