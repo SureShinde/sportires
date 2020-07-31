@@ -26,7 +26,7 @@ class Product extends \MagePal\GoogleTagManager\Block\Data\Product
                 'parent_sku' => $product->getData('sku'),
                 'product_type' => $product->getTypeId(),
                 'name' => $product->getName(),
-                'price' => $this->getPrice(),
+                'price' => $product->getFinalPrice(),
                 'attribute_set_id' => $product->getAttributeSetId(),
                 'path' => implode(" > ", $this->getBreadCrumbPath()),
                 'category' => $this->getProductCategoryName(),

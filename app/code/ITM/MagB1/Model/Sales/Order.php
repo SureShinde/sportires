@@ -461,6 +461,8 @@ class Order implements OrderInterface
         return (json_last_error() == JSON_ERROR_NONE);
     }
 
+
+
     /**
      *
      * {@inheritdoc}
@@ -468,6 +470,10 @@ class Order implements OrderInterface
      */
     public function getOrderInfo($increment_id)
     {
+        $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/SAP.log');
+        $logger = new \Zend\Log\Logger();
+        $logger->addWriter($writer);
+
         /* Get instance of object manager */
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
 
@@ -495,7 +501,9 @@ class Order implements OrderInterface
             $parent_product_id = $item->getData("parent_item")["product_id"];
             $parent_product = $objectManager->create('\Magento\Catalog\Model\Product')->load($parent_product_id);
 
+
             $items_array[$i]["original_sku"] = $parent_product->getSku();
+
             // AJUSTE PARA LOS PAQUETES, IRMB 08052020
             if(substr($item->getSku(),-1) == 'P'){
                 $items_array[$i]['product_options']['info_buyRequest']['qty'] = ($item->getQtyOrdered()*2);
@@ -513,10 +521,29 @@ class Order implements OrderInterface
                 
             }
             //FIN DE AJUSTE
+            // AJUSTE PARA PRODUCTOS MERCADO LIBRE PRODUCTOS PARA DIFERENTES PUBLICACIONES MERCADO LIBRE IRMB 14072020
+            if(substr($item->getSku(),-3) == '-01'){
+                $items_array[$i]['product_options']['info_buyRequest']['qty'] = $item->getQtyOrdered();
+                $items_array[$i]['sku'] = substr($item->getSku(),0,-3);
+
+                $price = $item->getPrice();
+
+                $items_array[$i]['price'] = (string)$price;
+                $items_array[$i]['base_price'] = (string)$price;
+                $items_array[$i]['price_incl_tax'] = (string)$price;
+                $items_array[$i]['base_price_incl_tax'] = (string)$price;
+                $items_array[$i]['base_price_incl_tax'] = (string)$price;
+                $items_array[$i]['qty_invoiced'] = $item->getQtyOrdered();
+                $items_array[$i]['qty_ordered'] = $item->getQtyOrdered();
+                
+            }
+            //FIN DE AHUSTE
+
             $i++;
         }
 
         $result["order"]["items"] = $items_array;
+
 
         if ($order->getShippingAddress() != null) {
             $result["order"]["shipping_address"] = $order->getShippingAddress()->getData();
@@ -650,6 +677,9 @@ class Order implements OrderInterface
         //$searchResult->setSearchCriteria(null);
         $searchResult->setItems($result);
         $searchResult->setTotalCount(count($result));
+
+        $logger->info("RETURN ORDER TO SAP ". print_r($result,true));
+
         return $searchResult;
     }
 
